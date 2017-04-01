@@ -5,6 +5,10 @@ import psycopg2
 
 def data_extract():
     try:
+        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?permit_number=2015-032266 EP'
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         sql = 'INSERT INTO issued_construction_permits VALUES ('
         for row in data:
