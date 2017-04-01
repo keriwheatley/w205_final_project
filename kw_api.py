@@ -5,7 +5,7 @@ import psycopg2
 
 def data_extract():
     try:
-        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?permit_number=2015-032266 EP'
+        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?permittype=EP'
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
