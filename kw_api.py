@@ -6,7 +6,11 @@ import psycopg2
 def data_extract():
     try:
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
-        sql = "INSERT INTO issued_construction_permits VALUES (1,%s);" %(row)
+        sql = 'INSERT INTO issued_construction_permits VALUES ('
+        for row in data:
+            for i in row:
+                sql += "'" + str(row[i]).replace("'","''") + "',"
+        sql = sql[:-1] + ');'
         cur.execute(sql);
     except Exception as inst:
         print(inst.args)
