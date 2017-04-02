@@ -25,17 +25,17 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
         last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
-        last_run = datetime.datetime.now() if last_run is None else last_run
+        last_run = datetime.date.now() if last_run is None else last_run
 
         print last_run
         
-        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?statusdate>'+ str(last_run) #2011-12-28T10:56:53.000
+        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?statusdate>='+ str(last_run) #2011-12-28T10:56:53.000
         print url
         response = requests.get(url, verify=False)
         if response.status_code == 200:
             data = response.json()
             num_rows = len(data)
-            current_time = datetime.datetime.now()
+            current_time = datetime.date.now()
             
 #         for row in data:
 #             values = ""
