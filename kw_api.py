@@ -6,9 +6,9 @@ import psycopg2
 def create_table():
     for row in data:
         sql = 'CREATE TABLE issued_construction_permits ('
-            for i in row:
-                sql += "'" + str(row[i]).replace("'" text,"''") + "',"
-            sql = sql[:-2] + ');'
+        for i in row:
+            sql += "'" + str(row[i]).replace("'" text,"''") + "',"
+        sql = sql[:-2] + ');'
         break
 
 create_table()
