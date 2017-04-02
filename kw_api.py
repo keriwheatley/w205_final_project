@@ -35,7 +35,7 @@ def data_extract():
                 values += "'" + str(row[i]).replace("'","") + "',"
             columns = columns[:-1]
             values = values[:-1]
-            sql = 'INSERT INTO issued_construction_permits('+columns+') VALUES ('+values+);'
+            sql = 'INSERT INTO issued_construction_permits('+columns+') VALUES ('+values+');'
             print sql
             cur.execute(sql);
     except Exception as inst:
