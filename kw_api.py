@@ -28,8 +28,8 @@ def data_extract():
         cur = conn.cursor()
 
         for row in data:
-            values = []
-            columns = []
+            values = ""
+            columns = ""
             for i in row:
                 columns += str(i) + ","                
                 values += "'" + str(row[i]).replace("'","") + "',"
