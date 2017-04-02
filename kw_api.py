@@ -28,7 +28,7 @@ def data_extract():
 
         print last_run
         
-        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?statusdate>'+ str(current_time) #2011-12-28T10:56:53.000
+        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?statusdate>'+ str(last_run) #2011-12-28T10:56:53.000
         print url
         response = requests.get(url, verify=False)
         if response.status_code == 200:
