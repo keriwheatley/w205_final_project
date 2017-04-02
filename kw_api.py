@@ -32,27 +32,27 @@ def data_extract():
         print url
         response = requests.get(url, verify=False)
         if response.status_code == 200:
-            data = response.json()
-            num_rows = len(data)
+#             data = response.json()
+#             num_rows = len(data)
             current_time = datetime.datetime.now()
             
-        for row in data:
-            values = ""
-            columns = ""
-            for i in row:
-                columns += str(i) + ","                
-                values += "'" + str(row[i]).replace("'","") + "',"
-            columns = columns[:-1]
-            values = values[:-1]
-            sql = 'INSERT INTO '+table_name+' (' + columns + ') VALUES (' + values + ');'
-            cur.execute(sql);
-            print "Loaded row "+ str(num_rows)
+#         for row in data:
+#             values = ""
+#             columns = ""
+#             for i in row:
+#                 columns += str(i) + ","                
+#                 values += "'" + str(row[i]).replace("'","") + "',"
+#             columns = columns[:-1]
+#             values = values[:-1]
+#             sql = 'INSERT INTO '+table_name+' (' + columns + ') VALUES (' + values + ');'
+#             cur.execute(sql);
+#             print "Loaded row "+ str(num_rows)
         
-        conn.commit()
+#         conn.commit()
         
-        cur.execute("INSERT INTO last_run VALUES('"+table_name+"',"+str(num_rows)+","+str(current_time)+");")
+#         cur.execute("INSERT INTO last_run VALUES('"+table_name+"',"+str(num_rows)+","+str(current_time)+");")
         
-        conn.close()
+#         conn.close()
         
         print current_time
 
