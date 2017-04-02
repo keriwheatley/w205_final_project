@@ -7,7 +7,7 @@ def create_table():
     for row in data:
         sql = 'CREATE TABLE issued_construction_permits ('
         for i in row:
-            sql += "'" + str(row[i]).replace("'" text,"''") + "',"
+            sql += str(row[i]) + " text,"
         sql = sql[:-2] + ');'
         break
 
