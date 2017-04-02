@@ -16,6 +16,7 @@ def data_extract():
             for i in row:
                 sql += "'" + str(row[i]).replace("'","''") + "',"
         sql = sql[:-1] + ');'
+        print sql
         cur.execute(sql);
     except Exception as inst:
         print(inst.args)
