@@ -3,6 +3,7 @@ import datetime
 import json
 import psycopg2
 
+# psql -U postgres -d finalproject -c "CREATE TABLE last_run (table_name TEXT, row_count INT, run_date TIMESTAMP);"
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
 # permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
 # description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
@@ -20,30 +21,40 @@ import psycopg2
 
 def data_extract():
     try:
-        current_time = datetime.datetime.now()
-        print current_time
+        table_name = 'issued_construction_permits'
+        conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
+        cur = conn.cursor()
+        last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
+
+        print last_run
+        
         url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?statusdate>'+ str(current_time) #2011-12-28T10:56:53.000
         print url
-#         response = requests.get(url, verify=False)
-#         if response.status_code == 200:
-#             data = response.json()
-#         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
-#         cur = conn.cursor()
-
-#         for row in data:
-#             values = ""
-#             columns = ""
-#             for i in row:
-#                 columns += str(i) + ","                
-#                 values += "'" + str(row[i]).replace("'","") + "',"
-#             columns = columns[:-1]
-#             values = values[:-1]
-#             sql = 'INSERT INTO issued_construction_permits(' + columns + ') VALUES (' + values + ');'
-#             cur.execute(sql);
-#             print "Loaded row "+
+        response = requests.get(url, verify=False)
+        if response.status_code == 200:
+            data = response.json()
+            current_time = datetime.datetime.now()
         
-#         conn.commit()
-#         conn.close()
+        for row in data:
+            values = ""
+            columns = ""
+            for i in row:
+                columns += str(i) + ","                
+                values += "'" + str(row[i]).replace("'","") + "',"
+            columns = columns[:-1]
+            values = values[:-1]
+            sql = 'INSERT INTO '+table_name+' (' + columns + ') VALUES (' + values + ');'
+            cur.execute(sql);
+            print "Loaded row "+
+        
+        conn.commit()
+        
+        cur.execute("INSERT INTO last_run VALUES('"+table_name+"',"+str(len(data))+","+str(current_time)+");")
+        
+        conn.close()
+        
+        print current_time
+
     except Exception as inst:
         print(inst.args)
         print(inst)
