@@ -11,7 +11,7 @@ def create_table():
     for row in data:
         sql = 'CREATE TABLE issued_construction_permits ('
         for i in row:
-            sql += str(row[i]) + " text,"
+            sql += i + " text,"
         sql = sql[:-1] + ');'
         break
     print sql
