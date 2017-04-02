@@ -30,6 +30,7 @@ def data_extract():
         for row in data:
             sql = 'INSERT INTO issued_construction_permits VALUES ('
             for i in row:
+                print i + ' ' + row(i)
                 sql += "'" + str(row[i]).replace("'","''") + "',"
             sql = sql[:-1] + ');'
             print sql
