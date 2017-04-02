@@ -6,7 +6,7 @@ import psycopg2
 def data_extract():
     try:
         url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?permittype=EP'
-        response = requests.get(url)
+        response = requests.get(url, verify=False)
         if response.status_code == 200:
             data = response.json()
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
