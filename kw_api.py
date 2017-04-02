@@ -26,8 +26,8 @@ def data_extract():
         cur = conn.cursor()
         current_day = datetime.datetime.now()
         last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
-        if last_run is None else last_run:
-            url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$statusdate"           
+        if last_run is None:
+            url = "https://data.austintexas.gov/resource/x9yh-78fz.json?permit_class=R- 329 Res Structures Other Than Bldg"           
         else:
             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$statusdate BETWEEN '"+\
             str(last_run)+"' AND '"+str(current_day) +"'"#2011-12-28T10:56:53.000
@@ -35,11 +35,11 @@ def data_extract():
         print current_day
         print last_run        
         print url
-#         response = requests.get(url, verify=False)
-#         if response.status_code == 200:
-#             data = response.json()
-#             num_rows = len(data)
-            
+        response = requests.get(url, verify=False)
+        if response.status_code == 200:
+            data = response.json()
+            num_rows = len(data)
+        print num_rows
 #         for row in data:
 #             values = ""
 #             columns = ""
