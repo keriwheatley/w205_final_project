@@ -40,6 +40,9 @@ def data_extract():
             sql = 'INSERT INTO issued_construction_permits('+columns+') VALUES ('+values+');'
             print sql
             cur.execute(sql);
+        
+        conn.commit()
+        conn.close()
     except Exception as inst:
         print(inst.args)
         print(inst)
