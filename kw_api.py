@@ -10,6 +10,7 @@ def data_extract():
         if response.status_code == 200:
             data = response.json()
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
+        cur = conn.cursor()
         sql = 'INSERT INTO issued_construction_permits VALUES ('
         for row in data:
             for i in row:
