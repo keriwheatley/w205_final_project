@@ -54,7 +54,7 @@ def data_extract():
         
 #         conn.close()
         
-        print current_time
+#         print current_time
 
     except Exception as inst:
         print(inst.args)
