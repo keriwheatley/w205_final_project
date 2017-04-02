@@ -39,5 +39,5 @@ def data_extract():
         print(inst.args)
         print(inst)
 
-data_extract()
+# data_extract()
 
