@@ -24,6 +24,7 @@ def data_extract():
         table_name = 'issued_construction_permits'
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
+        last_run = datetime.datetime.now()
         last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
 
         print last_run
