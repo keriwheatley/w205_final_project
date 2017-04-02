@@ -24,14 +24,16 @@ def data_extract():
         table_name = 'issued_construction_permits'
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
-        current_time = datetime.date.today()
+        current_day = datetime.date.today()
         last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
-        last_run = current_time if last_run is None else last_run
+        last_run = current_day if last_run is None else last_run
+
+        print current_day
 
         print last_run
         
-        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?$statusdate>='+
-            str(last_run)+'andstatusdate<'+str(current_time) #2011-12-28T10:56:53.000
+        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?$statusdate>='+\
+            str(last_run)+'andstatusdate<'+str(current_day) #2011-12-28T10:56:53.000
         print url
         response = requests.get(url, verify=False)
         if response.status_code == 200:
@@ -56,8 +58,6 @@ def data_extract():
         
 #         conn.close()
         
-        print current_time
-
     except Exception as inst:
         print(inst.args)
         print(inst)
