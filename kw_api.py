@@ -4,12 +4,17 @@ import json
 import psycopg2
 
 def create_table():
+    url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?permittype=EP'
+    response = requests.get(url, verify=False)
+    if response.status_code == 200:
+        data = response.json()
     for row in data:
         sql = 'CREATE TABLE issued_construction_permits ('
         for i in row:
             sql += str(row[i]) + " text,"
         sql = sql[:-2] + ');'
         break
+    print sql
 
 create_table()
 
