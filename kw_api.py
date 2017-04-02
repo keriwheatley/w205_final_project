@@ -31,11 +31,11 @@ def data_extract():
         
         url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?statusdate>'+ str(last_run) #2011-12-28T10:56:53.000
         print url
-#         response = requests.get(url, verify=False)
-#         if response.status_code == 200:
-#             data = response.json()
-#             num_rows = len(data)
-#             current_time = datetime.datetime.now()
+        response = requests.get(url, verify=False)
+        if response.status_code == 200:
+            data = response.json()
+            num_rows = len(data)
+            current_time = datetime.datetime.now()
             
 #         for row in data:
 #             values = ""
@@ -55,7 +55,7 @@ def data_extract():
         
 #         conn.close()
         
-#         print current_time
+        print current_time
 
     except Exception as inst:
         print(inst.args)
