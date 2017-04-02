@@ -31,7 +31,7 @@ def data_extract():
             sql = 'INSERT INTO issued_construction_permits VALUES ('
             for i in row:
                 print i + ' ' + str(row[i])
-                sql += "'" + str(row[i]).replace("'","''") + "',"
+                sql += '"' + str(row[i]).replace("'","") + '",'
             sql = sql[:-1] + ');'
             print sql
             cur.execute(sql);
