@@ -12,7 +12,7 @@ def create_table():
         sql = 'CREATE TABLE issued_construction_permits ('
         for i in row:
             sql += str(row[i]) + " text,"
-        sql = sql[:-2] + ');'
+        sql = sql[:-1] + ');'
         break
     print sql
 
