@@ -31,8 +31,8 @@ def data_extract():
         print current_day
         print last_run
         
-        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?$statusdate>='+\
-            str(last_run)+'andstatusdate<'+str(current_day) #2011-12-28T10:56:53.000
+        url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?$statusdate BETWEEN'+\
+            str(last_run)+' AND '+str(current_day) #2011-12-28T10:56:53.000
         print url
 #         response = requests.get(url, verify=False)
 #         if response.status_code == 200:
