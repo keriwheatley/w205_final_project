@@ -29,16 +29,15 @@ def data_extract():
         last_run = current_day if last_run is None else last_run
 
         print current_day
-
         print last_run
         
         url = 'https://data.austintexas.gov/resource/x9yh-78fz.json?$statusdate>='+\
             str(last_run)+'andstatusdate<'+str(current_day) #2011-12-28T10:56:53.000
         print url
-        response = requests.get(url, verify=False)
-        if response.status_code == 200:
-            data = response.json()
-            num_rows = len(data)
+#         response = requests.get(url, verify=False)
+#         if response.status_code == 200:
+#             data = response.json()
+#             num_rows = len(data)
             
 #         for row in data:
 #             values = ""
