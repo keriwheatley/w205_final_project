@@ -4,7 +4,7 @@ import json
 import psycopg2
 
 # pip install pyopenssl ndg-httpsclient pyasn1
-# psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (applied_date TIMESTAMP, row_count INT);"
+# psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (applied_date DATE, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
 # permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
 # description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
@@ -47,7 +47,9 @@ def data_extract():
                     break
 
                 num_rows = len(data)
-                print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
+                row_format = "{:>20}" *(6)
+                print row_format.format('Date:', str(single_date.strftime("%Y-%m-%d")),'Row_Count:',str(num_rows),
+                    'Runtime:',str(datetime.datetime.now().time()))
                 for row in data:
                     values = ""
                     columns = ""
