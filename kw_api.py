@@ -47,21 +47,16 @@ def data_extract():
 
                 num_rows = len(data)
                 print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
-                print data
                 for row in data:
-                    print row
                     values = ""
                     columns = ""
                     for i in row:
-                        print i
-                        print row[i]
                         columns += str(i) + ","                
                         values += "'" + str(row[i]).replace("'","") + "',"
                     columns = columns[:-1]
                     values = values[:-1]
                     sql = 'INSERT INTO issued_construction_permits (' + columns + ') VALUES (' + values + ');'
                     cur.execute(sql);
-                    print sql
                 conn.commit()
 #                 cur.execute("INSERT INTO issued_construction_permits_counts VALUES("+str(num_rows)+","+applied_date+");")
 
