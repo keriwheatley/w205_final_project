@@ -32,8 +32,8 @@ def data_extract():
         last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
         print last_run
         if last_run is None:
-            start_date = date(1990, 1, 1)
-            end_date = date(1990, 5, 1)
+            start_date = datetime.date(1990, 1, 1)
+            end_date = datetime.date(1990, 5, 1)
             print start_date
             print end_date
 #             end_date = date(2017, 5, 1)
