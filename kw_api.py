@@ -3,7 +3,7 @@ import datetime
 import json
 import psycopg2
 
-# pip install pyopenssl ndg-httpsclient pyasn1
+# psql -U postgres -d finalproject
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (applied_date DATE, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
 # permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
