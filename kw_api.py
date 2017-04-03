@@ -3,7 +3,7 @@ import datetime
 import json
 import psycopg2
 
-# psql -U postgres -d finalproject -c "CREATE TABLE last_run (table_name TEXT, row_count INT, run_date TIMESTAMP);"
+# psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (applied_date TIMESTAMP, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
 # permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
 # description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
@@ -25,24 +25,28 @@ def daterange(start_date, end_date):
 
 def data_extract():
     try:
-        table_name = 'issued_construction_permits'
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
         current_day = datetime.date.today()
-        last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
+        last_run = cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
         print last_run
         if last_run is None:
             start_date = datetime.date(1990, 1, 1)
             end_date = datetime.date(1990, 5, 1)
-            print start_date
-            print end_date
 #             end_date = date(2017, 5, 1)
             for single_date in daterange(start_date, end_date):
-                url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applied_date = "+str(single_date.strftime("%Y-%m-%d"))
+                applied_date=str(single_date.strftime("%Y-%m-%d")
+                url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applied_date = "+applied_date)
                 response = requests.get(url, verify=False)
                 data = response.json()
                 num_rows = len(data)
-                print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Number rows: " + str(num_rows)
+                print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
+                for row in data:
+                    sql = 'INSERT INTO issued_construction_permits' (' + columns + ') VALUES (' + values + ');'
+                    cur.execute(sql);
+                conn.commit()
+                cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+str(num_rows)+","+applied_date+");")
+
         else:
             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&statusdate BETWEEN '"+\
             str(last_run)+"' AND '"+str(current_day) +"'"#2011-12-28T10:56:53.000
@@ -54,7 +58,6 @@ def data_extract():
 #         if response.status_code == 200:
 #             data = response.json()
 #             num_rows = len(data)
-#         for row in data:
 #             values = ""
 #             columns = ""
 #             for i in row:
@@ -62,9 +65,7 @@ def data_extract():
 #                 values += "'" + str(row[i]).replace("'","") + "',"
 #             columns = columns[:-1]
 #             values = values[:-1]
-#             sql = 'INSERT INTO '+table_name+' (' + columns + ') VALUES (' + values + ');'
-#             cur.execute(sql);
-#             print "Loaded row "+ str(num_rows)
+
         
 #         conn.commit()
         
