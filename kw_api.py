@@ -43,9 +43,12 @@ def data_extract():
                 print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
 
                 for row in data:
+                    print row
                     values = ""
                     columns = ""
                     for i in row:
+                        print i
+                        print row[i]
                         columns += str(i) + ","                
                         values += "'" + str(row[i]).replace("'","") + "',"
                     columns = columns[:-1]
