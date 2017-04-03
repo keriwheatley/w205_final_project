@@ -33,7 +33,7 @@ def data_extract():
         cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
         last_run = cur.fetchall()
         if last_run is None: start_date = datetime.date(1990, 1, 1)
-        else: start_date = last_run[0][0]
+        else: start_date = int(last_run[0][0])
         
         print start_date
         print type(start_date)
