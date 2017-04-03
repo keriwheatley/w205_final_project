@@ -36,8 +36,12 @@ def data_extract():
 #             end_date = date(2017, 5, 1)
             for single_date in daterange(start_date, end_date):
                 applied_date=str(single_date.strftime("%Y-%m-%d"))
-                url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate = '"+applied_date+"'"
+                url = "https://data.austintexas.gov/resource/x9yh-78fz.json?applieddate = '"+applied_date+"'"
                 response = requests.get(url, verify=False)
+                if response.status_code <> 200:
+                    print "Error: Did not complete call to API."
+                    break
+
                 data = response.json()
                 num_rows = len(data)
                 print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
@@ -62,21 +66,8 @@ def data_extract():
         else:
             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&statusdate BETWEEN '"+\
             str(last_run)+"' AND '"+str(current_day) +"'"#2011-12-28T10:56:53.000
-
-#         print current_day
-#         print last_run        
-#         print url
-#         response = requests.get(url, verify=False)
-#         if response.status_code == 200:
-#             data = response.json()
-#             num_rows = len(data)
-
-        
-#         conn.commit()
-        
-#         cur.execute("INSERT INTO last_run VALUES('"+table_name+"',"+str(num_rows)+","+str(current_time)+");")
-        
-#         conn.close()
+               
+        conn.close()
         
     except Exception as inst:
         print(inst.args)
