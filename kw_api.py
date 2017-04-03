@@ -36,6 +36,7 @@ def data_extract():
         else: start_date = last_run[0][0]
         
         print start_date
+        print type(start_date)
 #         for single_date in daterange(start_date, current_day-1):
 #             applied_date=str(single_date.strftime("%Y-%m-%d"))
 #             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="+applied_date
