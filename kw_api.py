@@ -34,6 +34,8 @@ def data_extract():
         if last_run is None:
             start_date = date(1990, 1, 1)
             end_date = date(1990, 5, 1)
+            print start_date
+            print end_date
 #             end_date = date(2017, 5, 1)
             for single_date in daterange(start_date, end_date):
                 print single_date.strftime("%Y-%m-%d")
