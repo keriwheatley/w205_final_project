@@ -19,15 +19,24 @@ import psycopg2
 # applicant_full_name TEXT,applicant_org TEXT,applicant_phone TEXT,applicant_address1 TEXT,applicant_address2 TEXT,
 # applicant_city TEXT,applicantzip TEXT);"
 
+def daterange(start_date, end_date):
+    for n in range(int ((end_date - start_date).days)):
+        yield start_date + timedelta(n)
+
 def data_extract():
     try:
         table_name = 'issued_construction_permits'
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
-        current_day = datetime.datetime.now()
+        current_day = datetime.date.today()
         last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
         if last_run is None:
-            url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&statusdate<"+str(current_day)           
+            start_date = date(1990, 1, 1)
+            end_date = date(1990, 5, 1)
+#             end_date = date(2017, 5, 1)
+            for single_date in daterange(start_date, end_date):
+                print single_date.strftime("%Y-%m-%d")
+                url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applied_date = "+str(single_date.strftime("%Y-%m-%d"))
         else:
             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&statusdate BETWEEN '"+\
             str(last_run)+"' AND '"+str(current_day) +"'"#2011-12-28T10:56:53.000
