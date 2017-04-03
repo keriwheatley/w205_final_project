@@ -30,6 +30,7 @@ def data_extract():
         cur = conn.cursor()
         current_day = datetime.date.today()
         last_run = cur.execute("SELECT MAX(run_date) FROM last_run WHERE table_name = '"+table_name+"';");
+        print last_run
         if last_run is None:
             start_date = date(1990, 1, 1)
             end_date = date(1990, 5, 1)
