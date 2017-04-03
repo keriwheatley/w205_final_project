@@ -35,7 +35,7 @@ def data_extract():
             end_date = datetime.date(1990, 5, 1)
 #             end_date = date(2017, 5, 1)
             for single_date in daterange(start_date, end_date):
-                applied_date=str(single_date.strftime("%Y-%m-%d")
+                applied_date=str(single_date.strftime("%Y-%m-%d"))
                 url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applied_date = "+applied_date
                 response = requests.get(url, verify=False)
                 data = response.json()
