@@ -30,7 +30,8 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
         current_day = datetime.date.today()
-        last_run = cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
+        cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
+        last_run = cur.fetchall()
         print last_run
         if last_run is None:
             print "New"
