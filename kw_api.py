@@ -32,10 +32,11 @@ def data_extract():
         current_day = datetime.date.today()
         cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
         last_run = cur.fetchall()
-        if last_run is None: start_date = datetime.date(1990, 1, 1)
-        else: start_date = datetime.date(last_run)
+#         if last_run is None: start_date = datetime.date(1990, 1, 1)
+#         else: start_date = datetime.date(last_run)
         print last_run
         print type(last_run)
+        print datetime.date(1990, 1, 1)
                         
 #         for single_date in daterange(start_date, current_day-1):
 #             applied_date=str(single_date.strftime("%Y-%m-%d"))
