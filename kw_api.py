@@ -37,12 +37,14 @@ def data_extract():
             for single_date in daterange(start_date, end_date):
                 applied_date=str(single_date.strftime("%Y-%m-%d"))
                 url = "https://data.austintexas.gov/resource/x9yh-78fz.json?applieddate = '"+applied_date+"'"
+                print url
                 response = requests.get(url, verify=False)
+                data = response.json()
                 if response.status_code <> 200:
                     print "Error: Did not complete call to API."
+                    print data
                     break
 
-                data = response.json()
                 num_rows = len(data)
                 print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
                 print data
