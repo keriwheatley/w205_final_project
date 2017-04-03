@@ -33,40 +33,41 @@ def data_extract():
         last_run = cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
         print last_run
         if last_run is None:
-            start_date = datetime.date(1990, 1, 1)
-            end_date = datetime.date(1990, 5, 1)
+            print "New"
+#             start_date = datetime.date(1990, 1, 1)
 #             end_date = date(2017, 5, 1)
-            for single_date in daterange(start_date, end_date):
-                applied_date=str(single_date.strftime("%Y-%m-%d"))
-                url = "https://data.austintexas.gov/resource/x9yh-78fz.json?applieddate="+applied_date
-                print url
-                response = requests.get(url, verify=False)
-                data = response.json()
-                if response.status_code <> 200:
-                    print "Error: Did not complete call to API."
-                    print data
-                    break
+#             for single_date in daterange(start_date, end_date):
+#                 applied_date=str(single_date.strftime("%Y-%m-%d"))
+#                 url = "https://data.austintexas.gov/resource/x9yh-78fz.json?applieddate="+applied_date
+#                 print url
+#                 response = requests.get(url, verify=False)
+#                 data = response.json()
+#                 if response.status_code <> 200:
+#                     print "Error: Did not complete call to API."
+#                     print data
+#                     break
 
-                num_rows = len(data)
-                row_format = "{:>20}" *(6)
-                print row_format.format('Date:', str(single_date.strftime("%Y-%m-%d")),'Row_Count:',str(num_rows),
-                    'Runtime:',str((datetime.datetime.now() - start_time)))
-                for row in data:
-                    values = ""
-                    columns = ""
-                    for i in row:
-                        columns += str(i) + ","                
-                        values += "'" + str(row[i]).replace("'","") + "',"
-                    columns = columns[:-1]
-                    values = values[:-1]
-                    sql = 'INSERT INTO issued_construction_permits (' + columns + ') VALUES (' + values + ');'
-                    cur.execute(sql);
-                cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+applied_date+"',"+str(num_rows)+");")
-                conn.commit()
+#                 num_rows = len(data)
+#                 row_format = "{:>20}" *(6)
+#                 print row_format.format('Date:', str(single_date.strftime("%Y-%m-%d")),'Row_Count:',str(num_rows),
+#                     'Runtime:',str((datetime.datetime.now() - start_time)))
+#                 for row in data:
+#                     values = ""
+#                     columns = ""
+#                     for i in row:
+#                         columns += str(i) + ","                
+#                         values += "'" + str(row[i]).replace("'","") + "',"
+#                     columns = columns[:-1]
+#                     values = values[:-1]
+#                     sql = 'INSERT INTO issued_construction_permits (' + columns + ') VALUES (' + values + ');'
+#                     cur.execute(sql);
+#                 cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+applied_date+"',"+str(num_rows)+");")
+#                 conn.commit()
 
         else:
-            url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&statusdate BETWEEN '"+\
-            str(last_run)+"' AND '"+str(current_day) +"'"#2011-12-28T10:56:53.000
+            print "Not new"
+#             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&statusdate BETWEEN '"+\
+#             str(last_run)+"' AND '"+str(current_day) +"'"#2011-12-28T10:56:53.000
                
         conn.close()
         
