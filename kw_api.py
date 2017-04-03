@@ -41,7 +41,7 @@ def data_extract():
                 data = response.json()
                 num_rows = len(data)
                 print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
-
+                print data
                 for row in data:
                     print row
                     values = ""
