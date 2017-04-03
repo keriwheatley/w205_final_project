@@ -41,6 +41,14 @@ def data_extract():
                 data = response.json()
                 num_rows = len(data)
                 print "Date: " + str(single_date.strftime("%Y-%m-%d")) + " Row_Count: " + str(num_rows)
+
+                values = ""
+                columns = ""
+                for i in row:
+                    columns += str(i) + ","                
+                    values += "'" + str(row[i]).replace("'","") + "',"
+                columns = columns[:-1]
+                values = values[:-1]
                 for row in data:
                     sql = 'INSERT INTO issued_construction_permits (' + columns + ') VALUES (' + values + ');'
                     cur.execute(sql);
@@ -58,13 +66,6 @@ def data_extract():
 #         if response.status_code == 200:
 #             data = response.json()
 #             num_rows = len(data)
-#             values = ""
-#             columns = ""
-#             for i in row:
-#                 columns += str(i) + ","                
-#                 values += "'" + str(row[i]).replace("'","") + "',"
-#             columns = columns[:-1]
-#             values = values[:-1]
 
         
 #         conn.commit()
