@@ -26,7 +26,7 @@ def daterange(start_date, end_date):
 
 def data_extract():
     try:
-        start_time = time.time()
+        start_time = datetime.datetime.now()
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
         current_day = datetime.date.today()
@@ -50,7 +50,7 @@ def data_extract():
                 num_rows = len(data)
                 row_format = "{:>20}" *(6)
                 print row_format.format('Date:', str(single_date.strftime("%Y-%m-%d")),'Row_Count:',str(num_rows),
-                    'Runtime:',str((time.time() - start_time)))
+                    'Runtime:',str((datetime.datetime.now() - start_time)))
                 for row in data:
                     values = ""
                     columns = ""
