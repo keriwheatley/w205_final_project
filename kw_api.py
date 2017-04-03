@@ -34,7 +34,7 @@ def data_extract():
         last_run = cur.fetchall()
 #         if last_run is None: start_date = datetime.date(1990, 1, 1)
 #         else: start_date = datetime.date(last_run)
-        print last_run
+        print last_run[0]
         print type(last_run)
         print datetime.date(1990, 1, 1)
                         
