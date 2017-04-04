@@ -4,7 +4,7 @@ import json
 import psycopg2
 
 # psql -U postgres -d finalproject
-# psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (applied_date DATE, row_count INT);"
+# psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (match_key DATE, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
 # permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
 # description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
@@ -20,23 +20,36 @@ import psycopg2
 # applicant_full_name TEXT,applicant_org TEXT,applicant_phone TEXT,applicant_address1 TEXT,applicant_address2 TEXT,
 # applicant_city TEXT,applicantzip TEXT);"
 
+# Get date range for inputs incremented by day
 def daterange(start_date, end_date):
     for n in range(int ((end_date - start_date).days)):
         yield start_date + datetime.timedelta(n)
 
-def data_extract():
+# This function makes API calls and writes results to data lake tables
+def data_extract(data_source,api_url):
     try:
+        
+        # Start runtime
         start_time = datetime.datetime.now()
+        
+        # Connect to database
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
-        end_date = datetime.date.today() - datetime.timedelta(days=1)
-        cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
+        
+        # Find last run date for data source. If no run date exists, use 01-01-1990.
+        cur.execute("SELECT MAX(match_key) FROM "+data_source+"_counts;");
         last_run = cur.fetchall()[0][0]
         if last_run is None: start_date = datetime.date(1990, 1, 1)
         else: start_date = last_run
-        for single_date in daterange(start_date, end_date):
-            applied_date=str(single_date.strftime("%Y-%m-%d"))
-            url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="+applied_date
+        
+        # Iterate through all days from last run date to current date - 1 day
+        for single_date in daterange(start_date, (datetime.date.today()-datetime.timedelta(days=1))):
+            
+            # Reformat single date
+            curr_date=str(single_date.strftime("%Y-%m-%d"))
+            
+            # Make API call to data source
+            url = api_url+curr_date
             response = requests.get(url, verify=False)
             data = response.json()
             if response.status_code <> 200:
@@ -44,10 +57,13 @@ def data_extract():
                 print data
                 break
 
+            # Print row count for single date
             num_rows = len(data)
             row_format = "{:>20}" *(6)
-            print row_format.format('Date:', str(single_date.strftime("%Y-%m-%d")),'Row_Count:',str(num_rows),
+            print row_format.format('Date:', curr_date,'Row_Count:',str(num_rows),
                 'Runtime:',str((datetime.datetime.now() - start_time)))
+            
+            # Write each row for single date to data lake table
             for row in data:
                 values = ""
                 columns = ""
@@ -56,17 +72,23 @@ def data_extract():
                     values += "'" + str(row[i]).replace("'","") + "',"
                 columns = columns[:-1]
                 values = values[:-1]
-                sql = 'INSERT INTO issued_construction_permits (' + columns + ') VALUES (' + values + ');'
-                cur.execute(sql);
-            cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+applied_date+"',"+str(num_rows)+");")
+                cur.execute("INSERT INTO " + data_source + " (" + columns + ") VALUES (" + values + ");");
+            
+            # Record row count for single date to counts table
+            cur.execute("INSERT INTO " + data_source + "_counts VALUES('"+applied_date+"',"+str(num_rows)+");")
+
+            # Commit changes to tables for single date
             conn.commit()
             print "Loaded " + str(single_date.strftime("%Y-%m-%d")) + " records."
 
+        # Close connection after all single dates have been processed
         conn.close()
-        
+    
+    # Error logging
     except Exception as inst:
         print(inst.args)
         print(inst)
 
-data_extract()
-
+table_name = "issued_construction_permits"
+api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
+data_extract(table_name,api_url)
