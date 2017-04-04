@@ -31,7 +31,7 @@ def data_extract():
         cur = conn.cursor()
         end_date = datetime.date.today() - datetime.timedelta(days=1)
         cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
-        last_run = cur.fetchall()
+        last_run = cur.fetchall()[0][0]
         print last_run
 #         if last_run is None: start_date = datetime.date(1990, 1, 1)
 #         else: start_date = last_run[0][0]
