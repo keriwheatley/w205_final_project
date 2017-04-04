@@ -40,7 +40,7 @@ def data_extract():
         print start_date
         print type(start_date)
         for single_date in daterange(start_date, end_date):
-#             applied_date=str(single_date.strftime("%Y-%m-%d"))
+            applied_date=str(single_date.strftime("%Y-%m-%d"))
             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="+applied_date
 #             print url
 #             response = requests.get(url, verify=False)
