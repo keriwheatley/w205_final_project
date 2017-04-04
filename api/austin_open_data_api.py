@@ -9,7 +9,7 @@ def daterange(start_date, end_date):
         yield start_date + datetime.timedelta(n)
 
 # This function makes API calls and writes results to data lake tables
-def data_extract(data_source, api_url):
+def data_extract(data_source, initial_start_date, api_url):
     try:
         
         # Start runtime
@@ -22,7 +22,7 @@ def data_extract(data_source, api_url):
         # Find last run date for data source. If no run date exists, use 01-01-1990.
         cur.execute("SELECT MAX(match_key) FROM "+data_source+"_counts;");
         last_run = cur.fetchall()[0][0]
-        if last_run is None: start_date = datetime.date(1990, 1, 1)
+        if last_run is None: start_date = initial_start_date
         else: start_date = last_run
         
         # Iterate through all days from last run date to current date - 1 day
@@ -88,17 +88,20 @@ def data_extract(data_source, api_url):
 # applicant_full_name TEXT,applicant_org TEXT,applicant_phone TEXT,applicant_address1 TEXT,applicant_address2 TEXT,
 # applicant_city TEXT,applicantzip TEXT);"
 table_name = "issued_construction_permits"
+initial_start_date = datetime.date(1990, 1, 1)
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
-data_extract(table_name,api_url) #Initial runtime ~30 minutes
+data_extract(table_name,initial_start_date,api_url) #Initial runtime ~30 minutes
 
 # psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_counts (match_key DATE, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (restaurant_name TEXT,
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
 table_name = "restaurant_inspection_scores"
+initial_start_date = datetime.date(2014, 3, 1)
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
 data_extract(table_name,api_url)
 
 table_name = "issued_construction_permits"
+initial_start_date = datetime.date(1990, 1, 1)
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
 data_extract(table_name,api_url)
 
