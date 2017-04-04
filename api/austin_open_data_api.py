@@ -26,7 +26,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         else: start_date = last_run
         
         # Iterate through all days from last run date to current date - 1 day
-        for day in daterange(start_date, (datetime.date.today()-datetime.timedelta(days=1))):
+        for day in daterange(start_date+datetime.timedelta(days=1), (datetime.date.today()-datetime.timedelta(days=1))):
             
             # Reformat single date
             single_date=str(day.strftime(date_format))
