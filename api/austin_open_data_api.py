@@ -10,10 +10,10 @@ def daterange(start_date, end_date):
 
 # This function makes API calls and writes results to data lake tables
 def data_extract(data_source, initial_start_date, date_format, api_url):
-    try:
-        
+    try:        
         # Start runtime
         start_time = datetime.datetime.now()
+        print "Starting data extract for data source (" + data_source + ") at " + str(start_time) + "."
         
         # Connect to database
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
@@ -67,6 +67,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 
         # Close connection after all single dates have been processed
         conn.close()
+        print "Ended data extract for data source (" + data_source + ") at " + str(datetime.datetime.now()) + "."
     
     # Error logging
     except Exception as inst:
