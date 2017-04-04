@@ -29,11 +29,11 @@ def data_extract():
         start_time = datetime.datetime.now()
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
-#         end_date = datetime.date.today() - datetime.timedelta(days=1)
+        end_date = datetime.date.today() - datetime.timedelta(days=1)
         cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
         last_run = cur.fetchall()
         print last_run
-#         if last_run is None: start_date = datetime.date(1990, 1, 1)
+        if last_run is None: start_date = datetime.date(1990, 1, 1)
 #         else: start_date = datetime.date(last_run[0][0])
 #         print end_date
 #         print type(end_date)
