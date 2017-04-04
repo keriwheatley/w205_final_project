@@ -29,15 +29,15 @@ def data_extract():
         start_time = datetime.datetime.now()
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
-        current_day = datetime.date.today() - 1
+        end_date = datetime.date.today() - timedelta(days=1)
         cur.execute("SELECT MAX(applied_date) FROM issued_construction_permits_counts;");
         last_run = cur.fetchall()
 #         if last_run is None: start_date = datetime.date(1990, 1, 1)
 #         else: start_date = datetime.date(last_run[0][0])
-        print current_day
+        print end_date
 #         print start_date
 #         print type(start_date)
-#         for single_date in daterange(start_date, current_day):
+#         for single_date in daterange(start_date, end_date):
 #             applied_date=str(single_date.strftime("%Y-%m-%d"))
 #             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="+applied_date
 #             print url
