@@ -60,7 +60,7 @@ def data_extract():
                 cur.execute(sql);
             cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+applied_date+"',"+str(num_rows)+");")
             conn.commit()
-            print "Commit " + str(single_date.strftime("%Y-%m-%d")) + " records."
+            print "Loaded " + str(single_date.strftime("%Y-%m-%d")) + " records."
 
         conn.close()
         
