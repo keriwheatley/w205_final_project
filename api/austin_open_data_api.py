@@ -98,10 +98,10 @@ data_extract(table_name,initial_start_date,api_url) #Initial runtime ~30 minutes
 table_name = "restaurant_inspection_scores"
 initial_start_date = datetime.date(2014, 3, 1)
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
-data_extract(table_name,api_url)
+data_extract(table_name,initial_start_date,api_url)
 
-table_name = "issued_construction_permits"
-initial_start_date = datetime.date(1990, 1, 1)
-api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
-data_extract(table_name,api_url)
+# table_name = "issued_construction_permits"
+# initial_start_date = datetime.date(1990, 1, 1)
+# api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
+# data_extract(table_name,initial_start_date,api_url)
 
