@@ -36,8 +36,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
             response = requests.get(url, verify=False)
             data = response.json()
             if response.status_code <> 200:
-                print "Error: Did not complete call to API. Check url call: "
-                print url
+                print "Error: Did not complete call to API. Check API call: " + url
                 print data
                 break
 
