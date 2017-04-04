@@ -72,6 +72,8 @@ def data_extract(data_source, initial_start_date, api_url):
         print(inst.args)
         print(inst)
 
+# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits_counts;"
+# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits;"        
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (match_key DATE, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
 # permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
@@ -92,6 +94,8 @@ initial_start_date = datetime.date(1990, 1, 1)
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
 data_extract(table_name,initial_start_date,api_url) #Initial runtime ~30 minutes
 
+# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores_counts;"
+# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores;"
 # psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_counts (match_key DATE, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (restaurant_name TEXT,
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
