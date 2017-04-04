@@ -64,9 +64,9 @@ def data_extract():
 
 #         conn.close()
         
-#     except Exception as inst:
-#         print(inst.args)
-#         print(inst)
+    except Exception as inst:
+        print(inst.args)
+        print(inst)
 
 data_extract()
 
