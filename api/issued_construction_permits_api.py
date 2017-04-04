@@ -43,13 +43,13 @@ def data_extract(data_source,api_url):
         else: start_date = last_run
         
         # Iterate through all days from last run date to current date - 1 day
-        for single_date in daterange(start_date, (datetime.date.today()-datetime.timedelta(days=1))):
+        for day in daterange(start_date, (datetime.date.today()-datetime.timedelta(days=1))):
             
             # Reformat single date
-            curr_date=str(single_date.strftime("%Y-%m-%d"))
+            single_date=str(day.strftime("%Y-%m-%d"))
             
             # Make API call to data source
-            url = api_url+curr_date
+            url = api_url+single_date
             response = requests.get(url, verify=False)
             data = response.json()
             if response.status_code <> 200:
@@ -60,7 +60,7 @@ def data_extract(data_source,api_url):
             # Print row count for single date
             num_rows = len(data)
             row_format = "{:>20}" *(6)
-            print row_format.format('Date:', curr_date,'Row_Count:',str(num_rows),
+            print row_format.format('Date:', single_date,'Row_Count:',str(num_rows),
                 'Runtime:',str((datetime.datetime.now() - start_time)))
             
             # Write each row for single date to data lake table
@@ -75,11 +75,11 @@ def data_extract(data_source,api_url):
                 cur.execute("INSERT INTO " + data_source + " (" + columns + ") VALUES (" + values + ");");
             
             # Record row count for single date to counts table
-            cur.execute("INSERT INTO " + data_source + "_counts VALUES('"+applied_date+"',"+str(num_rows)+");")
+            cur.execute("INSERT INTO " + data_source + "_counts VALUES('"+single_date+"',"+str(num_rows)+");")
 
             # Commit changes to tables for single date
             conn.commit()
-            print "Loaded " + str(single_date.strftime("%Y-%m-%d")) + " records."
+            print "Loaded " + single_date + " records."
 
         # Close connection after all single dates have been processed
         conn.close()
