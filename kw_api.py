@@ -34,12 +34,12 @@ def data_extract():
         last_run = cur.fetchall()
         print last_run
         if last_run is None: start_date = datetime.date(1990, 1, 1)
-#         else: start_date = datetime.date(last_run[0][0])
-#         print end_date
-#         print type(end_date)
-#         print start_date
-#         print type(start_date)
-#         print (end_date - start_date).days
+        else: start_date = last_run[0][0]
+        print end_date
+        print type(end_date)
+        print start_date
+        print type(start_date)
+        print (end_date - start_date).days
 #         for single_date in daterange(start_date, end_date):
 #             applied_date=str(single_date.strftime("%Y-%m-%d"))
 #             url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="+applied_date
