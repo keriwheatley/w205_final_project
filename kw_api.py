@@ -63,7 +63,7 @@ def data_extract():
 #                 sql = 'INSERT INTO issued_construction_permits (' + columns + ') VALUES (' + values + ');'
 #                 cur.execute(sql);
 #             cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+applied_date+"',"+str(num_rows)+");")
-            conn.commit()
+#             conn.commit()
 
 #         conn.close()
         
