@@ -9,7 +9,7 @@ def daterange(start_date, end_date):
         yield start_date + datetime.timedelta(n)
 
 # This function makes API calls and writes results to data lake tables
-def data_extract(data_source, initial_start_date, api_url):
+def data_extract(data_source, initial_start_date, date_format, api_url):
     try:
         
         # Start runtime
@@ -29,7 +29,7 @@ def data_extract(data_source, initial_start_date, api_url):
         for day in daterange(start_date, (datetime.date.today()-datetime.timedelta(days=1))):
             
             # Reformat single date
-            single_date=str(day.strftime("%Y-%m-%d"))
+            single_date=str(day.strftime(date_format))
             
             # Make API call to data source
             url = api_url+single_date
@@ -91,8 +91,9 @@ def data_extract(data_source, initial_start_date, api_url):
 # applicant_city TEXT,applicantzip TEXT);"
 table_name = "issued_construction_permits"
 initial_start_date = datetime.date(1990, 1, 1)
+date_format = "%Y-%m-%d"
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
-data_extract(table_name,initial_start_date,api_url) #Initial runtime ~30 minutes
+data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~30 minutes
 
 # psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores_counts;"
 # psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores;"
@@ -101,11 +102,12 @@ data_extract(table_name,initial_start_date,api_url) #Initial runtime ~30 minutes
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
 table_name = "restaurant_inspection_scores"
 initial_start_date = datetime.date(2014, 3, 1)
+date_format = "%m/%d/%Y"
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
-data_extract(table_name,initial_start_date,api_url)
+data_extract(table_name,initial_start_date,date_format,api_url)
 
 # table_name = "issued_construction_permits"
 # initial_start_date = datetime.date(1990, 1, 1)
 # api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
-# data_extract(table_name,initial_start_date,api_url)
+# data_extract(table_name,initial_start_date,date_format,api_url)
 
