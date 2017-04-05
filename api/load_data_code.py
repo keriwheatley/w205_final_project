@@ -50,7 +50,7 @@ def data_extract(data_source, api_url):
                 cur.execute("INSERT INTO " + data_source + " (" + columns + ") VALUES (" + values + ");");
             
             # Record row count for single date to counts table
-            cur.execute("INSERT INTO " + data_source + "_counts VALUES('"+zip+"',"+str(num_rows)+");")
+            cur.execute("INSERT INTO " + data_source + "_counts VALUES('"+INT(zip)+"',"+str(num_rows)+");")
 
             # Commit changes to tables for single date
             conn.commit()
