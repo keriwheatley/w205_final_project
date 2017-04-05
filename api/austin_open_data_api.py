@@ -22,11 +22,8 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         # Find last run date for data source. If no run date exists, use input initial_start_date.
         cur.execute("SELECT MAX(match_key) FROM "+data_source+"_counts;");
         last_run = cur.fetchall()[0][0]
-        print last_run
         if last_run is None: start_date = initial_start_date
         else: start_date = last_run+datetime.timedelta(days=1)
-        print 'start_date' + str(start_date)
-        print 'end_date' + str(end_date)
         
         # Iterate through all days from last run date to end date
         for day in daterange(start_date, end_date):
@@ -95,7 +92,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 # applicant_city TEXT,applicantzip TEXT);"
 table_name = "issued_construction_permits"
 initial_start_date = datetime.date(1990, 1, 1)
-end_date = datetime.date.today()-datetime.timedelta(days=1)
+end_date = datetime.date.today()-datetime.timedelta(days=1) # End time is yesterday
 date_format = "strftime('%Y-%m-%d')"
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
 data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~30 minutes
@@ -109,10 +106,10 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 table_name = "restaurant_inspection_scores"
 initial_start_date = datetime.datetime(2014, 3, 1,hour=19)
 end_date = datetime.datetime(datetime.date.today().year, datetime.date.today().month, datetime.date.today().day,hour=19)-\
-    datetime.timedelta(days=1)
+    datetime.timedelta(days=1) # End time is yesterday
 date_format = "isoformat()"
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
-data_extract(table_name,initial_start_date,date_format,api_url)
+data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~1 minutes
 
 # table_name = "issued_construction_permits"
 # initial_start_date = datetime.date(1990, 1, 1)
