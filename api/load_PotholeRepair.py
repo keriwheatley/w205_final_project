@@ -13,7 +13,7 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        # Empty data tables
+        # Empty data table
         cur.execute("TRUNCATE TABLE pothole_repair;");
         print "Truncated data table."
                         
@@ -36,12 +36,10 @@ def data_extract():
             values = values[:-1]
             cur.execute("INSERT INTO pothole_repair (" + columns + ") VALUES (" + values + ");");
 
-        # Commit changes to table
+        # Commit changes to table and close connection
         conn.commit()
-        print "Loaded " + str(len(data)) + " records to data source (pothole_repair)."
-
-        # Close connection all data have been processed
         conn.close()
+        print "Loaded " + str(len(data)) + " records to data source (pothole_repair)."
         print "Ended data extract for data source (pothole_repair) at time (" + str(datetime.datetime.now()) + ")."
     
     # Error logging

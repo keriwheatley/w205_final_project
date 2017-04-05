@@ -40,13 +40,13 @@ def data_extract():
                     print data
                     break
 
-                # Print row count for single zip code
+                # Print row count for single year/race
                 num_rows = len(data)
                 row_format = "{:>20}" *(8)
                 print row_format.format('Year:', years[year_index], 'Race:', race, 'Row_Count:',str(num_rows),
                     'Runtime:',str((datetime.datetime.now() - start_time)))
 
-                # Write each row for single date to data lake table
+                # Write each row for single year/race to data table
                 for row in data:
                     values = ""
                     columns = ""
@@ -57,16 +57,16 @@ def data_extract():
                     values = values[:-1]
                     cur.execute("INSERT INTO racial_profiling_citations (" + columns + ") VALUES (" + values + ");");
 
-                # Record row count for single zip code to counts table
+                # Record row count for single year/race to counts table
                 cur.execute("INSERT INTO racial_profiling_citations_counts \
                     VALUES("+years[year_index]+",'"+race+"',"+str(num_rows)+");")
 
-                # Commit changes to tables for single zip code
+                # Commit changes to tables for single year/race
                 conn.commit()
                 print "Loaded records to data source (racial_profiling_citations) \
                     for year ("+years[year_index]+") and race (" +race+"."
 
-        # Close connection after all single dates have been processed
+        # Close connection after all single year/race have been processed
         conn.close()
         print "Ended data extract for data source (racial_profiling_citations) at time ("\
             + str(datetime.datetime.now()) + ")."

@@ -13,7 +13,7 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        # Empty data tables
+        # Empty data table
         cur.execute("TRUNCATE TABLE commercial_water_consumption;");
         print "Truncated data table."
                         
@@ -36,12 +36,10 @@ def data_extract():
             values = values[:-1]
             cur.execute("INSERT INTO commercial_water_consumption (" + columns + ") VALUES (" + values + ");");
 
-        # Commit changes to table
+        # Commit changes to table and close connection
         conn.commit()
-        print "Loaded " + str(len(data)) + " records to data source (commercial_water_consumption)."
-
-        # Close connection after all single dates have been processed
         conn.close()
+        print "Loaded " + str(len(data)) + " records to data source (commercial_water_consumption)."
         print "Ended data extract for data source (commercial_water_consumption) at time (" + str(datetime.datetime.now()) + ")."
     
     # Error logging

@@ -13,7 +13,7 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        # Empty data tables
+        # Empty data table
         cur.execute("TRUNCATE TABLE residential_water_consumption;");
         print "Truncated data table."
                         
@@ -25,7 +25,7 @@ def data_extract():
             print "Error: Did not complete call to API. Check API call: " + url
             return data
 
-        # Write each row for single date to data lake table
+        # Write each row to data table
         for row in data:
             values = ""
             columns = ""
@@ -36,12 +36,10 @@ def data_extract():
             values = values[:-1]
             cur.execute("INSERT INTO residential_water_consumption (" + columns + ") VALUES (" + values + ");");
 
-        # Commit changes to tables for single zip code
+        # Commit changes to table and close connection
         conn.commit()
-        print "Loaded " + str(len(data)) + " records to data source (residential_water_consumption)."
-
-        # Close connection after all single dates have been processed
         conn.close()
+        print "Loaded " + str(len(data)) + " records to data source (residential_water_consumption)."
         print "Ended data extract for data source (residential_water_consumption) at time (" + str(datetime.datetime.now()) + ")."
     
     # Error logging

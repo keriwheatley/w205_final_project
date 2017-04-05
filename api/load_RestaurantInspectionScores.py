@@ -40,7 +40,7 @@ def data_extract():
             print row_format.format('Zip_Code:', zip, 'Row_Count:',str(num_rows),
                 'Runtime:',str((datetime.datetime.now() - start_time)))
 
-            # Write each row for single date to data lake table
+            # Write each row for single zip code to data table
             for row in data:
                 values = ""
                 columns = ""
@@ -58,7 +58,7 @@ def data_extract():
             conn.commit()
             print "Loaded records to data source (restaurant_inspection_scores) for zip code ("+zip+")."
 
-        # Close connection after all single dates have been processed
+        # Close connection after all single zip codes have been processed
         conn.close()
         print "Ended data extract for data source (restaurant_inspection_scores) at time (" + str(datetime.datetime.now()) + ")."
     
