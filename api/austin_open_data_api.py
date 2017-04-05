@@ -92,7 +92,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 # applicant_city TEXT,applicantzip TEXT);"
 table_name = "issued_construction_permits"
 initial_start_date = datetime.date(1990, 1, 1)
-date_format = strftime("%Y-%m-%d")
+date_format = "strftime('%Y-%m-%d')"
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
 data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~30 minutes
 
@@ -103,7 +103,7 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
 table_name = "restaurant_inspection_scores"
 initial_start_date = datetime.date(2014, 3, 1,hour=19)
-date_format = isoformat(timespec='microseconds')
+date_format = "isoformat(timespec='microseconds')"
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
 data_extract(table_name,initial_start_date,date_format,api_url)
 
