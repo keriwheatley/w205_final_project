@@ -31,7 +31,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         
         # Iterate through all days from last run date to current date - 1 day
         for day in daterange(start_date+datetime.timedelta(days=1), 
-                             (datetime.date.today().isoformat(timespec='microseconds')-datetime.timedelta(days=1))):
+                             (datetime.datetime.now()-datetime.timedelta(days=1))):
             
             # Reformat single date
             single_date="str(day."+date_format+")"
