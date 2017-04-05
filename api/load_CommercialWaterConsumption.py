@@ -25,7 +25,7 @@ def data_extract():
             print "Error: Did not complete call to API. Check API call: " + url
             return data
 
-        # Write each row for single date to data lake table
+        # Write each row to data table
         for row in data:
             values = ""
             columns = ""
@@ -36,7 +36,7 @@ def data_extract():
             values = values[:-1]
             cur.execute("INSERT INTO commercial_water_consumption (" + columns + ") VALUES (" + values + ");");
 
-        # Commit changes to tables for single zip code
+        # Commit changes to table
         conn.commit()
         print "Loaded " + str(len(data)) + " records to data source (commercial_water_consumption)."
 
