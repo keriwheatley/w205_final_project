@@ -15,7 +15,6 @@ def data_extract():
 
         # Empty data tables
         cur.execute("TRUNCATE TABLE residential_water_consumption;");
-        cur.execute("TRUNCATE TABLE residential_water_consumption_counts;");
                         
         # Make API call to data source
         url = "https://data.austintexas.gov/resource/9vdn-n87u.json"
