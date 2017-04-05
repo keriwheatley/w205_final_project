@@ -25,9 +25,10 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         print last_run
         if last_run is None: start_date = initial_start_date
         else: start_date = last_run+datetime.timedelta(days=1)
-        print start_date
+        print 'start_date' + str(start_date)
+        print 'end_date' + str(end_date)
         
-        # Iterate through all days from last run date to current date - 1 day
+        # Iterate through all days from last run date to end date
         for day in daterange(start_date, end_date):
             
             # Reformat single date
