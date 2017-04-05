@@ -32,7 +32,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         for day in daterange(start_date, end_date):
             
             # Reformat single date
-            single_date=exec("str(day."+date_format+")")
+            single_date=eval("str(day."+date_format+")")
             
             # Make API call to data source
             url = api_url+single_date
