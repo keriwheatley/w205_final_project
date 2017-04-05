@@ -19,11 +19,13 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
         
-        # Find last run date for data source. If no run date exists, use 01-01-1990.
+        # Find last run date for data source. If no run date exists, use input initial_start_date.
         cur.execute("SELECT MAX(match_key) FROM "+data_source+"_counts;");
         last_run = cur.fetchall()[0][0]
+        print last_run
         if last_run is None: start_date = initial_start_date
         else: start_date = last_run+datetime.timedelta(days=1)
+        print start_date
         
         # Iterate through all days from last run date to current date - 1 day
         for day in daterange(start_date, end_date):
