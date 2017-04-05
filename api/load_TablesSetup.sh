@@ -73,6 +73,6 @@ sr_location_council_district TEXT,sr_location_map_page TEXT,sr_location_map_tile
 # Service Alerts
 # https://data.texas.gov/dataset/Service-Alerts/avj9-39zb
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS service_alerts;"
-psql -U postgres -d finalproject -c "CREATE TABLE service_alerts (alert_id TEXT,start TEXT,end TEXT,url TEXT,
+psql -U postgres -d finalproject -c 'CREATE TABLE service_alerts (alert_id TEXT,start TEXT,"end" TEXT,url TEXT,
 effect TEXT,header_text TEXT,route_type TEXT,route_id TEXT,trip TEXT,stop_id TEXT,description_text TEXT,cause TEXT,
-sup_timestamp TEXT);"
+sup_timestamp TEXT);'
