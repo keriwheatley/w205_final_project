@@ -58,7 +58,7 @@ def data_extract():
 
                 # Record row count for single zip code to counts table
                 cur.execute("INSERT INTO racial_profiling_citations_counts \
-                    VALUES("+years[year_index]+","+race+","+str(num_rows)+");")
+                    VALUES("+years[year_index]+",'"+race+"',"+str(num_rows)+");")
 
                 # Commit changes to tables for single zip code
                 conn.commit()
