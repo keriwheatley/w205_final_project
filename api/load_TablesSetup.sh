@@ -53,3 +53,9 @@ race_known TEXT, vl_street_name TEXT, msearch_y_n TEXT, msearch_type TEXT, msear
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS residential_water_consumption;"
 psql -U postgres -d finalproject -c "CREATE TABLE residential_water_consumption (year_month TEXT,
 postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
+
+# Commercial Water Consumption
+# https://data.austintexas.gov/Utility/Austin-Water-Commercial-Water-Consumption/5h9c-wmds
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS commercial_water_consumption;"
+psql -U postgres -d finalproject -c "CREATE TABLE commercial_water_consumption (year_month TEXT,
+postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
