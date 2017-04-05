@@ -33,6 +33,6 @@ psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS code_complaint_cases_c
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS code_complaint_cases;"
 psql -U postgres -d finalproject -c "CREATE TABLE code_complaint_cases_counts (match_key TIMESTAMP, row_count INT);"
 psql -U postgres -d finalproject -c "CREATE TABLE code_complaint_cases (case_id TEXT,address TEXT,house_number TEXT,
-street_name TEXT,city TEXT,state TEXT,zip_code TEXT,y TEXT,y TEXT,opened_date TEXT,closed_date TEXT,department TEXT,
+street_name TEXT,city TEXT,state TEXT,zip_code TEXT,x TEXT,y TEXT,opened_date TEXT,closed_date TEXT,department TEXT,
 case_type TEXT,description TEXT,case_contract TEXT,case_manager TEXT,date_updated TEXT,latitude TEXT,longitude TEXT,
 location_city TEXT,location TEXT,location_address TEXT,location_zip TEXT,location_state TEXT);" 
