@@ -50,7 +50,7 @@ def data_extract():
                     cur.execute("INSERT INTO issued_construction_permits (" + columns + ") VALUES (" + values + ");");
 
                 # Record row count for single year/zip code to counts table
-                cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+zip+"',"+str(num_rows)+");")
+                cur.execute("INSERT INTO issued_construction_permits_counts VALUES("+zip+","+str(year)+","+str(num_rows)+");")
 
                 # Commit changes to tables for single year/zip code
                 conn.commit()
