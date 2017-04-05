@@ -8,7 +8,6 @@ zipcodes=['78610', '78613', '78617', '78641', '78652', '78653', '78660', '78664'
           '78726', '78727', '78728', '78729', '78730', '78731', '78732', '78733', '78734', '78735', '78736',
           '78737', '78738', '78739', '78741', '78742', '78744', '78745', '78746', '78747', '78748', '78749',
           '78750', '78751', '78752', '78753', '78754', '78756', '78757', '78758', '78759']
-years=range(1990,datetime.datetime.now().year())
 
 # This function makes API calls and writes results to data lake tables
 def data_extract():
@@ -23,7 +22,7 @@ def data_extract():
                         
         # Iterate through all zip codes and years
         for zip in zipcodes:
-            for year in years:
+            for year in range(1990,datetime.datetime.now().year()):
             
                 # Make API call to data source
                 url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&original_zip="+zip+"&calendar_year_issued="+str(year)
