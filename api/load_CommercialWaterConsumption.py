@@ -17,7 +17,7 @@ def data_extract():
         cur.execute("TRUNCATE TABLE commercial_water_consumption;");
                         
         # Make API call to data source
-        url = "https://data.austintexas.gov/resource/9vdn-n87u.json?$limit=50000"
+        url = "https://data.austintexas.gov/resource/awym-tx82.json?$limit=50000"
         response = requests.get(url, verify=False)
         data = response.json()
         if response.status_code <> 200:
