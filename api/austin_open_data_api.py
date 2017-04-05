@@ -29,7 +29,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         for day in daterange(start_date+datetime.timedelta(days=1), (datetime.date.today()-datetime.timedelta(days=1))):
             
             # Reformat single date
-            single_date=str(day.strftime(date_format))
+            single_date=date_format
             
             # Make API call to data source
             url = api_url+single_date
@@ -92,7 +92,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 # applicant_city TEXT,applicantzip TEXT);"
 table_name = "issued_construction_permits"
 initial_start_date = datetime.date(1990, 1, 1)
-date_format = "%Y-%m-%d"
+date_format = str(day.strftime("%Y-%m-%d"))
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
 data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~30 minutes
 
@@ -102,8 +102,8 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 # psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (restaurant_name TEXT,
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
 table_name = "restaurant_inspection_scores"
-initial_start_date = datetime.date(2014, 3, 1)
-date_format = "%Y-%m-%d"
+initial_start_date = datetime.date(2014, 3, 1,hour=19)
+date_format = str(day.isoformat(timespec='microseconds'))
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
 data_extract(table_name,initial_start_date,date_format,api_url)
 
