@@ -36,3 +36,20 @@ psql -U postgres -d finalproject -c "CREATE TABLE code_complaint_cases (case_id 
 street_name TEXT,city TEXT,state TEXT,zip_code TEXT,x TEXT,y TEXT,opened_date TEXT,closed_date TEXT,department TEXT,
 case_type TEXT,description TEXT,case_contact TEXT,case_manager TEXT,date_updated TEXT,latitude TEXT,longitude TEXT,
 location_city TEXT,location TEXT,location_address TEXT,location_zip TEXT,location_state TEXT);" 
+
+# 2014-2016 Racial Profiling Dataset Citations
+# https://data.austintexas.gov/dataset/2014-Racial-Profiling-Dataset-Citations/mw6q-k5gy
+# https://data.austintexas.gov/Public-Safety/Racial-Profiling-Dataset-2015-Citations/sc6h-qr9f
+# https://data.austintexas.gov/Public-Safety/2016-Racial-Profiling-Dataset-Citations/gcpe-gehi
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_citations_counts;"
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_citations;"
+psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_counts (year INT, race VARCHAR(2), row_count INT);"
+psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations (case_id TEXT,address TEXT,house_number TEXT,
+street_name TEXT,city TEXT,state TEXT,zip_code TEXT,x TEXT,y TEXT,opened_date TEXT,closed_date TEXT,department TEXT,
+case_type TEXT,description TEXT,case_contact TEXT,case_manager TEXT,date_updated TEXT,latitude TEXT,longitude TEXT,
+location_city TEXT,location TEXT,location_address TEXT,location_zip TEXT,location_state TEXT);" 
+
+
+
+citation_number TEXT,off_from_date TEXT,off_time TEXT,race_origin_code TEXT,case_party_sex TEXT,reason_for_stop TEXT,race_known TEXT,
+vl_street_name TEXT,msearch_y_n TEXT,msearch_type TEXT,msearch_found TEXT,
