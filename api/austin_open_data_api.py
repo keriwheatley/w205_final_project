@@ -62,7 +62,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 
             # Commit changes to tables for single date
             conn.commit()
-            print "Loaded " + single_date + " records."
+            print "Loaded " + single_date + " records to data source ("+table_name+")."
 
         # Close connection after all single dates have been processed
         conn.close()
