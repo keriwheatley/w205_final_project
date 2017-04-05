@@ -15,8 +15,8 @@ def data_extract():
         cur = conn.cursor()
 
         # Empty data tables
-        cur.execute("DELETE FROM code_complaint_cases;");
-        cur.execute("DELETE FROM code_complaint_cases_counts;");
+        cur.execute("TRUNCATE TABLE code_complaint_cases;");
+        cur.execute("TRUNCATE TABLE code_complaint_cases_counts;");
                 
         # Iterate through all zip codes
         for zip in ['78610', '78613', '78617', '78641', '78652', '78653', '78660', '78664', '78681', '78701', '78702', 
