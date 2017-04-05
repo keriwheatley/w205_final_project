@@ -102,7 +102,7 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 # psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (restaurant_name TEXT,
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
 table_name = "restaurant_inspection_scores"
-initial_start_date = datetime.date(2014, 3, 1,hour=19)
+initial_start_date = datetime.datetime(2014, 3, 1,hour=19)
 date_format = "isoformat(timespec='microseconds')"
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
 data_extract(table_name,initial_start_date,date_format,api_url)
