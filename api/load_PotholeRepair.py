@@ -18,7 +18,7 @@ def data_extract():
         print "Truncated data table."
                         
         # Make API call to data source
-        url = "hhttps://data.austintexas.gov/resource/fmm2-ytyt.json?$limit=50000"
+        url = "https://data.austintexas.gov/resource/fmm2-ytyt.json?$limit=50000"
         response = requests.get(url, verify=False)
         data = response.json()
         if response.status_code <> 200:
