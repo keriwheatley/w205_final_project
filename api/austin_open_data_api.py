@@ -103,7 +103,7 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
 table_name = "restaurant_inspection_scores"
 initial_start_date = datetime.date(2014, 3, 1)
-date_format = "%m/%d/%Y"
+date_format = "%Y-%m-%d"
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
 data_extract(table_name,initial_start_date,date_format,api_url)
 
