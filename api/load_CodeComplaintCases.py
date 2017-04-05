@@ -1,4 +1,4 @@
-import data_extract
+import load_data_code
 import datetime
 
 table_name = "code_complaint_cases"
