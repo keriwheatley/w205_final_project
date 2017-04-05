@@ -17,7 +17,7 @@ def data_extract():
         cur.execute("TRUNCATE TABLE residential_water_consumption;");
                         
         # Make API call to data source
-        url = "https://data.austintexas.gov/resource/9vdn-n87u.json"
+        url = "https://data.austintexas.gov/resource/9vdn-n87u.json?$limit=50000"
         response = requests.get(url, verify=False)
         data = response.json()
         if response.status_code <> 200:
@@ -37,7 +37,7 @@ def data_extract():
 
         # Commit changes to tables for single zip code
         conn.commit()
-        print "Loaded " + str(len(data)) + "records to data source (residential_water_consumption)."
+        print "Loaded " + str(len(data)) + " records to data source (residential_water_consumption)."
 
         # Close connection after all single dates have been processed
         conn.close()
