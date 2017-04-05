@@ -9,7 +9,7 @@ def daterange(start_date, end_date):
         yield start_date + datetime.timedelta(n)
 
 # This function makes API calls and writes results to data lake tables
-def data_extract(data_source, initial_start_date, date_format, api_url):
+def data_extract(data_source, initial_start_date, end_date, date_format, api_url):
     try:        
         # Start runtime
         start_time = datetime.datetime.now()
@@ -24,11 +24,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         last_run = cur.fetchall()[0][0]
         if last_run is None: start_date = initial_start_date
         else: start_date = last_run+datetime.timedelta(days=1)
-        
-        print last_run
-        print start_date
-        print end_date
-        
+                
         # Iterate through all days from last run date to end date
         for day in daterange(start_date, end_date):
             
@@ -82,7 +78,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 # end_date = datetime.date.today()-datetime.timedelta(days=1) # End time is yesterday
 # date_format = "strftime('%Y-%m-%d')" # Format date for API call
 # api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
-# data_extract(table_name,initial_start_date,date_format,api_url)
+# data_extract(table_name,initial_start_date,end_date,date_format,api_url)
 
 # table_name = "restaurant_inspection_scores"
 # initial_start_date = datetime.datetime(2014, 3, 1,hour=19) # Start date for initial load; initial load runtime ~1 minute
@@ -90,11 +86,11 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 #     datetime.timedelta(days=1) # End time is yesterday
 # date_format = "isoformat()" # Format date for API call
 # api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
-# data_extract(table_name,initial_start_date,date_format,api_url)
+# data_extract(table_name,initial_start_date,end_date,date_format,api_url)
 
 # table_name = "code_complaint_cases"
 # initial_start_date = datetime.date(1990, 1, 1) # Start date for initial load
 # end_date = datetime.date.today()-datetime.timedelta(days=1) # End time is yesterday
 # date_format = "strftime('%Y-%m-%d')" # Format date for API call
 # api_url = "https://data.austintexas.gov/resource/cgku-nb4s.json?$limit=50000&opened_date="
-# data_extract(table_name,initial_start_date,date_format,api_url)
+# data_extract(table_name,initial_start_date,end_date,date_format,api_url)
