@@ -2,7 +2,7 @@
 # https://data.austintexas.gov/Permitting/Issued-Construction-Permits/3syk-w9eu
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits_counts;"
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits;"        
-psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (zip_code INT, row_count INT);"
+psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (zip_code VARCHAR(5), row_count INT);"
 psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
 permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
 description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
@@ -22,7 +22,7 @@ applicant_city TEXT,applicantzip TEXT);"
 # https://data.austintexas.gov/dataset/Restaurant-Inspection-Scores/ecmv-9xxi
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores_counts;"
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores;"
-psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_counts (zip_code INT, row_count INT);"
+psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_counts (zip_code VARCHAR(5), row_count INT);"
 psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (restaurant_name TEXT,zip_code TEXT,
 inspection_date TEXT,score TEXT,address_city TEXT,address_state TEXT,address TEXT,facility_id TEXT,
 process_description TEXT,address_address TEXT,address_zip TEXT);" 
@@ -31,7 +31,7 @@ process_description TEXT,address_address TEXT,address_zip TEXT);"
 # https://data.austintexas.gov/Government/Austin-Code-Complaint-Cases/6wtj-zbtb
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS code_complaint_cases_counts;"
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS code_complaint_cases;"
-psql -U postgres -d finalproject -c "CREATE TABLE code_complaint_cases_counts (zip_code INT, row_count INT);"
+psql -U postgres -d finalproject -c "CREATE TABLE code_complaint_cases_counts (zip_code VARCHAR(5), row_count INT);"
 psql -U postgres -d finalproject -c "CREATE TABLE code_complaint_cases (case_id TEXT,address TEXT,house_number TEXT,
 street_name TEXT,city TEXT,state TEXT,zip_code TEXT,x TEXT,y TEXT,opened_date TEXT,closed_date TEXT,department TEXT,
 case_type TEXT,description TEXT,case_contact TEXT,case_manager TEXT,date_updated TEXT,latitude TEXT,longitude TEXT,
