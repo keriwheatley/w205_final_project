@@ -1,4 +1,4 @@
-import data_extract
+import load_data_code
 import datetime
 
 table_name = "restaurant_inspection_scores"
@@ -7,4 +7,4 @@ end_date = datetime.datetime(datetime.date.today().year, datetime.date.today().m
     datetime.timedelta(days=1) # End time is yesterday
 date_format = "isoformat()" # Format date for API call
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
-data_extract(table_name,initial_start_date,end_date,date_format,api_url)
+load_data_code.data_extract(table_name,initial_start_date,end_date,date_format,api_url)
