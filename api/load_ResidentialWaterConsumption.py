@@ -17,29 +17,29 @@ def data_extract():
         cur.execute("TRUNCATE TABLE residential_water_consumption;");
         cur.execute("TRUNCATE TABLE residential_water_consumption_counts;");
                         
-            # Make API call to data source
-            url = "https://data.austintexas.gov/resource/9vdn-n87u.json"
-            response = requests.get(url, verify=False)
-            data = response.json()
-            if response.status_code <> 200:
-                print "Error: Did not complete call to API. Check API call: " + url
-                print data
-                break
+        # Make API call to data source
+        url = "https://data.austintexas.gov/resource/9vdn-n87u.json"
+        response = requests.get(url, verify=False)
+        data = response.json()
+        if response.status_code <> 200:
+            print "Error: Did not complete call to API. Check API call: " + url
+            print data
+            break
 
-            # Write each row for single date to data lake table
-            for row in data:
-                values = ""
-                columns = ""
-                for i in row:
-                    columns += str(i) + ","                
-                    values += "'" + str(row[i]).replace("'","") + "',"
-                columns = columns[:-1]
-                values = values[:-1]
-                cur.execute("INSERT INTO residential_water_consumption (" + columns + ") VALUES (" + values + ");");
+        # Write each row for single date to data lake table
+        for row in data:
+            values = ""
+            columns = ""
+            for i in row:
+                columns += str(i) + ","                
+                values += "'" + str(row[i]).replace("'","") + "',"
+            columns = columns[:-1]
+            values = values[:-1]
+            cur.execute("INSERT INTO residential_water_consumption (" + columns + ") VALUES (" + values + ");");
 
-            # Commit changes to tables for single zip code
-            conn.commit()
-            print "Loaded " + str(len(data)) + "records to data source (residential_water_consumption)."
+        # Commit changes to tables for single zip code
+        conn.commit()
+        print "Loaded " + str(len(data)) + "records to data source (residential_water_consumption)."
 
         # Close connection after all single dates have been processed
         conn.close()
