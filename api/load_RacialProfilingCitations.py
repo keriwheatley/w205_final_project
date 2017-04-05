@@ -31,7 +31,7 @@ def data_extract():
         for year_index in xrange(2):
             for race in ['A','B','H','ME','N','O','W']:
                 # Make API call to data source
-                url = api[year_index]+race
+                url = api_links[year_index]+race
                 response = requests.get(url, verify=False)
                 data = response.json()
                 if response.status_code <> 200:
