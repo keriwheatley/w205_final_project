@@ -59,3 +59,13 @@ postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS commercial_water_consumption;"
 psql -U postgres -d finalproject -c "CREATE TABLE commercial_water_consumption (year_month TEXT,
 postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
+
+# Pothole Repair
+# https://data.austintexas.gov/Utility/Austin-Water-Commercial-Water-Consumption/5h9c-wmds
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS pothole_repair;"
+psql -U postgres -d finalproject -c "CREATE TABLE pothole_repair (sr_number TEXT,sr_type_code TEXT,
+sr_type_desc TEXT,sr_department_desc TEXT,sr_method_received_desc TEXT,sr_status_desc TEXT,sr_status_date TEXT,
+sr_created_date TEXT,sr_updated_date TEXT,sr_closed_date TEXT,sr_location TEXT,sr_location_street_number TEXT,
+sr_location_street_name TEXT,sr_location_city TEXT,sr_location_zip_code TEXT,sr_location_county TEXT,
+sr_location_x TEXT,sr_location_y TEXT,sr_location_lat TEXT,sr_location_long TEXT,sr_location_lat_long TEXT,
+sr_location_council_district TEXT,sr_location_map_page TEXT,sr_location_map_tile TEXT);"
