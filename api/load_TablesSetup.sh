@@ -47,3 +47,9 @@ psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_cou
 psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations (citation_number TEXT,
 off_from_date TEXT, off_time TEXT, race_origin_code TEXT, case_party_sex TEXT, reason_for_stop TEXT,
 race_known TEXT, vl_street_name TEXT, msearch_y_n TEXT, msearch_type TEXT, msearch_found TEXT);"
+
+# Residential Water Consumption
+# https://data.austintexas.gov/Utility/Austin-Water-Residential-Water-Consumption/sxk7-7k6z
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS residential_water_consumption;"
+psql -U postgres -d finalproject -c "CREATE TABLE residential_water_consumption (year_month TEXT,
+postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
