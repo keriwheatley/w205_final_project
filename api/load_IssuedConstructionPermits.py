@@ -17,7 +17,7 @@ def data_extract():
                 
         # Empty data tables
         cur.execute("TRUNCATE TABLE issued_construction_permits;");
-        cur.execute("DELETE FROM issued_construction_permits_counts;");
+        cur.execute("TRUNCATE TABLE issued_construction_permits_counts;");
         
         # Iterate through all zip codes and years
         for year in range(1990,datetime.date.today().year):
