@@ -108,7 +108,8 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 table_name = "restaurant_inspection_scores"
 initial_start_date = datetime.datetime(2014, 3, 1,hour=19)
 print initial_start_date
-end_date = datetime.datetime(date.today().year, date.today().month, date.today().day,hour=19)-datetime.timedelta(days=1)
+end_date = datetime.datetime(datetime.date.today().year, datetime.date.today().month, datetime.date.today().day,hour=19)-
+    datetime.timedelta(days=1)
 print end_date
 date_format = "isoformat(timespec='microseconds')"
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
