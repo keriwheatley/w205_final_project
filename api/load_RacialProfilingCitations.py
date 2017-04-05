@@ -16,6 +16,7 @@ def data_extract():
         # Empty data tables
         cur.execute("TRUNCATE TABLE racial_profiling_citations;");
         cur.execute("TRUNCATE TABLE racial_profiling_citations_counts;");
+        print "Truncated data tables."
 
         # 2014 data API link
         api_2014 = "https://data.austintexas.gov/resource/rkqq-yay6.json?$limit=50000&race_origin_code="
