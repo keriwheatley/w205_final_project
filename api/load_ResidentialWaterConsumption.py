@@ -23,8 +23,7 @@ def data_extract():
         data = response.json()
         if response.status_code <> 200:
             print "Error: Did not complete call to API. Check API call: " + url
-            print data
-            break
+            return data
 
         # Write each row for single date to data lake table
         for row in data:
