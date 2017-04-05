@@ -69,3 +69,10 @@ sr_created_date TEXT,sr_updated_date TEXT,sr_closed_date TEXT,sr_location TEXT,s
 sr_location_street_name TEXT,sr_location_city TEXT,sr_location_zip_code TEXT,sr_location_county TEXT,
 sr_location_x TEXT,sr_location_y TEXT,sr_location_lat TEXT,sr_location_long TEXT,sr_location_lat_long TEXT,
 sr_location_council_district TEXT,sr_location_map_page TEXT,sr_location_map_tile TEXT);"
+
+# Service Alerts
+# https://data.texas.gov/dataset/Service-Alerts/avj9-39zb
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS service_alerts;"
+psql -U postgres -d finalproject -c "CREATE TABLE service_alerts (alert_id TEXT,start TEXT,end TEXT,url TEXT,
+effect TEXT,header_text TEXT,route_type TEXT,route_id TEXT,trip TEXT,stop_id TEXT,description_text TEXT,cause TEXT,
+sup_timestamp TEXT);"
