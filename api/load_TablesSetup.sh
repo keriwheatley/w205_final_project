@@ -47,9 +47,4 @@ psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_cou
 psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations (case_id TEXT,address TEXT,house_number TEXT,
 street_name TEXT,city TEXT,state TEXT,zip_code TEXT,x TEXT,y TEXT,opened_date TEXT,closed_date TEXT,department TEXT,
 case_type TEXT,description TEXT,case_contact TEXT,case_manager TEXT,date_updated TEXT,latitude TEXT,longitude TEXT,
-location_city TEXT,location TEXT,location_address TEXT,location_zip TEXT,location_state TEXT);" 
-
-
-
-citation_number TEXT,off_from_date TEXT,off_time TEXT,race_origin_code TEXT,case_party_sex TEXT,reason_for_stop TEXT,race_known TEXT,
-vl_street_name TEXT,msearch_y_n TEXT,msearch_type TEXT,msearch_found TEXT,
+location_city TEXT,location TEXT,location_address TEXT,location_zip TEXT,location_state TEXT);"
