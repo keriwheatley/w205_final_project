@@ -13,6 +13,10 @@ def data_extract():
         # Connect to database
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
+
+        # Empty data tables
+        cur.execute("DELETE FROM restaurant_inspection_scores;");
+        cur.execute("DELETE FROM restaurant_inspection_scores_counts;");
                 
         # Iterate through all zip codes
         for zip in ['78610', '78613', '78617', '78641', '78652', '78653', '78660', '78664', '78681', '78701', '78702', 
