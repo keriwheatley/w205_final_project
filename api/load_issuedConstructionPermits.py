@@ -15,10 +15,10 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
         
-        print datetime.datetime.now().year()
+#         print datetime.datetime.now().year()
         
         # Iterate through all zip codes and years
-        for year in range(1990,datetime.datetime.now().year()):
+        for year in range(1990,2017):
             for zip in ['78610', '78613', '78617', '78641', '78652', '78653', '78660', '78664', '78681', '78701', '78702', 
                     '78703', '78704', '78705', '78712', '78717', '78719', '78721', '78722', '78723', '78724', '78725',
                     '78726', '78727', '78728', '78729', '78730', '78731', '78732', '78733', '78734', '78735', '78736',
