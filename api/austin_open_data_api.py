@@ -101,7 +101,7 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 
 # psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores_counts;"
 # psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores;"
-# psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_counts (match_key DATE, row_count INT);"
+# psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_counts (match_key TIMESTAMP, row_count INT);"
 # psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (restaurant_name TEXT,zip_code TEXT,
 # inspection_date TEXT,score TEXT,address_city TEXT,address_state TEXT,address TEXT,facility_id TEXT,
 # process_description TEXT,address_address TEXT,address_zip TEXT);" 
