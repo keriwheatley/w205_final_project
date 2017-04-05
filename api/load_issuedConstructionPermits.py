@@ -15,7 +15,7 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
         
-#         print datetime.datetime.now().year()
+        print int(datetime.datetime.now().year())
         
         # Iterate through all zip codes and years
         for year in range(1990,2017):
