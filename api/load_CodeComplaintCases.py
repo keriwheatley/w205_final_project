@@ -1,11 +1,7 @@
-import load_data_code
-import datetime
-
 import requests
 import datetime
 import json
 import psycopg2
-
 
 # This function makes API calls and writes results to data lake tables
 def data_extract():
@@ -18,7 +14,7 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
                 
-        # Iterate through all zip codes and years
+        # Iterate through all zip codes
         for zip in ['78610', '78613', '78617', '78641', '78652', '78653', '78660', '78664', '78681', '78701', '78702', 
             '78703', '78704', '78705', '78712', '78717', '78719', '78721', '78722', '78723', '78724', '78725',
             '78726', '78727', '78728', '78729', '78730', '78731', '78732', '78733', '78734', '78735', '78736',
@@ -34,7 +30,7 @@ def data_extract():
                 print data
                 break
 
-            # Print row count for single year/zip code
+            # Print row count for single zip code
             num_rows = len(data)
             row_format = "{:>20}" *(6)
             print row_format.format('Zip_Code:', zip, 'Row_Count:',str(num_rows),
@@ -51,10 +47,10 @@ def data_extract():
                 values = values[:-1]
                 cur.execute("INSERT INTO code_complaint_cases (" + columns + ") VALUES (" + values + ");");
 
-            # Record row count for single year/zip code to counts table
+            # Record row count for single zip code to counts table
             cur.execute("INSERT INTO code_complaint_cases_counts VALUES('"+zip+"',"+str(num_rows)+");")
 
-            # Commit changes to tables for single year/zip code
+            # Commit changes to tables for single zip code
             conn.commit()
             print "Loaded records to data source (code_complaint_cases) for zip code ("+zip+")."
 
