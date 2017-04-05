@@ -16,7 +16,7 @@ def data_extract():
         cur = conn.cursor()
                 
         # Empty data tables
-        cur.execute("DELETE FROM issued_construction_permits;");
+        cur.execute("TRUNCATE TABLE issued_construction_permits;");
         cur.execute("DELETE FROM issued_construction_permits_counts;");
         
         # Iterate through all zip codes and years
