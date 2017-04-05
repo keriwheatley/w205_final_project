@@ -3,13 +3,14 @@ import datetime
 import json
 import psycopg2
 
-# Get date range for inputs incremented by day
-def daterange(start_date, end_date):
-    for n in range(int ((end_date - start_date).days)):
-        yield start_date + datetime.timedelta(n)
+zipcodes=['78610', '78613', '78617', '78641', '78652', '78653', '78660', '78664', '78681', '78701', '78702', 
+          '78703', '78704', '78705', '78712', '78717', '78719', '78721', '78722', '78723', '78724', '78725',
+          '78726', '78727', '78728', '78729', '78730', '78731', '78732', '78733', '78734', '78735', '78736',
+          '78737', '78738', '78739', '78741', '78742', '78744', '78745', '78746', '78747', '78748', '78749',
+          '78750', '78751', '78752', '78753', '78754', '78756', '78757', '78758', '78759']
 
 # This function makes API calls and writes results to data lake tables
-def data_extract(data_source, initial_start_date, end_date, date_format, api_url):
+def data_extract(data_source, api_url):
     try:        
         # Start runtime
         start_time = datetime.datetime.now()
@@ -18,21 +19,12 @@ def data_extract(data_source, initial_start_date, end_date, date_format, api_url
         # Connect to database
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
-        
-        # Find last run date for data source. If no run date exists, use input initial_start_date.
-        cur.execute("SELECT MAX(match_key) FROM "+data_source+"_counts;");
-        last_run = cur.fetchall()[0][0]
-        if last_run is None: start_date = initial_start_date
-        else: start_date = last_run+datetime.timedelta(days=1)
-                
+                        
         # Iterate through all days from last run date to end date
-        for day in daterange(start_date, end_date):
-            
-            # Reformat single date
-            single_date=eval("str(day."+date_format+")")
+        for zip in zipcodes:
             
             # Make API call to data source
-            url = api_url+single_date
+            url = api_url+zip
             response = requests.get(url, verify=False)
             data = response.json()
             if response.status_code <> 200:
@@ -43,7 +35,7 @@ def data_extract(data_source, initial_start_date, end_date, date_format, api_url
             # Print row count for single date
             num_rows = len(data)
             row_format = "{:>20}" *(6)
-            print row_format.format('Date:', single_date,'Row_Count:',str(num_rows),
+            print row_format.format('Zip_Code:', zip,'Row_Count:',str(num_rows),
                 'Runtime:',str((datetime.datetime.now() - start_time)))
             
             # Write each row for single date to data lake table
@@ -58,11 +50,11 @@ def data_extract(data_source, initial_start_date, end_date, date_format, api_url
                 cur.execute("INSERT INTO " + data_source + " (" + columns + ") VALUES (" + values + ");");
             
             # Record row count for single date to counts table
-            cur.execute("INSERT INTO " + data_source + "_counts VALUES('"+single_date+"',"+str(num_rows)+");")
+            cur.execute("INSERT INTO " + data_source + "_counts VALUES('"+zip+"',"+str(num_rows)+");")
 
             # Commit changes to tables for single date
             conn.commit()
-            print "Loaded records to data source ("+data_source+") for day ("+single_date+")."
+            print "Loaded records to data source ("+data_source+") for zip code ("+zip+")."
 
         # Close connection after all single dates have been processed
         conn.close()
