@@ -1,4 +1,5 @@
 import data_extract
+import datetime
 
 table_name = "issued_construction_permits"
 initial_start_date = datetime.date(1990, 1, 1) # Start date for initial load; initial load runtime ~30 minutes
