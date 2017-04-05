@@ -27,40 +27,40 @@ def data_extract():
             
                 # Make API call to data source
                 url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&original_zip="+zip+"&calendar_year_issued="+str(year)
-                response = requests.get(url, verify=False)
-                data = response.json()
-                if response.status_code <> 200:
-                    print "Error: Did not complete call to API. Check API call: " + url
-                    print data
-                    break
+#                 response = requests.get(url, verify=False)
+#                 data = response.json()
+#                 if response.status_code <> 200:
+#                     print "Error: Did not complete call to API. Check API call: " + url
+#                     print data
+#                     break
 
-                # Print row count for single date
-                num_rows = len(data)
-                row_format = "{:>20}" *(8)
-                print row_format.format('Zip_Code:', zip,'Year:', year, 'Row_Count:',str(num_rows),
-                    'Runtime:',str((datetime.datetime.now() - start_time)))
+#                 # Print row count for single date
+#                 num_rows = len(data)
+#                 row_format = "{:>20}" *(8)
+#                 print row_format.format('Zip_Code:', zip,'Year:', year, 'Row_Count:',str(num_rows),
+#                     'Runtime:',str((datetime.datetime.now() - start_time)))
 
-                # Write each row for single date to data lake table
-                for row in data:
-                    values = ""
-                    columns = ""
-                    for i in row:
-                        columns += str(i) + ","                
-                        values += "'" + str(row[i]).replace("'","") + "',"
-                    columns = columns[:-1]
-                    values = values[:-1]
-                    cur.execute("INSERT INTO issued_construction_permits (" + columns + ") VALUES (" + values + ");");
+#                 # Write each row for single date to data lake table
+#                 for row in data:
+#                     values = ""
+#                     columns = ""
+#                     for i in row:
+#                         columns += str(i) + ","                
+#                         values += "'" + str(row[i]).replace("'","") + "',"
+#                     columns = columns[:-1]
+#                     values = values[:-1]
+#                     cur.execute("INSERT INTO issued_construction_permits (" + columns + ") VALUES (" + values + ");");
 
-            # Record row count for single date to counts table
-            cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+zip+"',"+str(num_rows)+");")
+#             # Record row count for single date to counts table
+#             cur.execute("INSERT INTO issued_construction_permits_counts VALUES('"+zip+"',"+str(num_rows)+");")
 
-            # Commit changes to tables for single date
-            conn.commit()
-            print "Loaded records to data source (issued_construction_permits) for zip code ("+zip+")."
+#             # Commit changes to tables for single date
+#             conn.commit()
+#             print "Loaded records to data source (issued_construction_permits) for zip code ("+zip+")."
 
-        # Close connection after all single dates have been processed
-        conn.close()
-        print "Ended data extract for data source (issued_construction_permits) at time (" + str(datetime.datetime.now()) + ")."
+#         # Close connection after all single dates have been processed
+#         conn.close()
+#         print "Ended data extract for data source (issued_construction_permits) at time (" + str(datetime.datetime.now()) + ")."
     
     # Error logging
     except Exception as inst:
