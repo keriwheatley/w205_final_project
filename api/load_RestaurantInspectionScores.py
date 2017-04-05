@@ -3,7 +3,6 @@ import datetime
 import json
 import psycopg2
 
-# This function makes API calls and writes results to data lake tables
 def data_extract():
     try:        
         # Start runtime
