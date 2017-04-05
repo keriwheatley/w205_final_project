@@ -73,46 +73,24 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         print(inst.args)
         print(inst)
 
-# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits_counts;"
-# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits;"        
-# psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (match_key DATE, row_count INT);"
-# psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
-# permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
-# description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
-# calendar_year_issued TEXT,fiscal_year_issued TEXT,issued_in_last_30_days TEXT,issue_method TEXT,status_current TEXT,
-# statusdate TEXT,expiresdate TEXT,completed_date TEXT,total_existing_bldg_sqft TEXT,remodel_repair_sqft TEXT,
-# total_new_add_sqft TEXT,total_valuation_remodel TEXT,total_job_valuation TEXT,number_of_floors TEXT,housing_units TEXT,
-# building_valuation TEXT,building_valuation_remodel TEXT,electrical_valuation TEXT,electrical_valuation_remodel TEXT,
-# mechanical_valuation TEXT,mechanical_valuation_remodel TEXT,plumbing_valuation TEXT,plumbing_valuation_remodel TEXT,
-# medgas_valuation TEXT,medgas_valuation_remodel TEXT,original_address1 TEXT,original_city TEXT,original_state TEXT,
-# original_zip TEXT,council_district TEXT,jurisdiction TEXT,link TEXT,project_id TEXT,masterpermitnum TEXT,
-# latitude TEXT,longitude TEXT,location TEXT,contractor_trade TEXT,contractor_company_name TEXT,contractor_full_name TEXT,
-# contractor_phone TEXT,contractor_address1 TEXT,contractor_address2 TEXT,contractor_city TEXT,contractor_zip TEXT,
-# applicant_full_name TEXT,applicant_org TEXT,applicant_phone TEXT,applicant_address1 TEXT,applicant_address2 TEXT,
-# applicant_city TEXT,applicantzip TEXT);"
 table_name = "issued_construction_permits"
-initial_start_date = datetime.date(1990, 1, 1)
+initial_start_date = datetime.date(1990, 1, 1) # Start date for initial load; initial load runtime ~30 minutes
 end_date = datetime.date.today()-datetime.timedelta(days=1) # End time is yesterday
-date_format = "strftime('%Y-%m-%d')"
+date_format = "strftime('%Y-%m-%d')" # Format date for API call
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
-data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~30 minutes
+data_extract(table_name,initial_start_date,date_format,api_url)
 
-# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores_counts;"
-# psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores;"
-# psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_counts (match_key TIMESTAMP, row_count INT);"
-# psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (restaurant_name TEXT,zip_code TEXT,
-# inspection_date TEXT,score TEXT,address_city TEXT,address_state TEXT,address TEXT,facility_id TEXT,
-# process_description TEXT,address_address TEXT,address_zip TEXT);" 
 table_name = "restaurant_inspection_scores"
-initial_start_date = datetime.datetime(2014, 3, 1,hour=19)
+initial_start_date = datetime.datetime(2014, 3, 1,hour=19) # Start date for initial load; initial load runtime ~1 minute
 end_date = datetime.datetime(datetime.date.today().year, datetime.date.today().month, datetime.date.today().day,hour=19)-\
     datetime.timedelta(days=1) # End time is yesterday
-date_format = "isoformat()"
+date_format = "isoformat()" # Format date for API call
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
-data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~1 minutes
+data_extract(table_name,initial_start_date,date_format,api_url)
 
-# table_name = "issued_construction_permits"
-# initial_start_date = datetime.date(1990, 1, 1)
-# api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
-# data_extract(table_name,initial_start_date,date_format,api_url)
-
+table_name = "code_complaint_cases"
+initial_start_date = datetime.date(1990, 1, 1) # Start date for initial load
+end_date = datetime.date.today()-datetime.timedelta(days=1) # End time is yesterday
+date_format = "strftime('%Y-%m-%d')" # Format date for API call
+api_url = "https://data.austintexas.gov/resource/cgku-nb4s.json?$limit=50000&opened_date="
+data_extract(table_name,initial_start_date,date_format,api_url)
