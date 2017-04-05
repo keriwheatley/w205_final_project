@@ -9,7 +9,7 @@ def daterange(start_date, end_date):
         yield start_date + datetime.timedelta(n)
 
 # This function makes API calls and writes results to data lake tables
-def data_extract(table_name,data_source, initial_start_date, end_date, date_format, api_url):
+def data_extract(data_source, initial_start_date, end_date, date_format, api_url):
     try:        
         # Start runtime
         start_time = datetime.datetime.now()
@@ -62,7 +62,7 @@ def data_extract(table_name,data_source, initial_start_date, end_date, date_form
 
             # Commit changes to tables for single date
             conn.commit()
-            print "Loaded records to data source ("+table_name+") for day ("+single_date+")."
+            print "Loaded records to data source ("+data_source+") for day ("+single_date+")."
 
         # Close connection after all single dates have been processed
         conn.close()
