@@ -41,8 +41,8 @@ def data_extract():
 
                 # Print row count for single zip code
                 num_rows = len(data)
-                row_format = "{:>20}" *(6)
-                print row_format.format('Year:', years[year_index], 'Row_Count:',str(num_rows),
+                row_format = "{:>20}" *(8)
+                print row_format.format('Year:', years[year_index], 'Race:', race, 'Row_Count:',str(num_rows),
                     'Runtime:',str((datetime.datetime.now() - start_time)))
 
                 # Write each row for single date to data lake table
