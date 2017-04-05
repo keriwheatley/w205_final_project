@@ -40,7 +40,7 @@ def data_extract():
             print row_format.format('Zip_Code:', zip, 'Row_Count:',str(num_rows),
                 'Runtime:',str((datetime.datetime.now() - start_time)))
 
-            # Write each row for single date to data lake table
+            # Write each row for single zip code to data table
             for row in data:
                 values = ""
                 columns = ""
