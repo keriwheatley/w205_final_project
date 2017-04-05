@@ -15,6 +15,10 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
                 
+        # Empty data tables
+        cur.execute("DELETE FROM issued_construction_permits;");
+        cur.execute("DELETE FROM issued_construction_permits_counts;");
+        
         # Iterate through all zip codes and years
         for year in range(1990,datetime.date.today().year):
             for zip in ['78610', '78613', '78617', '78641', '78652', '78653', '78660', '78664', '78681', '78701', '78702', 
