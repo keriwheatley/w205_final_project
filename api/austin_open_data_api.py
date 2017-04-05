@@ -23,15 +23,13 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
         cur.execute("SELECT MAX(match_key) FROM "+data_source+"_counts;");
         last_run = cur.fetchall()[0][0]
         if last_run is None: start_date = initial_start_date
-        else: start_date = last_run
+        else: start_date = last_run+datetime.timedelta(days=1)
         
         print start_date
-        print start_date+datetime.timedelta(days=1)
-        print datetime.datetime.now()-datetime.timedelta(days=1)
+        print end_date
         
         # Iterate through all days from last run date to current date - 1 day
-        for day in daterange(start_date+datetime.timedelta(days=1), 
-                             (datetime.datetime.now()-datetime.timedelta(days=1))):
+        for day in daterange(start_date, end_date):
             
             # Reformat single date
             single_date="str(day."+date_format+")"
@@ -97,7 +95,7 @@ def data_extract(data_source, initial_start_date, date_format, api_url):
 # applicant_city TEXT,applicantzip TEXT);"
 table_name = "issued_construction_permits"
 initial_start_date = datetime.date(1990, 1, 1)
-end_date = datetime.date.today()
+end_date = datetime.date.today()-datetime.timedelta(days=1)
 date_format = "strftime('%Y-%m-%d')"
 api_url = "https://data.austintexas.gov/resource/x9yh-78fz.json?$limit=50000&applieddate="
 data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime ~30 minutes
@@ -109,7 +107,9 @@ data_extract(table_name,initial_start_date,date_format,api_url) #Initial runtime
 # zip_code TEXT, inspection_date TEXT, score TEXT, address TEXT, facility_id TEXT, process_description TEXT);"
 table_name = "restaurant_inspection_scores"
 initial_start_date = datetime.datetime(2014, 3, 1,hour=19)
-end_date = datetime.date.today()
+print initial_start_date
+end_date = datetime.datetime(date.today().year, date.today().month, date.today().day,hour=19)-datetime.timedelta(days=1)
+print end_date
 date_format = "isoformat(timespec='microseconds')"
 api_url = "https://data.austintexas.gov/resource/nguv-n54k.json?$limit=50000&inspection_date="
 data_extract(table_name,initial_start_date,date_format,api_url)
