@@ -26,7 +26,7 @@ def data_extract():
         years=['2015','2016']
 
         # Iterate through all years
-        for year_index in xrange(1):
+        for year_index in [0,1]:
             # Make API call to data source
             url = api_links[year_index]
             response = requests.get(url, verify=False)
