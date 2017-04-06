@@ -29,7 +29,7 @@ def data_extract():
         years=['2014','2015','2016']
 
         # Iterate through all years and races
-        for year_index in xrange(2):
+        for year_index in [0,1,2]:
             for race in ['A','B','H','ME','N','O','W']:
                 # Make API call to data source
                 url = api_links[year_index]+race
