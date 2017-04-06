@@ -9,3 +9,6 @@ python load_RacialProfilingCitations.py
 python load_ResidentialWaterConsumption.py
 python load_RestaurantInspectionScores.py
 python load_ServiceAlerts.py
+
+#### Need to load 2014 data. This is in CSV format not API.
+python load_RacialProfilingArrests.py
