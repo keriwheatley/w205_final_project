@@ -76,3 +76,13 @@ psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS service_alerts;"
 psql -U postgres -d finalproject -c 'CREATE TABLE service_alerts (alert_id TEXT,start TEXT,"end" TEXT,url TEXT,
 effect TEXT,header_text TEXT,route_type TEXT,route_id TEXT,trip TEXT,stop_id TEXT,description_text TEXT,cause TEXT,
 sup_timestamp TEXT);'
+
+# 2014-2016 Racial Profiling Arrests
+# https://data.austintexas.gov/Public-Safety/2014-Racial-Profiling-Dataset-Arrests/rnv4-98ze
+# https://data.austintexas.gov/Public-Safety/Racial-Profiling-Dataset-2015-Arrests/vykk-upaj
+# https://data.austintexas.gov/Public-Safety/2016-Racial-Profiling-Dataset-Arrests/834s-nvqn
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_arrests;"
+psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_arrests (primary_key TEXT,rep_date TEXT,
+rep_time TEXT,sex TEXT,age_at_offense TEXT,apd_race_desc TEXT,location TEXT,person_searched_desc TEXT,
+reason_for_stop_desc TEXT,search_based_on_desc TEXT,search_disc_desc TEXT,race_known TEXT,x_coordinate TEXT,
+y_coordinate TEXT,sector TEXT,local_field1 TEXT);"
