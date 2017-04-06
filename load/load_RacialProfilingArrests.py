@@ -25,10 +25,10 @@ def data_extract():
         api_links=[api_2015, api_2016]
         years=['2015','2016']
 
-        # Iterate through all years and races
+        # Iterate through all years
         for year_index in xrange(1):
             # Make API call to data source
-            url = api_links[year_index]+race
+            url = api_links[year_index]
             response = requests.get(url, verify=False)
             data = response.json()
             if response.status_code <> 200:
@@ -36,13 +36,13 @@ def data_extract():
                 print data
                 break
 
-            # Print row count for single year/race
+            # Print row count for single year
             num_rows = len(data)
             row_format = "{:>20}" *(6)
             print row_format.format('Year:', years[year_index], 'Row_Count:',str(num_rows),
                 'Runtime:',str((datetime.datetime.now() - start_time)))
 
-            # Write each row for single year/race to data table
+            # Write each row for single year to data table
             for row in data:
                 values = ""
                 columns = ""
@@ -53,12 +53,12 @@ def data_extract():
                 values = values[:-1]
                 cur.execute("INSERT INTO racial_profiling_arrests (" + columns + ") VALUES (" + values + ");");
 
-            # Commit changes to tables for single year/race
+            # Commit changes to tables for single year
             conn.commit()
             print "Loaded records to data source (racial_profiling_arrests) \
                 for year ("+years[year_index]+")."
 
-        # Close connection after all single year/race have been processed
+        # Close connection after all single year have been processed
         conn.close()
         print "Ended data extract for data source (racial_profiling_arrests) at time ("\
             + str(datetime.datetime.now()) + ")."
