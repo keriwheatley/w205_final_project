@@ -55,8 +55,7 @@ def data_extract():
 
             # Commit changes to tables for single year
             conn.commit()
-            print "Loaded records to data source (racial_profiling_arrests) \
-                for year ("+years[year_index]+")."
+            print "Loaded records to data source (racial_profiling_arrests) for year ("+years[year_index]+")."
 
         # Close connection after all single year have been processed
         conn.close()
