@@ -58,13 +58,13 @@ def data_extract():
                     cur.execute("INSERT INTO racial_profiling_citations (" + columns + ") VALUES (" + values + ");");
 
                 # Record row count for single year/race to counts table
-                cur.execute("INSERT INTO racial_profiling_citations_counts \
-                    VALUES("+years[year_index]+",'"+race+"',"+str(num_rows)+");")
+                cur.execute("INSERT INTO racial_profiling_citations_counts VALUES("+\
+                            years[year_index]+",'"+race+"',"+str(num_rows)+");")
 
                 # Commit changes to tables for single year/race
                 conn.commit()
-                print "Loaded records to data source (racial_profiling_citations) \
-                    for year ("+years[year_index]+") and race (" +race+"."
+                print "Loaded records to data source (racial_profiling_citations) for year ("+\
+                    years[year_index]+") and race (" +race+"."
 
         # Close connection after all single year/race have been processed
         conn.close()
