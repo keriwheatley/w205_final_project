@@ -64,7 +64,7 @@ def data_extract():
                 # Commit changes to tables for single year/race
                 conn.commit()
                 print "Loaded records to data source (racial_profiling_citations) for year ("+\
-                    years[year_index]+") and race (" +race+"."
+                    years[year_index]+") and race (" +race+")."
 
         # Close connection after all single year/race have been processed
         conn.close()
