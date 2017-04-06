@@ -61,7 +61,7 @@ psql -U postgres -d finalproject -c "CREATE TABLE commercial_water_consumption (
 postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
 
 # Pothole Repair
-# https://data.austintexas.gov/Utility/Austin-Water-Commercial-Water-Consumption/5h9c-wmds
+# https://data.austintexas.gov/Government/Pothole-Repair/fmm2-ytyt
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS pothole_repair;"
 psql -U postgres -d finalproject -c "CREATE TABLE pothole_repair (sr_number TEXT,sr_type_code TEXT,
 sr_type_desc TEXT,sr_department_desc TEXT,sr_method_received_desc TEXT,sr_status_desc TEXT,sr_status_date TEXT,
