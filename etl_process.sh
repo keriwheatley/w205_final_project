@@ -1,9 +1,5 @@
-mount -t ext4 /dev/xvdf /data
-/data/start_postgres.sh
-su - w205
-
-chmod +x ./load_tables_setup.sh
-./load_tables_setup.sh
+chmod +x ./etl_files/load_tables_setup.sh
+./etl_files/load_tables_setup.sh
 
 python /etl_files/load_CodeComplaintCases.py
 python /etl_files/load_CommercialWaterConsumption.py
