@@ -31,7 +31,6 @@ psql -U postgres -d finalproject -c "CREATE TABLE construction_permit_aggregate 
     , work_class
   );"
 
-
 # Restaurant Inspection Scores
 # https://data.austintexas.gov/dataset/Restaurant-Inspection-Scores/ecmv-9xxi
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_aggregate;"
@@ -87,7 +86,6 @@ psql -U postgres -d finalproject -c "CREATE TABLE water_consumption_aggregate AS
     , total_gallons AS total_gallons
   FROM commercial_water_consumption
   );"
-
 
 # Pothole Repair
 # https://data.austintexas.gov/Government/Pothole-Repair/fmm2-ytyt
