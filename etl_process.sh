@@ -1,8 +1,8 @@
-chmod +x ./etl_files/load_tables_setup.sh
-./etl_files/load_tables_setup.sh
+chmod +x ./etl_files/extract_TablesSetup.sh
+./etl_files/extract_TablesSetup.sh
 
-python /etl_files/load_CodeComplaintCases.py
-python /etl_files/load_CommercialWaterConsumption.py
+python etl_files/load_CodeComplaintCases.py
+python etl_files/load_CommercialWaterConsumption.py
 python load_IssuedConstructionPermits.py
 python load_PotholeRepair.py
 python load_RacialProfilingCitations.py
