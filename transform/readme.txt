@@ -1,2 +1,2 @@
-chmod +x ./load_austinData.sh
-./load_austinData.sh
+chmod +x ./transform_austinData.sh
+./transform_austinData.sh
