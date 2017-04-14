@@ -1,7 +1,9 @@
-cd extract
+mount -t ext4 /dev/xvdf /data
+/data/start_postgres.sh
+su - w205
 
-chmod +x ./extract_tables_setup.sh
-./extract_load_tables_setup.sh
+chmod +x ./load_tables_setup.sh
+./load_tables_setup.sh
 
 python load_CodeComplaintCases.py
 python load_CommercialWaterConsumption.py
@@ -15,5 +17,6 @@ python load_ServiceAlerts.py
 #### Need to load 2014 data. This is in CSV format not API.
 python load_RacialProfilingArrests.py
 
-cd ..
+chmod +x ./transform_DataAggregates.sh
+./transform_DataAggregates.sh
 
