@@ -1,9 +1,9 @@
 # Issued Construction Permits
 # https://data.austintexas.gov/Permitting/Issued-Construction-Permits/3syk-w9eu
-psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits_counts;"
-psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS issued_construction_permits;"        
-psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits_counts (zip_code INT,year INT,row_count INT);"
-psql -U postgres -d finalproject -c "CREATE TABLE issued_construction_permits (permittype TEXT,permit_type_desc TEXT,
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS construction_permits_counts;"
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS construction_permits;"        
+psql -U postgres -d finalproject -c "CREATE TABLE construction_permits_counts (zip_code INT,year INT,row_count INT);"
+psql -U postgres -d finalproject -c "CREATE TABLE construction_permits (permittype TEXT,permit_type_desc TEXT,
 permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
 description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
 calendar_year_issued TEXT,fiscal_year_issued TEXT,issued_in_last_30_days TEXT,issue_method TEXT,status_current TEXT,
