@@ -1,5 +1,6 @@
 mount -t ext4 /dev/xvdf /data
 /data/start_postgres.sh
+su - w205
 
 chmod +x ./load_tables_setup.sh
 ./load_tables_setup.sh
