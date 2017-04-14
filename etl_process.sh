@@ -5,8 +5,8 @@ su - w205
 chmod +x ./load_tables_setup.sh
 ./load_tables_setup.sh
 
-python load_CodeComplaintCases.py
-python load_CommercialWaterConsumption.py
+python /etl_files/load_CodeComplaintCases.py
+python /etl_files/load_CommercialWaterConsumption.py
 python load_IssuedConstructionPermits.py
 python load_PotholeRepair.py
 python load_RacialProfilingCitations.py
