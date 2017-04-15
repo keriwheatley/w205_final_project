@@ -3,7 +3,7 @@ chmod +x ./etl_files/extract_TablesSetup.sh
 
 python ./etl_files/extract_CodeComplaintCases.py
 python ./etl_files/extract_CommercialWaterConsumption.py
-python ./etl_files/extract_IssuedConstructionPermits.py
+python ./etl_files/extract_ConstructionPermits.py
 python ./etl_files/extract_PotholeRepair.py
 python ./etl_files/extract_RacialProfilingCitations.py
 python ./etl_files/extract_ResidentialWaterConsumption.py
