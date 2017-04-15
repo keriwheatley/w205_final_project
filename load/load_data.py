@@ -66,17 +66,23 @@ def load_data_SODA( dict_db_connect, url, table_name,
 
             # Write each row to data table
             for row in data:
-                values = ""
-                columns = ""
-                for i in row:
-                    columns += str(i) + ","                
-                    values += "'" + str(row[i]).replace("'","") + "',"
-                columns = columns[:-1]
-                values = values[:-1]
-                #counter += 1
-                #print(counter, end=" ")
-                #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-                cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
+                try:
+                    values = ""
+                    columns = ""
+                    for i in row:
+                        columns += '"' + str(i) + '",'
+                        values += "'" + str(row[i]).replace("'","") + "',"
+                    columns = columns[:-1]
+                    values = values[:-1]
+                    #counter += 1
+                    #print(counter, end=" ")
+                    #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
+                
+                    cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
+                except Exception as e:
+                    # placeholder - sometimes there are weird characters that the db won't take
+                    # MUST SORT THIS OUT RATHER THAN SKIPPING THEM!
+                    print "exception encountered:\n" +  str(e)
             
             # determine if there is more data
             if len(data) == chunk_size:
@@ -108,5 +114,3 @@ def load_data_SODA( dict_db_connect, url, table_name,
     else:
         return True
             
-load_data_SODA( url = "https://data.austintexas.gov/resource/awym-tx82.json",
-                table_name = "commercial_water_consumption")

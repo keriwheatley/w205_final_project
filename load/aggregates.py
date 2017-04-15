@@ -9,15 +9,15 @@
 
 
 
-
 # test function
 def testAgg( stuff):
     """Simple test to check function loader is working"""
     print("I am a test aggregation function!!")
     if len(stuff) > 0:
-        print()        
+        print
         for s in stuff:
-            print( s, end = " ")
-        print()  
+            print s,
+        print '\n'
+
 
 

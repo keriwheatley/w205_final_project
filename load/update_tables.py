@@ -8,7 +8,7 @@
 #import datetime
 #import json
 #import psycopg2
-import configparser as cp
+import ConfigParser as cp
 import sys
 from load_data import *
 import aggregates as aggs
@@ -33,7 +33,7 @@ TYPE_KEY = 'type'
 TRUNCATE_KEY = 'truncate'
 
 
-config = cp.configparser()
+config = cp.ConfigParser()
 
 # this line keeps the config parser from converting option names to lowercase
 config.optionxform = str
@@ -110,8 +110,8 @@ for i in range(2):
                             no_errors = False
                     else:
                         config.set(s, LAST_UPDATE_VAL_KEY, ret)
-                        config.write(CONFIG_FILE_NAME)
-                        
+                        with open(CONFIG_FILE_NAME, 'w') as configfile:
+                            config.write(configfile)                        
                 else:
                     # unknown type - don't error out, just skip
                     # this could be a convenient way to add sources that aren't quite ready yet to the config
@@ -143,7 +143,7 @@ if no_errors:
                 print("With parameter list: " + str(params))
                 result = getattr(aggs, function)(params)
     
-            # do something with the result
+            # do something with the result?
     except Exception as e:
             print(e)
 
