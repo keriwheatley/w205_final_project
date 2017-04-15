@@ -7,7 +7,7 @@ HOW TO SETUP ETL
 		pip install datetime
 		pip install json
 		pip install psycopg2
-		pip install GoogleMaps
+		pip install geopy
 
 3. Load Postgres
 		mount -t ext4 /dev/xvdf /data
