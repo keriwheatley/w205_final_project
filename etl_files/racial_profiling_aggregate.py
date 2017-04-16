@@ -20,9 +20,9 @@ def data_extract():
         cur.execute("SELECT off_from_date, vl_street_name, case_party_sex, race_origin_code, reason_for_stop, msearch_type, msearch_found FROM racial_profiling_citations")        
         data = cur.fetchall()
                     
-        print data
-#         for row in data:
-#             print row
+#         print data
+        for row in data:
+            print row
                     
             
         
