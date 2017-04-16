@@ -22,7 +22,7 @@ def data_extract():
                     
 #         print data
         for row in data:
-            print row
+            print row['vl_street_name']
                     
             
         
