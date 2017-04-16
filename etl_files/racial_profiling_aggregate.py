@@ -57,3 +57,5 @@ def data_extract():
     except Exception as inst:
         print(inst.args)
         print(inst)
+
+data_extract() 
