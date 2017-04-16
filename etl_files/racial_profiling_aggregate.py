@@ -21,8 +21,8 @@ def data_extract():
         data = cur.fetchall()
                     
         print data
-        for row in data:
-            print row
+#         for row in data:
+#             print row
                     
             
         
