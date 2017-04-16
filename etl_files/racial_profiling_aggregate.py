@@ -17,14 +17,7 @@ def data_extract():
         cur.execute("TRUNCATE TABLE racial_profiling_citations_aggregate;");
         print "Truncated aggregate table."
 
-        cur.execute("SELECT 
-            rep_date
-            , location
-            , sex
-            , age_at_offense
-            , apd_race_desc
-            , reason_for_stop
-        FROM racial_profiling_citations")        
+        cur.execute("SELECT rep_date, location, sex, age_at_offense, apd_race_desc, reason_for_stop FROM racial_profiling_citations")        
         data = cur.fetchall()
                     
         print data
