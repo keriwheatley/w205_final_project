@@ -3,6 +3,7 @@ import datetime
 import json
 import psycopg2
 from googlemaps import Client
+from eventlet.timeout import Timeout
 
 def data_extract():
     try:        
@@ -39,13 +40,19 @@ def data_extract():
             print "ROW: " + str(row)
 
             vl_street_name = row[0] + ",Austin,TX"
-            geocode_result = c.geocode(vl_street_name)
-            if len(geocode_result)==0:
+            geocode_result = []
+            timeout = Timeout(5, "Not running")
+            try:
+                geocode_result = c.geocode(vl_street_name)
+                if len(geocode_result)==0:
+                    zip_code = '99999'
+                else:
+                    for i in xrange(len(geocode_result[0]['address_components'])):
+                        if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
+                            zip_code = geocode_result[0]['address_components'][i]['long_name']
+            finally:
+                timeout.cancel()
                 zip_code = '99999'
-            else:
-                for i in xrange(len(geocode_result[0]['address_components'])):
-                    if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
-                        zip_code = geocode_result[0]['address_components'][i]['long_name']
 
             date_number = row[1]
             case_party_sex = row[2]
