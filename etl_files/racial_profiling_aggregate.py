@@ -28,15 +28,16 @@ def data_extract():
         c = Client(key=api_key)
 
         for row in data:
+            print row
             vl_street_name = row[0]
             off_from_date = row[1]
             case_party_sex = row[2]
             race_origin_code = row[3]
             reason_for_stop = row[4]
             msearch_type = row[5]
-            msearch_found = row[6]
+#             msearch_found = row[6]
 
-            geocode_result = c.geocode(vl_street_name)
+#             geocode_result = c.geocode(vl_street_name)
 #             for i in xrange(len(geocode_result[0]['address_components'])):
 #                 if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
 #                     print geocode_result[0]['address_components'][i]['long_name']
