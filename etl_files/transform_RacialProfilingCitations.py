@@ -39,6 +39,7 @@ def data_extract():
             print "ROW: " + str(row)
 
             vl_street_name = row[0] + ",Austin,TX"
+            print vl_street_name
             geocode_result = c.geocode(vl_street_name)
             for i in xrange(len(geocode_result[0]['address_components'])):
                 if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
