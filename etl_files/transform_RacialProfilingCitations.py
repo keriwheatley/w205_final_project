@@ -45,11 +45,17 @@ def data_extract():
                     zip_code = geocode_result[0]['address_components'][i]['long_name']
 
             date_number = row[1]
+            print date_number
             case_party_sex = row[2]
+            print case_party_sex
             race_origin_code = row[3]
+            print race_origin_code
             reason_for_stop = row[4]
+            print reason_for_stop
             msearch_type = row[5]
+            print msearch_type
             msearch_found = row[6]
+            print msearch_found
             
             sql = "INSERT INTO racial_profiling_citations_temp"
             sql += " (zip_code, date_number, case_party_sex,race_origin_code, reason_for_stop, msearch_type, msearch_found)"
