@@ -35,14 +35,14 @@ def data_extract():
         
         for row in data:
             print 'ROW: ' + str(row)
-#             vl_street_name = row[0]
-#             print vl_street_name
-#             off_from_date = row[1]
-#             case_party_sex = row[2]
-#             race_origin_code = row[3]
-#             reason_for_stop = row[4]
-#             msearch_type = row[5]
-#             msearch_found = row[6]
+            vl_street_name = row[0]
+            print vl_street_name
+            off_from_date = row[1]
+            case_party_sex = row[2]
+            race_origin_code = row[3]
+            reason_for_stop = row[4]
+            msearch_type = row[5]
+            msearch_found = row[6]
 
 #             geocode_result = c.geocode(vl_street_name)
 #             for i in xrange(len(geocode_result[0]['address_components'])):
