@@ -49,9 +49,7 @@ psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations (ci
 off_from_date TEXT, off_time TEXT, race_origin_code TEXT, case_party_sex TEXT, reason_for_stop TEXT,
 race_known TEXT, vl_street_name TEXT, msearch_y_n TEXT, msearch_type TEXT, msearch_found TEXT);"
 psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_temp (zip_code INT, date_number INT,
-race TEXT, gender TEXT, reason_for_stop TEXT);"
-
-
+case_party_sex TEXT, race_origin_code TEXT, reason_for_stop TEXT, msearch_type TEXT, msearch_found TEXT);"
 
 # Residential Water Consumption
 # https://data.austintexas.gov/Utility/Austin-Water-Residential-Water-Consumption/sxk7-7k6z
