@@ -24,8 +24,11 @@ def data_extract():
 #         print data
         for row in data:
             print row
+
+        columns = cur.description
                     
-            
+        for row in columns:
+            print row
         
 #         "SELECT 
 #             rep_date AS date_number
