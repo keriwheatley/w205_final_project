@@ -140,12 +140,25 @@ def load_data_SODA( dict_db_connect, url, table_name,
             
 
 # You will need to implement truncate_table as well
-# Basically, if that value is true, you need to 
+# Basically, if that value is true, you need to truncate the db table and reload all the data
+# it is mostly for testing, but needs to be implemented for consistency
+# 
+# Also, you need to modify slightly so that it doesn't just check the last column(date) because
+# on the first run it will need to load data for all dates thus far.
+# Another scenario is if somehow it doesn't run one month (who knows how), it should be able to 
+# see that there are 2 new date columns (or however many new columns there are) and load them both
+# shouldn't be too tough, do something like start at the last column and move towards the first.
+# Compare each date to "last_update_value" with isNewer, if it returns true, add that column to a 
+# list, and when isNewer returns false you have all the new dates. 
+# 
 def load_data_Zillow( dict_db_connect, url, table_name, 
                       truncate_table = False, last_update_value =  ""):
     """return True if no errors and no new data to load
     return the newest date string that was loaded into the DB to be stored for next time
     return False if errors occurred"""
+    
+    print "Loading Zillow data from (" + url + ")"
+    
     try:
         #Read the CSV from the url directly into a pandas dataframe
         df = pd.read_csv(url)
@@ -154,8 +167,11 @@ def load_data_Zillow( dict_db_connect, url, table_name,
         #    - replace newDate with the actual date extracted from the csv file
         #    - last_update_value will contain what this function returned last time it updated the DB
         # check if there is newer data
+        newDate = list(df)[-1]  # (this is a placeholder for my own testing, do this part however is best)
         if not isNewer( last_update_value, newDate):
             return True
+        
+        print "loaded: " + str(df.shape[0]) + " rows, with " + str(df.shape[1]) + " columns."
         
         #Drop all rows that aren't for Austin
         df = df.drop(df[df.City != "Austin"].index)
@@ -193,23 +209,21 @@ def load_data_Zillow( dict_db_connect, url, table_name,
         
         # this is where the data needs to be added to the DB
         # assume that the table is created before the initial load in a bash script
-        #count = 0
+        count = 0
         for index, row in df.iterrows():
             # for testing
-            #if count > 10:
-            #    break
+            if count > 10:
+                break
             
             #
             #insert values into DB
             #
             # for testing, let's print a couple of column headers and some row values
-            print(list(df)[0], list(df)[6])
-            print(str(row['RegionID']), str(row[date]))
-            print("\n")
+            print list(df)[0], list(df)[6]
+            print str(row['RegionID']), str(row[date])
+            
+            count += 1
         
-            #count += 1
-        
-        #print(df)
         return date
     
     except Exception as e:

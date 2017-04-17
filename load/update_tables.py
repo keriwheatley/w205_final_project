@@ -112,11 +112,28 @@ for i in range(2):
                         config.set(s, LAST_UPDATE_VAL_KEY, ret)
                         with open(CONFIG_FILE_NAME, 'w') as configfile:
                             config.write(configfile)                        
+                    
+                elif type_value == "ZILLOW":
+                    ret = load_data_Zillow( dict_db_connect, url_value, table_name_value,
+                                            truncate_value, last_update_val_value)
+                    
+                    # check ret - it will be either a boolean or a string
+                    # write back to the config file if we are not truncating
+                    # and storing the last_update_val
+                    print(str(ret))
+                    if isinstance(ret, bool):
+                        if ret == False:
+                            no_errors = False
+                    else:
+                        config.set(s, LAST_UPDATE_VAL_KEY, ret)
+                        with open(CONFIG_FILE_NAME, 'w') as configfile:
+                            config.write(configfile)
+                                
                 else:
                     # unknown type - don't error out, just skip
                     # this could be a convenient way to add sources that aren't quite ready yet to the config
                     print("Unknown source type: " + type_value + "\nSkipping source at " + url_value)
-    
+
     if not config_ok:
         sys.exit("Cannot proceed until errors are fixed\nexiting...")
 
