@@ -26,19 +26,17 @@ def data_extract():
             , COALESCE(reason_for_stop,'NONE') AS reason_for_stop\
             , COALESCE(msearch_type,'NONE') AS msearch_type\
             , COALESCE(msearch_found,'NONE') AS msearch_found\
-            FROM racial_profiling_citations")        
-#         data = cur.fetchall()
-        data = cur.fetchone()
+            FROM racial_profiling_citations LIMIT 5")        
+        data = cur.fetchall()
+#         data = cur.fetchone()
         
         api_key = 'AIzaSyAEiOrh_qZFJBTzEVRKLKYQ3cYFBAvcScs'
         c = Client(key=api_key)
-
-        print data
         
         for row in data:
-#             print row
-            vl_street_name = row[0]
-            print vl_street_name
+            print 'ROW: ' + str(row)
+#             vl_street_name = row[0]
+#             print vl_street_name
 #             off_from_date = row[1]
 #             case_party_sex = row[2]
 #             race_origin_code = row[3]
