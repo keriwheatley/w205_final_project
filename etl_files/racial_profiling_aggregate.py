@@ -26,10 +26,8 @@ def data_extract():
             print row
 
         columns = cur.description
-                    
-        for row in columns:
-            print row
         
+        print cur.description[0]
         print cur.description[0][0]
     
 #         "SELECT 
