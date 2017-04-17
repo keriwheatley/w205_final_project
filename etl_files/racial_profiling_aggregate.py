@@ -34,7 +34,7 @@ def data_extract():
         c = Client(key=api_key)
 
         for row in data:
-            print row
+#             print row
             vl_street_name = row[0]
             print vl_street_name
 #             off_from_date = row[1]
