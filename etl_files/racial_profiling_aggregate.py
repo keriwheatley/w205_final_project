@@ -32,8 +32,7 @@ def data_extract():
 
         result_set = cur.fetchone()
         for row in result_set:
-            print row["name"]
-            print row["category"]
+            print row.vl_street_name
     
 #         "SELECT 
 #             rep_date AS date_number
