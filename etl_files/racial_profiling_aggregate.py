@@ -50,7 +50,7 @@ def data_extract():
             msearch_found = row[6]
             
             sql = "INSERT INTO racial_profiling_citations_temp (zip_code, date_number, case_party_sex, race_origin_code, reason_for_stop, msearch_type, msearch_found) VALUES ("+zip_code+","+date_number+","+case_party_sex+","+race_origin_code+","+reason_for_stop+","+msearch_type+","+msearch_found+");"
-             print sql
+            print sql
             cur.execute(sql)              
     
 #         "SELECT 
