@@ -30,7 +30,7 @@ def data_extract():
         for row in columns:
             print row
 
-        result_set = cursor.fetchone()
+        result_set = cur.fetchone()
         for row in result_set:
             print "%s, %s" % (row["name"], row["category"])
     
