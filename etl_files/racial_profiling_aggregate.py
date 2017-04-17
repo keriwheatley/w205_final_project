@@ -32,7 +32,8 @@ def data_extract():
 
         result_set = cur.fetchone()
         for row in result_set:
-            print "%s, %s" % (row["name"], row["category"])
+            print row["name"]
+            print row["category"]
     
 #         "SELECT 
 #             rep_date AS date_number
