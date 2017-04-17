@@ -19,14 +19,16 @@ def data_extract():
         cur.execute("TRUNCATE TABLE racial_profiling_citations_temp;");
         print "Truncated (racial_profiling_citations_temp) table."
 
-        cur.execute("SELECT COALESCE(vl_street_name,'NONE') AS vl_street_name\
-            , TO_CHAR(TO_DATE(off_from_date, 'YYYY-MM-DD'),'YYYYMMDD') AS date_number\
-            , COALESCE(case_party_sex,'NONE') AS case_party_sex\
-            , COALESCE(race_origin_code,'NONE') AS race_origin_code\
-            , COALESCE(reason_for_stop,'NONE') AS reason_for_stop\
-            , COALESCE(msearch_type,'NONE') AS msearch_type\
-            , COALESCE(msearch_found,'NONE') AS msearch_found\
-            FROM racial_profiling_citations;")        
+        sql = "SELECT COALESCE(vl_street_name,'NONE') AS vl_street_name"
+        sql += " , TO_CHAR(TO_DATE(off_from_date, 'YYYY-MM-DD'),'YYYYMMDD') AS date_number"
+        sql += " , COALESCE(case_party_sex,'NONE') AS case_party_sex"
+        sql += " , COALESCE(race_origin_code,'NONE') AS race_origin_code"
+        sql += " , COALESCE(reason_for_stop,'NONE') AS reason_for_stop"
+        sql += " , COALESCE(msearch_type,'NONE') AS msearch_type"
+        sql += " , COALESCE(msearch_found,'NONE') AS msearch_found"
+        sql += " FROM racial_profiling_citations;"
+        
+        cur.execute(sql)        
         data = cur.fetchall()
         
         api_key = 'AIzaSyAEiOrh_qZFJBTzEVRKLKYQ3cYFBAvcScs'
@@ -49,9 +51,10 @@ def data_extract():
             msearch_type = row[5]
             msearch_found = row[6]
             
-            sql = "INSERT INTO racial_profiling_citations_temp (zip_code, date_number, case_party_sex,\
-            race_origin_code, reason_for_stop, msearch_type, msearch_found) VALUES ("+zip_code+","+date_number+\
-            ",'"+case_party_sex+"','"+race_origin_code+"','"+reason_for_stop+"','"+msearch_type+"','"+msearch_found+"');"
+            sql = "INSERT INTO racial_profiling_citations_temp"
+            sql += " (zip_code, date_number, case_party_sex,race_origin_code, reason_for_stop, msearch_type, msearch_found)"
+            sql += " VALUES ("+zip_code+","+date_number+",'"+case_party_sex+"','"+race_origin_code+"','"
+            sql += reason_for_stop+"','"+msearch_type+"','"+msearch_found+"');"
             print sql
             cur.execute(sql)              
     
