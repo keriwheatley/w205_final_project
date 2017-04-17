@@ -2,9 +2,11 @@ import requests
 import datetime
 import json
 import psycopg2
+from googlemaps import Client
 
 def data_extract():
     try:        
+        
         # Start runtime
         start_time = datetime.datetime.now()
         print "Starting data aggregation into (racial_profiling_citations_aggregate) for data source (racial_profiling_citations) at time (" + str(start_time) + ")."
@@ -17,18 +19,31 @@ def data_extract():
         cur.execute("TRUNCATE TABLE racial_profiling_citations_aggregate;");
         print "Truncated aggregate table."
 
-        cur.execute("SELECT vl_street_name, off_from_date, case_party_sex, race_origin_code, reason_for_stop, msearch_type, msearch_found FROM racial_profiling_citations")        
+        cur.execute("SELECT vl_street_name, off_from_date, case_party_sex, race_origin_code,\
+            reason_for_stop, msearch_type, msearch_found FROM racial_profiling_citations")        
 #         data = cur.fetchall()
         data = cur.fetchone()
-    
-        for row in data:
-            location = data[0]
-            print location
-
-        columns = cur.description
         
-        print cur.description[0]
-        print cur.description[0][0]
+        api_key = 'AIzaSyAEiOrh_qZFJBTzEVRKLKYQ3cYFBAvcScs'
+        c = Client(key=api_key)
+
+        for row in data:
+            vl_street_name = row[0]
+            off_from_date = row[1]
+            case_party_sex = row[2]
+            race_origin_code = row[3]
+            reason_for_stop = row[4]
+            msearch_type = row[5]
+            msearch_found = row[6]
+
+            geocode_result = c.geocode(vl_street_name)
+            for i in xrange(len(geocode_result[0]['address_components'])):
+                if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
+                    print geocode_result[0]['address_components'][i]['long_name']
+
+            
+#             cur.execute("SELECT vl_street_name, off_from_date, case_party_sex, race_origin_code,\
+#                 reason_for_stop, msearch_type, msearch_found FROM racial_profiling_citations")              
     
 #         "SELECT 
 #             rep_date AS date_number
