@@ -16,10 +16,6 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        # Empty data table
-        cur.execute("TRUNCATE TABLE racial_profiling_citations_temp;");
-        print "Truncated (racial_profiling_citations_temp) table."
-
         sql = "SELECT COALESCE(vl_street_name,'NONE') AS vl_street_name"
         sql += " , TO_CHAR(TO_DATE(off_from_date, 'YYYY-MM-DD'),'YYYYMMDD') AS date_number"
         sql += " , COALESCE(case_party_sex,'NONE') AS case_party_sex"
