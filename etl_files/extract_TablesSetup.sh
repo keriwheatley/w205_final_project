@@ -43,12 +43,12 @@ location_city TEXT,location TEXT,location_address TEXT,location_zip TEXT,locatio
 # https://data.austintexas.gov/Public-Safety/2016-Racial-Profiling-Dataset-Citations/gcpe-gehi
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_citations_counts;"
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_citations;"
-psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_citations_temp;"
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_citations_transformed;"
 psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_counts (year INT, race VARCHAR(2), row_count INT);"
 psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations (citation_number TEXT,
 off_from_date TEXT, off_time TEXT, race_origin_code TEXT, case_party_sex TEXT, reason_for_stop TEXT,
 race_known TEXT, vl_street_name TEXT, msearch_y_n TEXT, msearch_type TEXT, msearch_found TEXT);"
-psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_temp (zip_code INT, date_number INT,
+psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_transformed (zip_code INT, date_number INT,
 case_party_sex TEXT, race_origin_code TEXT, reason_for_stop TEXT, msearch_type TEXT, msearch_found TEXT);"
 
 # Residential Water Consumption
