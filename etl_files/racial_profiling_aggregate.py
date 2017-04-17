@@ -29,10 +29,8 @@ def data_extract():
                     
         for row in columns:
             print row
-
-        result_set = cur.fetchone()
-        for row in result_set:
-            print row.vl_street_name
+        
+        print cur.description[0][0]
     
 #         "SELECT 
 #             rep_date AS date_number
