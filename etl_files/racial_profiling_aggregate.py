@@ -35,7 +35,8 @@ def data_extract():
 
         for row in data:
             print row
-#             vl_street_name = row[0]
+            vl_street_name = row[0]
+            print vl_street_name
 #             off_from_date = row[1]
 #             case_party_sex = row[2]
 #             race_origin_code = row[3]
