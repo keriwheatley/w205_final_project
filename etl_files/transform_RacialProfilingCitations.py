@@ -10,7 +10,7 @@ def data_extract():
         
         # Start runtime
         start_time = datetime.datetime.now()
-        print "Starting data transformation into (racial_profiling_citations_temp) for data source (racial_profiling_citations) at time (" + str(start_time) + ")."
+        print "Starting data transformation into (racial_profiling_citations_transformed) for data source (racial_profiling_citations) at time (" + str(start_time) + ")."
         
         # Connect to database
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
@@ -52,7 +52,7 @@ def data_extract():
             msearch_type = row[5]
             msearch_found = row[6]
             
-            sql = "INSERT INTO racial_profiling_citations_temp"
+            sql = "INSERT INTO racial_profiling_citations_transformed"
             sql += " (zip_code, date_number, case_party_sex,race_origin_code, reason_for_stop, msearch_type, msearch_found)"
             sql += " VALUES ("+zip_code+","+date_number+",'"+case_party_sex+"','"+race_origin_code+"','"
             sql += reason_for_stop+"','"+msearch_type+"','"+msearch_found+"');"
@@ -62,8 +62,8 @@ def data_extract():
         # Commit changes to table and close connection
         conn.commit()
         conn.close()
-        print "Loaded " + str(len(data)) + " records to data source (racial_profiling_citations_temp)."
-        print "Ended data extract for data source (racial_profiling_citations_temp) at time (" + str(datetime.datetime.now()) + ")."
+        print "Loaded " + str(len(data)) + " records to data source (racial_profiling_citations_transformed)."
+        print "Ended data extract for data source (racial_profiling_citations_transformed) at time (" + str(datetime.datetime.now()) + ")."
     
     # Error logging
     except Exception as inst:
