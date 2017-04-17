@@ -37,9 +37,9 @@ def data_extract():
             msearch_found = row[6]
 
             geocode_result = c.geocode(vl_street_name)
-            for i in xrange(len(geocode_result[0]['address_components'])):
-                if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
-                    print geocode_result[0]['address_components'][i]['long_name']
+#             for i in xrange(len(geocode_result[0]['address_components'])):
+#                 if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
+#                     print geocode_result[0]['address_components'][i]['long_name']
 
             
 #             cur.execute("SELECT vl_street_name, off_from_date, case_party_sex, race_origin_code,\
