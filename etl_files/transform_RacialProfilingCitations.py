@@ -43,7 +43,7 @@ def data_extract():
             geocode_result = c.geocode(vl_street_name)
             print geocode_result
             if len(geocode_result)==0:
-                zip_code = 99999
+                zip_code = '99999'
             else:
                 for i in xrange(len(geocode_result[0]['address_components'])):
                     if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
