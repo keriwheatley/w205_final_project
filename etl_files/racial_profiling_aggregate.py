@@ -19,8 +19,14 @@ def data_extract():
         cur.execute("TRUNCATE TABLE racial_profiling_citations_aggregate;");
         print "Truncated aggregate table."
 
-        cur.execute("SELECT vl_street_name, off_from_date, case_party_sex, race_origin_code,\
-            reason_for_stop, msearch_type, msearch_found FROM racial_profiling_citations")        
+        cur.execute("SELECT COALESCE(vl_street_name,'NONE') AS vl_street_name\
+            , COALESCE(off_from_date,'NONE') AS off_from_date\
+            , COALESCE(case_party_sex,'NONE') AS case_party_sex\
+            , COALESCE(race_origin_code,'NONE') AS race_origin_code\
+            , COALESCE(reason_for_stop,'NONE') AS reason_for_stop\
+            , COALESCE(msearch_type,'NONE') AS msearch_type\
+            , COALESCE(msearch_found,'NONE') AS msearch_found\
+            FROM racial_profiling_citations")        
 #         data = cur.fetchall()
         data = cur.fetchone()
         
@@ -35,7 +41,7 @@ def data_extract():
             race_origin_code = row[3]
             reason_for_stop = row[4]
             msearch_type = row[5]
-#             msearch_found = row[6]
+            msearch_found = row[6]
 
 #             geocode_result = c.geocode(vl_street_name)
 #             for i in xrange(len(geocode_result[0]['address_components'])):
