@@ -8,6 +8,7 @@ HOW TO SETUP ETL
 		pip install json
 		pip install psycopg2
 		pip install geopy
+		pip install googlemaps
 
 3. Load Postgres
 		mount -t ext4 /dev/xvdf /data
