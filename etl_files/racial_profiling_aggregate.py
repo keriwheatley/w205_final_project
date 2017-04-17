@@ -29,7 +29,11 @@ def data_extract():
                     
         for row in columns:
             print row
-        
+
+        result_set = cursor.fetchone()
+        for row in result_set:
+            print "%s, %s" % (row["name"], row["category"])
+    
 #         "SELECT 
 #             rep_date AS date_number
 #             , zip_code AS zip_code
