@@ -18,11 +18,12 @@ def data_extract():
         print "Truncated aggregate table."
 
         cur.execute("SELECT off_from_date, vl_street_name, case_party_sex, race_origin_code, reason_for_stop, msearch_type, msearch_found FROM racial_profiling_citations")        
-        data = cur.fetchall()
+#         data = cur.fetchall()
+        data = cur.fetchone()
                     
 #         print data
         for row in data:
-            print row['vl_street_name']
+            print row
                     
             
         
