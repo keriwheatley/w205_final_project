@@ -33,6 +33,8 @@ def data_extract():
         api_key = 'AIzaSyAEiOrh_qZFJBTzEVRKLKYQ3cYFBAvcScs'
         c = Client(key=api_key)
 
+        print data
+        
         for row in data:
 #             print row
             vl_street_name = row[0]
