@@ -20,7 +20,7 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        sql = "SELECT location, row_number FROM zip_codes WHERE row_number BETWEEN 20325 and 22825;"
+        sql = "SELECT location, row_number FROM zip_codes WHERE row_number BETWEEN 22811 and 25311;"
         
         cur.execute(sql)        
         data = cur.fetchall()
