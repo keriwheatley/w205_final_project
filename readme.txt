@@ -4,8 +4,9 @@ HOW TO SETUP ETL
 	AMI Name: UCB MIDS W205 Ex2-FULL
 	AMI ID: ami-d4dd4ec3
 		
-2. Configure these security groups:
-	<<<<<<<<add this>>>>>>>
+2. Configure inbound security rule:
+	Type: All TCP
+	Source: Anywhere
 
 3. Connect to instance and run setup scripts
 	ls /
