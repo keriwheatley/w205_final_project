@@ -48,9 +48,9 @@ def data_extract():
             sql = "UPDATE zip_codes SET zip_code = "+zip_code+" WHERE row_number = "+str(row_number)+";"
             print sql
             cur.execute(sql)              
+            conn.commit()
     
         # Commit changes to table and close connection
-        conn.commit()
         conn.close()
         print "Loaded " + str(len(data)) + " records to data source (racial_profiling_citations_transformed)."
         print "Ended data extract for data source (racial_profiling_citations_transformed) at time (" + str(datetime.datetime.now()) + ")."
