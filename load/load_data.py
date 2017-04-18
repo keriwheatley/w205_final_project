@@ -16,8 +16,13 @@ import pandas as pd
 # packages/urllib3/connectionpool.py:821: InsecureRequestWarning: Unverified HTTPS request is 
 # being made. Adding certificate verification is strongly advised. 
 # See: https://urllib3.readthedocs.org/en/latest/security.html 
+# InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification 
+# is strongly advised. See: https://urllib3.readthedocs.org/en/latest/security.html
 from requests.packages.urllib3.exceptions import InsecurePlatformWarning
 requests.packages.urllib3.disable_warnings(InsecurePlatformWarning)
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 
 #############################################################################
 # Helper Functions
