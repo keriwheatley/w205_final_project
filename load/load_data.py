@@ -105,8 +105,9 @@ def load_data_SODA( dict_db_connect, url, table_name,
                     #counter += 1
                     #print(counter, end=" ")
                     #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-                
-                    cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
+                    sql = "INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");"
+                    print sql
+                    cur.execute(sql);
                 except Exception as e:
                     # placeholder - sometimes there are weird characters that the db won't take
                     # MUST SORT THIS OUT RATHER THAN SKIPPING THEM!
