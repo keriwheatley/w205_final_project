@@ -35,8 +35,8 @@ HOW TO SETUP ETL
 
 6. Run tables setup script
 	cd w205_final_project
-	chmod +x ./create_tables.sh
-	./create_tables.sh
+	chmod +x ./table_setup.sh
+	./table_setup.sh
 
 7. Run initial load of data
 	cd load
