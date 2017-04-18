@@ -1,6 +1,16 @@
 HOW TO SETUP ETL
 
-1. Make sure you have Postgres loaded to your AMI.
+1. We will be using the same AMI from Exercise 2.
+		AMI Name: UCB MIDS W205 Ex2-FULL
+		AMI ID: ami-d4dd4ec3
+
+2. Follow these steps to set up your instance.
+		Create instance - Configure security groups and attach an EBS volume
+		Connect to instance
+		chmod a+rwx /data
+		wget https://s3.amazonaws.com/ucbdatasciencew205/setup_ucb_complete_plus_postgres.sh
+		chmod +x ./setup_ucb_complete_plus_postgres.sh
+		./setup_ucb_complete_plus_postgres.sh <Find EBS volume location using: fdisk -l>
 
 2. Load these Python packages
 		pip install requests
@@ -8,7 +18,6 @@ HOW TO SETUP ETL
 		pip install json
 		pip install psycopg2
 		pip install googlemaps
-		pip install eventlet
 
 3. Load Postgres
 		mount -t ext4 /dev/xvdf /data
