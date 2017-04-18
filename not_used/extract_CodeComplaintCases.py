@@ -15,7 +15,7 @@ def data_extract():
 
         # Empty data tables
         cur.execute("TRUNCATE TABLE code_complaint_cases;");
-        cur.execute("TRUNCATE TABLE code_complaint_cases_counts;");
+#         cur.execute("TRUNCATE TABLE code_complaint_cases_counts;");
         print "Truncated data tables."
                 
         # Iterate through all zip codes
@@ -52,7 +52,7 @@ def data_extract():
                 cur.execute("INSERT INTO code_complaint_cases (" + columns + ") VALUES (" + values + ");");
 
             # Record row count for single zip code to counts table
-            cur.execute("INSERT INTO code_complaint_cases_counts VALUES('"+zip+"',"+str(num_rows)+");")
+#             cur.execute("INSERT INTO code_complaint_cases_counts VALUES('"+zip+"',"+str(num_rows)+");")
 
             # Commit changes to tables for single zip code
             conn.commit()
