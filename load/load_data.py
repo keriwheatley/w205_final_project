@@ -17,7 +17,7 @@ import pandas as pd
 # being made. Adding certificate verification is strongly advised. 
 # See: https://urllib3.readthedocs.org/en/latest/security.html 
 
-hide urrlib3 warnings
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 #############################################################################
 # Helper Functions
