@@ -95,9 +95,15 @@ def load_data_SODA( dict_db_connect, url, table_name,
                     columns = ""
                     for i in row:
                         columns += '"' + str(i) + '",'
+                        
                         print row[i]
-                        print str(row[i]).encode('ascii','ignore').replace("'","").replace("\\","")
-                        values += "'" + str(row[i]).encode('ascii','ignore').replace("'","").replace("\\","") + "',"
+
+                        if isinstance(row[i],dict):
+                            print list(set(row[i].values()))
+                        else:
+                            print str(row[i]).encode('ascii','ignore').replace("'","").replace("\\","")
+                            values += "'" + str(row[i]).encode('ascii','ignore').replace("'","").replace("\\","") + "',"
+                            
                     columns = columns[:-1]
                     values = values[:-1]
                     #counter += 1
