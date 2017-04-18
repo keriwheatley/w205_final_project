@@ -15,7 +15,7 @@ def data_extract():
 
         # Empty data tables
         cur.execute("TRUNCATE TABLE racial_profiling_citations;");
-        cur.execute("TRUNCATE TABLE racial_profiling_citations_counts;");
+#         cur.execute("TRUNCATE TABLE racial_profiling_citations_counts;");
         print "Truncated data tables."
 
         # 2014 data API link
@@ -58,8 +58,8 @@ def data_extract():
                     cur.execute("INSERT INTO racial_profiling_citations (" + columns + ") VALUES (" + values + ");");
 
                 # Record row count for single year/race to counts table
-                cur.execute("INSERT INTO racial_profiling_citations_counts VALUES("+\
-                            years[year_index]+",'"+race+"',"+str(num_rows)+");")
+#                 cur.execute("INSERT INTO racial_profiling_citations_counts VALUES("+\
+#                             years[year_index]+",'"+race+"',"+str(num_rows)+");")
 
                 # Commit changes to tables for single year/race
                 conn.commit()
