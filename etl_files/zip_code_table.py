@@ -6,7 +6,7 @@ from googlemaps import Client
 from eventlet.timeout import Timeout
 
 # CREATE TABLE zip_codes AS (
-# SELECT row_number() OVER () AS row_number, 99999 AS zip_code, location 
+# SELECT row_number() OVER () AS row_number, 00000 AS zip_code, location 
 # FROM (SELECT DISTINCT location AS location FROM racial_profiling_arrests UNION SELECT DISTINCT vl_street_name AS location FROM racial_profiling_citations) loc);
 
 def data_extract():
@@ -20,7 +20,7 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        sql = "SELECT location, row_number FROM zip_codes WHERE row_number BETWEEN 1 and 2500;"
+        sql = "SELECT location, row_number FROM zip_codes WHERE row_number BETWEEN 1 and 2400;"
         
         cur.execute(sql)        
         data = cur.fetchall()
