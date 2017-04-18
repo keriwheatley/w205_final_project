@@ -45,7 +45,7 @@ def data_extract():
                     if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
                         zip_code = geocode_result[0]['address_components'][i]['long_name']
             
-            sql = "UPDATE zip_codes SET zip_code = "+zip_code+" WHERE row_number = "+row_number+");"
+            sql = "UPDATE zip_codes SET zip_code = "+zip_code+" WHERE row_number = "+str(row_number)+");"
             print sql
             cur.execute(sql)              
     
