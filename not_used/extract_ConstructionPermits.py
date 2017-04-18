@@ -15,7 +15,7 @@ def data_extract():
                 
         # Empty data tables
         cur.execute("TRUNCATE TABLE construction_permits;");
-        cur.execute("TRUNCATE TABLE construction_permits_counts;");
+#         cur.execute("TRUNCATE TABLE construction_permits_counts;");
         print "Truncated data tables."
         
         # Iterate through all zip codes and years
@@ -53,7 +53,7 @@ def data_extract():
                     cur.execute("INSERT INTO construction_permits (" + columns + ") VALUES (" + values + ");");
 
                 # Record row count for single year/zip code to counts table
-                cur.execute("INSERT INTO construction_permits_counts VALUES("+zip+","+str(year)+","+str(num_rows)+");")
+#                 cur.execute("INSERT INTO construction_permits_counts VALUES("+zip+","+str(year)+","+str(num_rows)+");")
 
                 # Commit changes to tables for single year/zip code
                 conn.commit()
