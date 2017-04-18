@@ -98,9 +98,8 @@ def load_data_SODA( dict_db_connect, url, table_name,
                         columns += '"' + str(i) + '",'
 #                         temp_row = row[i].replace("'","").replace("\","")
                         print row[i]
-                        print str(row[i].replace("'","").replace("\\",""))
-#                         print str(re.sub(r'(?i)[^a-z0-9-:. ]+', '', temp_row))
-                        values += "'" + str(row[i].replace("'","").replace("\\","")) + "',"
+                        print str(row[i]).replace("'","").replace("\","")
+                        values += "'" + str(row[i]).replace("'","").replace("\","") + "',"
                     columns = columns[:-1]
                     values = values[:-1]
                     #counter += 1
