@@ -34,6 +34,8 @@ def data_extract():
 
             location = row[0] + ",Austin,TX"
             row_number = row[1]
+            print location
+            print row_number
             geocode_result = c.geocode(location)
                 
             if len(geocode_result)==0:
