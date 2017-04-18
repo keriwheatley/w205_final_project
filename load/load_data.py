@@ -9,6 +9,7 @@ import datetime
 import json
 import psycopg2
 import pandas as pd
+import re
 
 #############################################################################
 # Helper Functions
@@ -95,7 +96,7 @@ def load_data_SODA( dict_db_connect, url, table_name,
                     columns = ""
                     for i in row:
                         columns += '"' + str(i) + '",'
-                        values += "'" + str(row[i]).replace("'","") + "',"
+                        values += "'" + str(re.sub(r'[^a-z0-9 ]+', '', row[i].replace("'",""))) + "',"
                     columns = columns[:-1]
                     values = values[:-1]
                     #counter += 1
