@@ -25,7 +25,7 @@ def data_extract():
         cur.execute(sql)        
         data = cur.fetchall()
         
-        api_key = 'AIzaSyAEiOrh_qZFJBTzEVRKLKYQ3cYFBAvcScs'
+        api_key = 'AIzaSyABv-P4wOVxfTFW4_T-654exQXSsnZO0z0'
         c = Client(key=api_key)
         
         for row in data:
