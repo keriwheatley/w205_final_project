@@ -5,25 +5,22 @@ import psycopg2
 from googlemaps import Client
 from eventlet.timeout import Timeout
 
+# CREATE TABLE zip_codes AS (
+# SELECT row_number() OVER () AS row_number, 99999 AS zip_code, location 
+# FROM (SELECT DISTINCT location AS location FROM racial_profiling_arrests UNION SELECT DISTINCT vl_street_name AS location FROM racial_profiling_citations) loc);
+
 def data_extract():
     try:        
         
         # Start runtime
         start_time = datetime.datetime.now()
-        print "Starting data transformation into (racial_profiling_citations_transformed) for data source (racial_profiling_citations) at time (" + str(start_time) + ")."
+        print "Starting zip codes table load at time (" + str(start_time) + ")."
         
         # Connect to database
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        sql = "SELECT COALESCE(vl_street_name,'NONE') AS vl_street_name"
-        sql += " , TO_CHAR(TO_DATE(off_from_date, 'YYYY-MM-DD'),'YYYYMMDD') AS date_number"
-        sql += " , COALESCE(case_party_sex,'NONE') AS case_party_sex"
-        sql += " , COALESCE(race_origin_code,'NONE') AS race_origin_code"
-        sql += " , COALESCE(reason_for_stop,'NONE') AS reason_for_stop"
-        sql += " , COALESCE(msearch_type,'NONE') AS msearch_type"
-        sql += " , COALESCE(msearch_found,'NONE') AS msearch_found"
-        sql += " FROM racial_profiling_citations;"
+        sql = "SELECT location, row_number FROM zip_codes WHERE row BETWEEN 1 and 2500;"
         
         cur.execute(sql)        
         data = cur.fetchall()
@@ -35,8 +32,9 @@ def data_extract():
             
             print "ROW: " + str(row)
 
-            vl_street_name = row[0] + ",Austin,TX"
-            geocode_result = c.geocode(vl_street_name)
+            location = row[0] + ",Austin,TX"
+            row_number = row[1]
+            geocode_result = c.geocode(location)
                 
             if len(geocode_result)==0:
                 zip_code = '99999'
@@ -44,18 +42,8 @@ def data_extract():
                 for i in xrange(len(geocode_result[0]['address_components'])):
                     if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
                         zip_code = geocode_result[0]['address_components'][i]['long_name']
-
-            date_number = row[1]
-            case_party_sex = row[2]
-            race_origin_code = row[3]
-            reason_for_stop = row[4]
-            msearch_type = row[5]
-            msearch_found = row[6]
             
-            sql = "INSERT INTO racial_profiling_citations_transformed"
-            sql += " (zip_code, date_number, case_party_sex,race_origin_code, reason_for_stop, msearch_type, msearch_found)"
-            sql += " VALUES ("+zip_code+","+date_number+",'"+case_party_sex+"','"+race_origin_code+"','"
-            sql += reason_for_stop+"','"+msearch_type+"','"+msearch_found+"');"
+            sql = "UPDATE zip_codes SET zip_code = "+zip_code+" WHERE row_number = "+row_number+");"
             print sql
             cur.execute(sql)              
     
