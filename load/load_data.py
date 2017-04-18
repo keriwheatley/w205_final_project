@@ -10,6 +10,15 @@ import json
 import psycopg2
 import pandas as pd
 
+# Will hide urrlib3 warnings for the purposes of this project
+# Currently receiving this error message because an older version of Python is loaded to AMI:
+# InsecurePlatformWarning /usr/lib/python2.7/site-packages/requests-2.10.0-py2.7.egg/requests/
+# packages/urllib3/connectionpool.py:821: InsecureRequestWarning: Unverified HTTPS request is 
+# being made. Adding certificate verification is strongly advised. 
+# See: https://urllib3.readthedocs.org/en/latest/security.html 
+
+hide urrlib3 warnings
+
 #############################################################################
 # Helper Functions
 #############################################################################
