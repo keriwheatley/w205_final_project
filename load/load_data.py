@@ -91,7 +91,7 @@ def load_data_SODA( dict_db_connect, url, table_name,
             # if we don't have last update info, or we aren't doing incremental updates,
             # truncate the table before insertion
             cur.execute("TRUNCATE TABLE " + table_name + ";");
-            #print("Truncated data table.")
+            print("Truncated data table.")
         
         # loop until all data is received
         offset = 0
