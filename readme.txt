@@ -40,3 +40,11 @@ HOW TO SETUP ETL
 7. Run initial load of data
 	cd load
 	python 
+
+8. Setup password for database (to enable connection to Tableau)
+	psql -U postgres -d finalproject
+	\password
+	Enter new password: pass
+	
+	To test connection, type this into your local command line:
+	psql -U postgres -d finalproject -h <public DNS from AWS>
