@@ -22,7 +22,7 @@ HOW TO SETUP ETL
 		pip install googlemaps
 
 3. Start Postgres
-		mount -t ext4 /dev/xvdf /data
+		mount -t ext4 <input EBS volume directoy> /data
 		/data/start_postgres.sh
 
 4. Log into w205 user
