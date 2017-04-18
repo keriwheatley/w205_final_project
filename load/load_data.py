@@ -96,21 +96,18 @@ def load_data_SODA( dict_db_connect, url, table_name,
                     columns = ""
                     for i in row:
                         columns += '"' + str(i) + '",'
-#                         temp_row = row[i].replace("'","").replace("\","")
-                        print row[i]
-                        print str(row[i]).replace("'","").replace("\\","")
                         values += "'" + str(row[i]).replace("'","").replace("\\","") + "',"
                     columns = columns[:-1]
                     values = values[:-1]
                     #counter += 1
                     #print(counter, end=" ")
-                    print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
+                    #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
                     cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-                    conn.commit()
                 except Exception as e:
                     # placeholder - sometimes there are weird characters that the db won't take
                     # MUST SORT THIS OUT RATHER THAN SKIPPING THEM!
                     print "exception encountered:\n" +  str(e)
+                    return False
             
             # determine if there is more data
             if len(data) == chunk_size:
@@ -120,6 +117,7 @@ def load_data_SODA( dict_db_connect, url, table_name,
                 all_data_loaded = True
         
         # Commit changes to table and close connection
+        conn.commit()
         conn.close()
         
         print ("Loaded " + str(offset) + " records to data source (" + table_name + ").")
