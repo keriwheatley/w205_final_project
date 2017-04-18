@@ -35,3 +35,7 @@ HOW TO SETUP ETL
 	cd w205_final_project
 	chmod +x ./create_tables.sh
 	./create_tables.sh
+
+7. Run initial load of data
+	cd load
+	python 
