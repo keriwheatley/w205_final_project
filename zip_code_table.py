@@ -20,12 +20,12 @@ def data_extract():
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
         cur = conn.cursor()
 
-        sql = "SELECT location, row_number FROM zip_codes WHERE row_number BETWEEN 1001 and 3500;"
+        sql = "SELECT location, row_number FROM zip_codes WHERE row_number BETWEEN 5972 and 8472;"
         
         cur.execute(sql)        
         data = cur.fetchall()
         
-        api_key = 'AIzaSyBJk7nEbRQn2iZ5FyVaLV9tZ85x0uZgvj0'
+        api_key = ''
         c = Client(key=api_key)
         
         for row in data:
@@ -37,7 +37,9 @@ def data_extract():
             print location
             print row_number
             geocode_result = c.geocode(location)
-                
+            
+            zip_code = '0'
+            
             if len(geocode_result)==0:
                 zip_code = '99999'
             else:
