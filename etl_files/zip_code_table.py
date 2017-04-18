@@ -37,7 +37,9 @@ def data_extract():
             print location
             print row_number
             geocode_result = c.geocode(location)
-                
+            
+            zip_code = '0'
+            
             if len(geocode_result)==0:
                 zip_code = '99999'
             else:
