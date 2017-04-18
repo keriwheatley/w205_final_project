@@ -96,18 +96,17 @@ def load_data_SODA( dict_db_connect, url, table_name,
                     columns = ""
                     for i in row:
                         columns += '"' + str(i) + '",'
-                        temp_row = row[i].replace("'","")
-                        print temp_row
-                        print str(re.sub(r'(?i)[^a-z0-9-:. ]+', '', temp_row))
-                        values += "'" + str(re.sub(r'(?i)[^a-z0-9-:. ]+', '', temp_row)) + "',"
+#                         temp_row = row[i].replace("'","")
+                        print row[i]
+                        print str(re.sub(r'(?i)[^a-z0-9-:. ]+', '', row[i]))
+#                         print str(re.sub(r'(?i)[^a-z0-9-:. ]+', '', temp_row))
+                        values += "'" + str(re.sub(r'(?i)[^a-z0-9-:. ]+', '', row[i])) + "',"
                     columns = columns[:-1]
                     values = values[:-1]
                     #counter += 1
                     #print(counter, end=" ")
-                    #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-                    sql = "INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");"
-                    print sql
-                    cur.execute(sql);
+                    print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
+                    cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
                 except Exception as e:
                     # placeholder - sometimes there are weird characters that the db won't take
                     # MUST SORT THIS OUT RATHER THAN SKIPPING THEM!
