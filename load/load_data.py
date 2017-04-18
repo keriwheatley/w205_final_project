@@ -134,7 +134,7 @@ def load_data_SODA( dict_db_connect, url, table_name,
                     print "exception encountered:\n" +  str(e)
                     return False
             
-            print "Loaded (" + str(len(data)) + ") records at time (" + str(start_time) + ")."
+            print "Added " + str(len(data)) + " records at time (" + str(start_time) + ")."
 
             # determine if there is more data
             if len(data) == chunk_size:
