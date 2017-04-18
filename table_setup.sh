@@ -5,6 +5,7 @@ psql -U postgres -c "CREATE DATABASE finalproject;"
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS transform_map;"
 psql -U postgres -d finalproject -c "CREATE TABLE transform_map (source_table TEXT, target_table TEXT, source_field TEXT, 
 target_field TEXT, group_by INT, sum_of INT, count_of INT);"
+psql -U postgres -d finalproject -c "COPY transform_map FROM 'transform_map.tsv' DELIMITER \t;"
 
 # Issued Construction Permits
 # https://data.austintexas.gov/Permitting/Issued-Construction-Permits/3syk-w9eu
