@@ -9,6 +9,26 @@ from eventlet.timeout import Timeout
 # SELECT row_number() OVER () AS row_number, 00000 AS zip_code, location 
 # FROM (SELECT DISTINCT location AS location FROM racial_profiling_arrests UNION SELECT DISTINCT vl_street_name AS location FROM racial_profiling_citations) loc);
 
+# Will hide urrlib3 warnings for the purposes of this project.
+# Currently receiving this error message because an older version of Python is loaded to AMI.
+# InsecurePlatformWarning /usr/lib/python2.7/site-packages/requests-2.10.0-py2.7.egg/requests/
+# packages/urllib3/connectionpool.py:821: InsecureRequestWarning: Unverified HTTPS request is 
+# being made. Adding certificate verification is strongly advised. 
+# See: https://urllib3.readthedocs.org/en/latest/security.html 
+# InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification 
+# is strongly advised. See: https://urllib3.readthedocs.org/en/latest/security.html
+# SNIMissingWarning: An HTTPS request has been made, but the SNI (Subject Name Indication) 
+# extension to TLS is not available on this platform. This may cause the server to present an 
+# incorrect TLS certificate, which can cause validation failures. You can upgrade to a newer 
+# version of Python to solve this. For more information, see 
+# https://urllib3.readthedocs.org/en/latest/security.html#snimissingwarning.
+from requests.packages.urllib3.exceptions import InsecurePlatformWarning
+requests.packages.urllib3.disable_warnings(InsecurePlatformWarning)
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+from requests.packages.urllib3.exceptions import SNIMissingWarning
+requests.packages.urllib3.disable_warnings(SNIMissingWarning)
+
 def data_extract():
     try:        
         
