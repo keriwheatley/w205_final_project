@@ -10,7 +10,7 @@ import json
 import psycopg2
 import pandas as pd
 import sys
-
+reload(sys)
 sys.setdefaultencoding('utf-8')
 
 #############################################################################
