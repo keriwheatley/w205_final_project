@@ -1,6 +1,9 @@
+# Create database
+psql -U postgres -c "CREATE DATABASE finalproject;"
+  
 # Issued Construction Permits
 # https://data.austintexas.gov/Permitting/Issued-Construction-Permits/3syk-w9eu
-psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS construction_permits;"        
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS construction_permits;"
 psql -U postgres -d finalproject -c "CREATE TABLE construction_permits (permittype TEXT,permit_type_desc TEXT,
 permit_number TEXT,permit_class_mapped TEXT,permit_class TEXT,work_class TEXT,condominium TEXT,permit_location TEXT,
 description TEXT,tcad_id TEXT,legal_description TEXT,applieddate TEXT,issue_date TEXT,day_issued TEXT,
