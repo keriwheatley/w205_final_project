@@ -1,6 +1,11 @@
 # Create database
 psql -U postgres -c "CREATE DATABASE finalproject;"
-  
+
+# Create mapping table
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS transform_map;"
+psql -U postgres -d finalproject -c "CREATE TABLE transform_map (source_table TEXT, target_table TEXT, source_field TEXT, 
+target_field TEXT, group_by INT, sum_of INT, count_of INT);"
+
 # Issued Construction Permits
 # https://data.austintexas.gov/Permitting/Issued-Construction-Permits/3syk-w9eu
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS construction_permits;"
