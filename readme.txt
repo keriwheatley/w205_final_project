@@ -39,7 +39,7 @@ HOW TO SETUP ETL
 
 7. Run initial load of data
 	cd load
-	python 
+	python update_tables.py
 
 8. Setup password for database (to enable connection to Tableau)
 	psql -U postgres -d finalproject
