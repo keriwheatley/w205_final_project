@@ -31,7 +31,7 @@ HOW TO SETUP ETL
 5. Clone repository
 	git clone https://github.com/keriwheatley/w205_final_project.git
 
-6. Go to repository and run setup script
+6. Run tables setup script
 	cd w205_final_project
-	chmod +x ./etl_process.sh
-	./etl_process.sh
+	chmod +x ./etl_files/extract_TablesSetup.sh
+	./etl_files/extract_TablesSetup.sh
