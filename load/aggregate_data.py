@@ -85,9 +85,9 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         sql += " GROUP BY " + group_by + ";"
     
         print "Inserting into table..."
-        print sql
         cur.execute(sql)
-        print cur.statusmessage
+        print "Insert complete."
+        print "Status message: " + cur.statusmessage
         conn.commit()
         conn.close()
             
