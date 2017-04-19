@@ -51,23 +51,20 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
                                  port = dict_db_connect["port"])
         cur = conn.cursor()
 
-        print "SELECT * FROM transform_map WHERE target_table = '" + target_table + "';"
         cur.execute("SELECT * FROM transform_map WHERE target_table = '" + target_table + "';")
 
         data = cur.fetchall()
         
-        print data
-
         insert_columns = ""
         select_columns = ""
         group_by = ""
         for row in data:
             try:
-                insert_columns += row[4] + ","
-                if row[5]==1: select_columns += row[3] + " AS " + row[4] + ","
-                if row[6]==1: select_columns += "SUM(" + row[3] + ") AS " + row[4] + ","
-                if row[7]==1: select_columns += "COUNT(" + row[3] + ") AS " + row[4] + ","
-                if row[5]==1: group_by += row[3] + ","
+                insert_columns += str(row[4]) + ","
+                if row[5]==1: select_columns += str(row[3]) + " AS " + str(row[4]) + ","
+                if row[6]==1: select_columns += "SUM(" + str(row[3]) + ") AS " + str(row[4]) + ","
+                if row[7]==1: select_columns += "COUNT(" + str(row[3]) + ") AS " + str(row[4]) + ","
+                if row[5]==1: group_by += str(row[3]) + ","
             except Exception as e:
                 print "exception encountered:\n" +  str(e)
                 return False
