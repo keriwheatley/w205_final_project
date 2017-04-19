@@ -26,6 +26,12 @@ contractor_phone TEXT,contractor_address1 TEXT,contractor_address2 TEXT,contract
 applicant_full_name TEXT,applicant_org TEXT,applicant_phone TEXT,applicant_address1 TEXT,applicant_address2 TEXT,
 applicant_city TEXT,applicantzip TEXT);"
 
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS construction_permits_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE construction_permits_aggregate (date_number INT, zip_code INT,
+residential_or_commercial TEXT, permit_type TEXT, work_class TEXT, 
+sum_project_valuation DECIMAL(16,2), total_num_permits INT);"
+
+
 # Restaurant Inspection Scores
 # https://data.austintexas.gov/dataset/Restaurant-Inspection-Scores/ecmv-9xxi
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores;"
