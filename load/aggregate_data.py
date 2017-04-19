@@ -95,14 +95,14 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
             
         print ("Ended data aggregation for data source (" + source_table + ") at time (" + 
                 str(datetime.datetime.now()) + ").")
-        
+    
+        # if doing incremental updates, return last value inserted to use next time
+        if not truncate_table and len(last_update_field) > 0:
+            return str(last_update_value)
+        else:
+            return True
+
     except Exception as inst:
         print(inst.args)
         print(inst)
         return False
-    
-    # if doing incremental updates, return last value inserted to use next time
-    if not truncate_table and len(last_update_field) > 0:
-        return str(last_update_value)
-    else:
-        return True
