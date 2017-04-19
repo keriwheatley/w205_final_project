@@ -84,22 +84,14 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         
         sql += " GROUP BY " + group_by + ";"
     
-        print "Inserting into table..."
+        print "Inserting into (" + target_table +") table"
         cur.execute(sql)
         print "Insert complete."
         print "Status message: " + cur.statusmessage
         conn.commit()
         conn.close()
             
-#         print "Added " + str(len(data)) + " records at time (" + str(start_time) + ")."
-        
-#         print ("Loaded " + str(offset) + " records to data source (" + table_name + ").")
-#         print ("Ended data extract for data source (" + table_name + ") at time (" + 
-#                 str(datetime.datetime.now()) + ").")
-    
-#         # if doing incremental updates, save last value inserted, if there is one
-#         if len(data) > 0 and not truncate_table and len(last_update_field) > 0:
-#             last_update_value = row[last_update_field]
+        print ("Ended data aggregation for data source (" + source_table + ") at time (" + 
     
     except Exception as inst:
         print(inst.args)
