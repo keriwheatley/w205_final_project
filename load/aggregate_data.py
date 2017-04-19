@@ -91,6 +91,11 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         cur.execute(sql)
         print "Insert completed with status message: " + cur.statusmessage
         conn.commit()
+
+        cur.execute("SELECT MAX("+last_update_field+") FROM " + target_table + ";")
+        last_update_value = cur.fetchone()
+        print last_update_value
+        
         conn.close()
             
         print ("Ended data aggregation for data source (" + source_table + ") at time (" + 
@@ -98,7 +103,6 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
     
         # if doing incremental updates, return last value inserted to use next time
         if not truncate_table and len(last_update_field) > 0:
-            print str(last_update_value)
             return str(last_update_value)
         else:
             return True
