@@ -58,9 +58,9 @@ def zip_code_map_SODA( dict_db_connect, source_table, target_table, custom_map_c
         sql += " LEFT JOIN zip_code_map ON zip_code_map.location = '" + source_table + "." + custom_map_col + "');"                
 
         cur.execute(sql)
-        print "Created temp table with status message: " + cur.statusmessage
-        
+        conn.commit()
         conn.close()
+        print "Created temp table with status message: " + cur.statusmessage        
             
         print ("Ended temp table creation for table (" + source_table + ") at time (" + 
                 str(datetime.datetime.now()) + ").")
