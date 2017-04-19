@@ -29,3 +29,23 @@ pothole_repair	pothole_repair_aggregate	CAST(sr_location_zip_code AS INT)	zip_co
 pothole_repair	pothole_repair_aggregate	CAST(TO_CHAR(TO_DATE(sr_updated_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	status_change_date_number	1	0	0	0	0
 pothole_repair	pothole_repair_aggregate	sr_status_desc	status	1	0	0	0	0
 pothole_repair	pothole_repair_aggregate	*	total_num_cases	0	0	1	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	CAST(TO_CHAR(TO_DATE(off_from_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	zip_code	zip_code	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	race_origin_code	race_origin_code	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	case_party_sex	case_party_sex	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	reason_for_stop	reason_for_stop	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	race_known	race_known	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	msearch_y_n	msearch_y_n	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	msearch_type	msearch_type	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	msearch_found	msearch_found	1	0	0	0	0
+racial_profiling_citations_temp	racial_profiling_citations_aggregate	*	total_num_cases	0	0	1	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	CAST(TO_CHAR(TO_DATE(rep_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	zip_code	zip_code	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	sex	sex	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	age_at_offense	age_at_offense	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	apd_race_desc	apd_race_desc	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	reason_for_stop_desc	reason_for_stop_desc	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	search_based_on_desc	search_based_on_desc	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	search_disc_desc	search_disc_desc	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	race_known	race_known	1	0	0	0	0
+racial_profiling_arrests_temp	racial_profiling_arrests_aggregate	*	total_num_cases	0	0	1	0	0
