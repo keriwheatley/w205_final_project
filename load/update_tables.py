@@ -147,6 +147,7 @@ if no_errors:
         # parse AGGREGATES section of config file and call each function            
         for i in range(2):
             for s in config.sections():
+                print s
                 if s.startswith(AGGREGATE_SECTION):
 
                     if SOURCE_TABLE_KEY in config.options(s):
