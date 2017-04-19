@@ -92,7 +92,8 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         conn.close()
             
         print ("Ended data aggregation for data source (" + source_table + ") at time (" + 
-    
+                str(datetime.datetime.now()) + ").")
+        
     except Exception as inst:
         print(inst.args)
         print(inst)
