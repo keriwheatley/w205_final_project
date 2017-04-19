@@ -4,19 +4,7 @@ construction_permits	construction_permits_aggregate	CAST(original_zip AS INT)	zi
 construction_permits	construction_permits_aggregate	permit_class_mapped	residential_or_commercial	1	0	0	0	0
 construction_permits	construction_permits_aggregate	permit_type_desc	permit_type	1	0	0	0	0
 construction_permits	construction_permits_aggregate	work_class	work_class	1	0	0	0	0
-construction_permits	construction_permits_aggregate	COALESCE(CAST(total_valuation_remodel AS decimal(16,2))
-        , COALESCE(CAST(total_job_valuation AS decimal(16,2))
-        ,  (CAST(building_valuation AS decimal(16,2)) + 
-            CAST(building_valuation_remodel AS decimal(16,2)) + 
-            CAST(electrical_valuation AS decimal(16,2)) + 
-            CAST(electrical_valuation_remodel AS decimal(16,2)) +
-            CAST(mechanical_valuation AS decimal(16,2)) +
-            CAST(mechanical_valuation_remodel AS decimal(16,2)) +
-            CAST(plumbing_valuation AS decimal(16,2)) +
-            CAST(plumbing_valuation_remodel AS decimal(16,2)) +
-            CAST(medgas_valuation AS decimal(16,2)) +
-            CAST(medgas_valuation_remodel AS decimal(16,2)))
-        ))	sum_project_valuation	0	1	0	0	0
+construction_permits	construction_permits_aggregate	COALESCE(CAST(total_valuation_remodel AS decimal(16,2)), COALESCE(CAST(total_job_valuation AS decimal(16,2)),  (CAST(building_valuation AS decimal(16,2)) + CAST(building_valuation_remodel AS decimal(16,2)) + CAST(electrical_valuation AS decimal(16,2)) + CAST(electrical_valuation_remodel AS decimal(16,2)) + CAST(mechanical_valuation AS decimal(16,2)) + CAST(mechanical_valuation_remodel AS decimal(16,2)) + CAST(plumbing_valuation AS decimal(16,2)) + CAST(plumbing_valuation_remodel AS decimal(16,2)) + CAST(medgas_valuation AS decimal(16,2)) + CAST(medgas_valuation_remodel AS decimal(16,2)))))	sum_project_valuation	0	1	0	0	0
 construction_permits	construction_permits_aggregate	*	total_num_permits	0	0	1	0	0
 restaurant_inspection_scores	restaurant_inspection_scores_aggregate	CAST(TO_CHAR(TO_DATE(inspection_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
 restaurant_inspection_scores	restaurant_inspection_scores_aggregate	CAST(zip_code AS INT)	zip_code	1	0	0	0	0
