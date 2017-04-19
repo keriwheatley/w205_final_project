@@ -188,36 +188,36 @@ if no_errors:
                     else:
                         truncate_value = False
 
-                # at a minimum, we need source table name, target table name, and type
-                # if any are missing, error out so it can be fixed
-                if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0:
-                    print("Config file error:")            
-                    print("In " + s + "source_table, target_table, and type are required")
-                    config_ok = False            
+                    # at a minimum, we need source table name, target table name, and type
+                    # if any are missing, error out so it can be fixed
+                    if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0:
+                        print("Config file error:")            
+                        print("In " + s + "source_table, target_table, and type are required")
+                        config_ok = False            
 
-                # everything is read in for this source, on verify pass, load the data
-                if i == 1:
-                    if type_value == "SODA":
-                        print dict_db_connect
-                        print source_table
-                        print target_table
-                        print truncate_value
-                        print last_update_col_value
-                        print last_update_val_value
-                        ret = aggregate_data_SODA(dict_db_connect, source_table, target_table, 
-                                              truncate_value, last_update_col_value, last_update_val_value)
+                    # everything is read in for this source, on verify pass, load the data
+                    if i == 1:
+                        if type_value == "SODA":
+                            print dict_db_connect
+                            print source_table
+                            print target_table
+                            print truncate_value
+                            print last_update_col_value
+                            print last_update_val_value
+                            ret = aggregate_data_SODA(dict_db_connect, source_table, target_table, 
+                                                  truncate_value, last_update_col_value, last_update_val_value)
 
-                        #check ret - it will be either a boolean or a string
-                        # here is where we'd write back to the config file if we are not truncating
-                        # and storing the last_update_val
-                        if isinstance(ret, bool):
-                            if ret == False:
-                                no_errors = False
-                        else:
-                            config.set(s, LAST_UPDATE_VAL_KEY, ret)
-                            with open(CONFIG_FILE_NAME, 'w') as configfile:
-                                config.write(configfile)                        
-                        print ""
+                            #check ret - it will be either a boolean or a string
+                            # here is where we'd write back to the config file if we are not truncating
+                            # and storing the last_update_val
+                            if isinstance(ret, bool):
+                                if ret == False:
+                                    no_errors = False
+                            else:
+                                config.set(s, LAST_UPDATE_VAL_KEY, ret)
+                                with open(CONFIG_FILE_NAME, 'w') as configfile:
+                                    config.write(configfile)                        
+                            print ""
 
     except Exception as e:
             print(e)
