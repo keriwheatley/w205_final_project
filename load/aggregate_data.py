@@ -56,7 +56,6 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
             print("Truncated (" + target_table +") data table.")
 
         cur.execute("SELECT * FROM transform_map WHERE target_table = '" + target_table + "';")
-
         data = cur.fetchall()
         
         insert_columns = ""
@@ -86,71 +85,12 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         sql += " GROUP BY " + group_by + ";"
 
         print sql
+        cur.execute(sql)
+        print cur.statusmessage
+        conn.commit()
+        conn.close()
             
-#                 #counter += 1
-#                 #print(counter, end=" ")
-#                 #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-#                 cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-#                 conn.commit()
-
-
-# source_table    target_table    source_field    target_field    group_by    sum_of  count_of
-# construction_permits    construction_permit_aggregate   TO_CHAR(TO_DATE(issue_date, 'YYYY-MM-DD'),'YYYYMMDD')   date_number 1   0   0
-# construction_permits    construction_permit_aggregate   original_zip    zip_code    1   0   0
-# construction_permits    construction_permit_aggregate   permit_class_mapped residential_or_commercial   1   0   0
-# construction_permits    construction_permit_aggregate   permit_type_desc    permit_type 1   0   0
-# construction_permits    construction_permit_aggregate   work_class  work_class  1   0   0
-# construction_permits    construction_permit_aggregate   COALESCE(CAST(total_valuation_remodel AS decimal(16,2)) , COALESCE(CAST(total_job_valuation AS decimal(16,2)) , (CAST(building_valuation AS decimal(16,2)) + CAST(building_valuation_remodel AS decimal(16,2)) + CAST(electrical_valuation AS decimal(16,2)) + CAST(electrical_valuation_remodel AS decimal(16,2)) + CAST(mechanical_valuation AS decimal(16,2)) + CAST(mechanical_valuation_remodel AS decimal(16,2)) + CAST(plumbing_valuation AS decimal(16,2)) + CAST(plumbing_valuation_remodel AS decimal(16,2)) + CAST(medgas_valuation AS decimal(16,2)) + CAST(medgas_valuation_remodel AS decimal(16,2))) ))  sum_project_valuation   0   1   0
-# construction_permits    construction_permit_aggregate   *   total_num_permits   0   0   1
-
-
-#         # loop until all data is received
-#         offset = 0
-#         all_data_loaded = False
-#         #counter = 0
-#         while not all_data_loaded:
-#             requestFull = request + "&$offset=" + str(offset)
-#             #print(requestFull)
-#             response = requests.get(requestFull, verify=False)
-#             data = response.json()
-#             if response.status_code != 200:
-#                 print("Error: Did not complete call to API (status code: " + str(response.status_code) + ")")
-#                 print("Check API call: " + request)
-#                 print(data)
-#                 return False
-
-#             # Write each row to data table
-#             for row in data:
-#                 try:
-#                     values = ""
-#                     columns = ""
-#                     for i in row:
-#                         columns += '"' + str(i) + '",'
-                        
-#                         if isinstance(row[i],dict):
-#                             values += "'" + str(row[i]).replace("'","").replace("\\","") + "',"
-#                         else:
-#                             values += "'" + str(row[i].encode('ascii','ignore').replace("'","").replace("\\","")) + "',"
-                            
-#                     columns = columns[:-1]
-#                     values = values[:-1]
-#                     #counter += 1
-#                     #print(counter, end=" ")
-#                     #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-#                     cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-#                     conn.commit()
-            
-#             print "Added " + str(len(data)) + " records at time (" + str(start_time) + ")."
-
-#             # determine if there is more data
-#             if len(data) == chunk_size:
-#                 offset += chunk_size
-#             else:
-#                 offset += len(data)
-#                 all_data_loaded = True
-        
-#         # Commit changes to table and close connection
-#         conn.close()
+#         print "Added " + str(len(data)) + " records at time (" + str(start_time) + ")."
         
 #         print ("Loaded " + str(offset) + " records to data source (" + table_name + ").")
 #         print ("Ended data extract for data source (" + table_name + ") at time (" + 
