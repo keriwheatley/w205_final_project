@@ -39,6 +39,9 @@ psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores (
 inspection_date TEXT,score TEXT,address_city TEXT,address_state TEXT,address TEXT,facility_id TEXT,
 process_description TEXT,address_address TEXT,address_zip TEXT);" 
 
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS restaurant_inspection_scores_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE restaurant_inspection_scores_aggregate (date_number INT, zip_code INT, sum_score DECIMAL(16,2), total_num_scores INT, min_score INT, max_score INT); 
+
 # Code Complaint Cases
 # https://data.austintexas.gov/Government/Austin-Code-Complaint-Cases/6wtj-zbtb
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS code_complaint_cases;"
@@ -47,17 +50,26 @@ street_name TEXT,city TEXT,state TEXT,zip_code TEXT,x TEXT,y TEXT,opened_date TE
 case_type TEXT,description TEXT,case_contact TEXT,case_manager TEXT,date_updated TEXT,latitude TEXT,longitude TEXT,
 location_city TEXT,location TEXT,location_address TEXT,location_zip TEXT,location_state TEXT);" 
 
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS code_complaint_cases_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE code_complaint_cases_aggregate (date_number INT, zip_code INT, complaint_type TEXT, total_num_cases INT);
+
 # Residential Water Consumption
 # https://data.austintexas.gov/Utility/Austin-Water-Residential-Water-Consumption/sxk7-7k6z
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS residential_water_consumption;"
 psql -U postgres -d finalproject -c "CREATE TABLE residential_water_consumption (year_month TEXT,
 postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
 
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS residential_water_consumption_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE residential_water_consumption_aggregate (year_month INT, zip_code INT, custom_class TEXT, total_gallons INT);
+
 # Commercial Water Consumption
 # https://data.austintexas.gov/Utility/Austin-Water-Commercial-Water-Consumption/5h9c-wmds
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS commercial_water_consumption;"
 psql -U postgres -d finalproject -c "CREATE TABLE commercial_water_consumption (year_month TEXT,
 postal_code TEXT, customer_class TEXT, total_gallons TEXT);"
+
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS commercial_water_consumption_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE commercial_water_consumption_aggregate (year_month INT, zip_code INT, custom_class TEXT, total_gallons INT);
 
 # Pothole Repair
 # https://data.austintexas.gov/Government/Pothole-Repair/fmm2-ytyt
@@ -68,6 +80,9 @@ sr_created_date TEXT,sr_updated_date TEXT,sr_closed_date TEXT,sr_location TEXT,s
 sr_location_street_name TEXT,sr_location_city TEXT,sr_location_zip_code TEXT,sr_location_county TEXT,
 sr_location_x TEXT,sr_location_y TEXT,sr_location_lat TEXT,sr_location_long TEXT,sr_location_lat_long TEXT,
 sr_location_council_district TEXT,sr_location_map_page TEXT,sr_location_map_tile TEXT);"
+
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS pothole_repair_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE pothole_repair_aggregate (created_date_number INT, zip_code INT, status_change_date_number INT, status TEXT, total_num_cases INT);
 
 # Service Alerts
 # https://data.texas.gov/dataset/Service-Alerts/avj9-39zb
