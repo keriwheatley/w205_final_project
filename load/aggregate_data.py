@@ -88,7 +88,7 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
             
         print "Inserting into (" + target_table +") table..."
         cur.execute(sql)
-        print "Insert complete. Status message: " + cur.statusmessage
+        print "Insert completed with status message: " + cur.statusmessage
         conn.commit()
         conn.close()
             
