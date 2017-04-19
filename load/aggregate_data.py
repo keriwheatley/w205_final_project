@@ -58,6 +58,8 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         cur.execute("SELECT * FROM transform_map WHERE target_table = '" + target_table + "';")
         data = cur.fetchall()
         
+        print data
+        
         insert_columns = ""
         select_columns = ""
         group_by = ""
@@ -84,6 +86,8 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         
         sql += " GROUP BY " + group_by + ";"
     
+        print sql
+        
         print "Inserting into (" + target_table +") table..."
         cur.execute(sql)
         print "Insert complete."
