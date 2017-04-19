@@ -39,10 +39,6 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
     """Loads all data since last_update_value (if provided) from source_table 
     at url using the SODA API""" 
     try:
-        print dict_db_connect
-        print truncate_table
-        print last_update_field
-        print last_update_value
         # Start runtime
         start_time = datetime.datetime.now()
         print("Starting data aggregation for data source (" + source_table + ") at time (" + str(start_time) + ").")
