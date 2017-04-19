@@ -36,12 +36,12 @@ requests.packages.urllib3.disable_warnings(SNIMissingWarning)
 #############################################################################
 
 def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = False, last_update_field = "", last_update_value =  ""):
-    """Loads all data since last_update_value (if provided) from table_name 
+    """Loads all data since last_update_value (if provided) from source_table 
     at url using the SODA API""" 
     try:
         # Start runtime
         start_time = datetime.datetime.now()
-        print("Starting data aggregation for data source (" + table_name + ") at time (" + str(start_time) + ").")
+        print("Starting data aggregation for data source (" + source_table + ") at time (" + str(start_time) + ").")
         
         # Connect to database
         conn = psycopg2.connect( database = dict_db_connect["database"], 
