@@ -35,8 +35,7 @@ requests.packages.urllib3.disable_warnings(SNIMissingWarning)
 # Data Aggregate Functions
 #############################################################################
 
-def aggregate_data_SODA( dict_db_connect, source_table, target_table, 
-                    truncate_table = False, last_update_field = "", last_update_value =  ""):
+def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = False, last_update_field = "", last_update_value =  ""):
     """Loads all data since last_update_value (if provided) from table_name 
     at url using the SODA API""" 
     try:
