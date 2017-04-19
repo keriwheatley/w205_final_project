@@ -12,6 +12,7 @@ import ConfigParser as cp
 import sys
 from extract_data import *
 from aggregate_data import *
+from custom_transform_data import *
 import aggregates as aggs
 
 #
