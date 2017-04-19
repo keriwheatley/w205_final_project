@@ -35,7 +35,7 @@ requests.packages.urllib3.disable_warnings(SNIMissingWarning)
 # Data Aggregate Functions
 #############################################################################
 
-def zip_code_map_SODA( dict_db_connect, source_table, target_table):
+def zip_code_map_SODA( dict_db_connect, source_table, target_table, custom_map_col):
     """Map all data to zip code values""" 
     try:
         # Start runtime
@@ -55,7 +55,7 @@ def zip_code_map_SODA( dict_db_connect, source_table, target_table):
         
         sql = "CREATE TABLE " + target_table + " AS"
         sql += " (SELECT *, COALESCE(zip_code,99999) AS zip_code FROM " + source_table
-        sql += " WHERE location = " + source_location_col + ");"                
+        sql += " WHERE location = " + custom_map_col + ");"                
 
         print sql
         cur.execute(sql)
