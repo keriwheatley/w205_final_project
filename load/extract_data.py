@@ -1,5 +1,5 @@
 # 
-# load_data.py
+# extract_data.py
 # Provides functions to download data from various sources and insert into database
 # 
 # 
