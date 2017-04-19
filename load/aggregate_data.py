@@ -82,7 +82,7 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         sql += select_columns + " FROM " + source_table
 
         if not truncate_table and len(last_update_field) > 0 and len(last_update_value) > 0:
-            sql += " WHERE " + last_update_field + " > " + last_update_value
+            sql += " WHERE " + last_update_field + " > '" + last_update_value + "'"
         
         sql += " GROUP BY " + group_by + ";"
         
