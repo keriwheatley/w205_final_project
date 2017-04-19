@@ -34,7 +34,7 @@ def data_extract():
         
         # Start runtime
         start_time = datetime.datetime.now()
-        print "Starting zip codes table load at time (" + str(start_time) + ")."
+        print "Starting (zip_code_map) table load at time (" + str(start_time) + ")."
         
         # Connect to database
         conn = psycopg2.connect(database="finalproject",user="postgres",password="pass",host="localhost",port="5432")
@@ -67,15 +67,13 @@ def data_extract():
                     if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
                         zip_code = geocode_result[0]['address_components'][i]['long_name']
             
-            sql = "UPDATE zip_codes SET zip_code = "+zip_code+" WHERE row_number = "+str(row_number)+";"
+            sql = "UPDATE zip_code_map SET zip_code = "+zip_code+" WHERE row_number = "+str(row_number)+";"
             print sql
             cur.execute(sql)              
             conn.commit()
     
         # Commit changes to table and close connection
         conn.close()
-        print "Loaded " + str(len(data)) + " records to data source (racial_profiling_citations_transformed)."
-        print "Ended data extract for data source (racial_profiling_citations_transformed) at time (" + str(datetime.datetime.now()) + ")."
     
     # Error logging
     except Exception as inst:
