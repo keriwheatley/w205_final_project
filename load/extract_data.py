@@ -50,12 +50,12 @@ def isNewer(strDate1, strDate2):
 
 
 #############################################################################
-# Data Load Functions
+# Data Extract Functions
 #############################################################################
 
-def load_data_SODA( dict_db_connect, url, table_name, 
+def extract_data_SODA( dict_db_connect, url, table_name, 
                     truncate_table = False, last_update_field = "", last_update_value =  ""):
-    """Loads all data since last_update_value (if provided) from table_name 
+    """Extracts all data since last_update_value (if provided) from table_name 
     at url using the SODA API""" 
     try:
         # Start runtime
@@ -178,7 +178,7 @@ def load_data_SODA( dict_db_connect, url, table_name,
 # Compare each date to "last_update_value" with isNewer, if it returns true, add that column to a 
 # list, and when isNewer returns false you have all the new dates. 
 # 
-def load_data_Zillow( dict_db_connect, url, table_name, 
+def extract_data_Zillow( dict_db_connect, url, table_name, 
                       truncate_table = False, last_update_value =  ""):
     """return True if no errors and no new data to load
     return the newest date string that was loaded into the DB to be stored for next time
