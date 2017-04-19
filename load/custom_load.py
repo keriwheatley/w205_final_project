@@ -35,7 +35,7 @@ requests.packages.urllib3.disable_warnings(SNIMissingWarning)
 # Data Aggregate Functions
 #############################################################################
 
-def custom_zip_code_map_SODA( dict_db_connect, source_table, target_table):
+def zip_code_map_SODA( dict_db_connect, source_table, target_table):
     """Map all data to zip code values""" 
     try:
         # Start runtime
