@@ -142,6 +142,8 @@ for i in range(2):
     if not config_ok:
         sys.exit("Cannot proceed until errors are fixed\nexiting...")
 
+print ""
+
 # do we want to run aggregations even if there were errors?
 if no_errors:
     
