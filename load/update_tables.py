@@ -131,7 +131,8 @@ for i in range(2):
                         config.set(s, LAST_UPDATE_VAL_KEY, ret)
                         with open(CONFIG_FILE_NAME, 'w') as configfile:
                             config.write(configfile)
-                        print ""
+                    
+                    print ""
                                 
                 else:
                     # unknown type - don't error out, just skip
@@ -213,7 +214,8 @@ if no_errors:
                                 config.set(s, LAST_UPDATE_VAL_KEY, ret)
                                 with open(CONFIG_FILE_NAME, 'w') as configfile:
                                     config.write(configfile)                        
-                            print ""
+                         
+                        print ""
 
     except Exception as e:
             print(e)
