@@ -24,7 +24,7 @@ import aggregates as aggs
 # config file strings
 CONFIG_FILE_NAME = 'config.ini'
 DATASOURCE_SECTION = "DATASOURCE"
-AGGREGATES_SECTION = "AGGREGATES"
+AGGREGATES_SECTION = "AGGREGATE"
 URL_KEY = 'url'
 TABLE_NAME_KEY= 'table_name'
 LAST_UPDATE_COL_KEY = 'last_update_col'
