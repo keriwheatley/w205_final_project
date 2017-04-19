@@ -72,8 +72,6 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         select_columns = select_columns[:-1]
         insert_columns = insert_columns[:-1]
         group_by = group_by[:-1]
-        sum_of = sum_of[:-1]
-        count_of = count_of[:-1]
 
         sql = "INSERT INTO " + target_table + " ("+ insert_columns + ") SELECT "
         sql += select_columns + " FROM " + source_table
