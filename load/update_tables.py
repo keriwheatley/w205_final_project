@@ -11,6 +11,7 @@
 import ConfigParser as cp
 import sys
 from load_data import *
+from aggregate_data import *
 import aggregates as aggs
 
 #
