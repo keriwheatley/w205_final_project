@@ -114,7 +114,8 @@ for i in range(2):
                         config.set(s, LAST_UPDATE_VAL_KEY, ret)
                         with open(CONFIG_FILE_NAME, 'w') as configfile:
                             config.write(configfile)
-                        print ""
+                        
+                    print ""
                     
                 elif type_value == "ZILLOW":
                     ret = extract_data_Zillow( dict_db_connect, url_value, table_name_value,
