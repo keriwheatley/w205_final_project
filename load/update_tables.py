@@ -113,7 +113,8 @@ for i in range(2):
                     else:
                         config.set(s, LAST_UPDATE_VAL_KEY, ret)
                         with open(CONFIG_FILE_NAME, 'w') as configfile:
-                            config.write(configfile)                        
+                            config.write(configfile)
+                        print ""
                     
                 elif type_value == "ZILLOW":
                     ret = extract_data_Zillow( dict_db_connect, url_value, table_name_value,
@@ -130,6 +131,7 @@ for i in range(2):
                         config.set(s, LAST_UPDATE_VAL_KEY, ret)
                         with open(CONFIG_FILE_NAME, 'w') as configfile:
                             config.write(configfile)
+                        print ""
                                 
                 else:
                     # unknown type - don't error out, just skip
@@ -203,6 +205,7 @@ if no_errors:
                             config.set(s, LAST_UPDATE_VAL_KEY, ret)
                             with open(CONFIG_FILE_NAME, 'w') as configfile:
                                 config.write(configfile)                        
+                        print ""
 
     except Exception as e:
             print(e)
