@@ -156,9 +156,6 @@ if no_errors:
                         source_table = config.get(s, SOURCE_TABLE_KEY)
                     else:
                         source_table = ""
-                    
-                    print source_table
-
 
                     if TARGET_TABLE_KEY in config.options(s):
                         target_table = config.get(s, TARGET_TABLE_KEY)
@@ -195,12 +192,6 @@ if no_errors:
                     # everything is read in for this source, on verify pass, load the data
                     if i == 1:
                         if type_value == "SODA":
-                            print dict_db_connect
-                            print source_table
-                            print target_table
-                            print truncate_value
-                            print last_update_col_value
-                            print last_update_val_value
                             ret = aggregate_data_SODA(dict_db_connect, source_table, target_table, 
                                                   truncate_value, last_update_col_value, last_update_val_value)
 
