@@ -36,6 +36,7 @@ TYPE_KEY = 'type'
 TRUNCATE_KEY = 'truncate'
 SOURCE_TABLE_KEY = 'source_table'
 TARGET_TABLE_KEY = 'target_table'
+CUSTOM_MAP_KEY = 'custom_map_col'
 
 config = cp.ConfigParser()
 
@@ -172,17 +173,22 @@ if no_errors:
                     else:
                         type_value = ""
 
+                    if CUSTOM_MAP_KEY in config.options(s):
+                        custom_map_col = config.get(s, CUSTOM_MAP_KEY)
+                    else:
+                        custom_map_col = ""
+                        
                     # at a minimum, we need source table name, target table name, and type
                     # if any are missing, error out so it can be fixed
-                    if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0:
+                    if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0 or len(custom_map_col) == 0:
                         print("Config file error:")            
-                        print("In " + s + "source_table, target_table, and type are required")
+                        print("In " + s + "source_table, target_table, type, and custom_map_col are required")
                         config_ok = False            
 
                     # everything is read in for this source, on verify pass, load the data
                     if i == 1:
                         if type_value == "SODA":
-                            ret = zip_code_map_SODA(dict_db_connect, source_table, target_table)
+                            ret = zip_code_map_SODA(dict_db_connect, source_table, target_table, custom_map_col)
 
                             #check ret - it will be either a boolean or a string
                             # here is where we'd write back to the config file if we are not truncating
