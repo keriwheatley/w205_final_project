@@ -51,6 +51,10 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
                                  port = dict_db_connect["port"])
         cur = conn.cursor()
 
+        if truncate_table:
+            cur.execute("TRUNCATE TABLE " + target_table + ";");
+            print("Truncated (" + target_table +") data table.")
+
         cur.execute("SELECT * FROM transform_map WHERE target_table = '" + target_table + "';")
 
         data = cur.fetchall()
@@ -75,24 +79,20 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
 
         sql = "INSERT INTO " + target_table + " ("+ insert_columns + ") SELECT "
         sql += select_columns + " FROM " + source_table
+
+        if not truncate_table and len(last_update_field) > 0 and len(last_update_value) > 0:
+            sql += " WHERE " + last_update_field + " > " + last_update_value
+        
         sql += " GROUP BY " + group_by + ";"
 
         print sql
-
+            
 #                 #counter += 1
 #                 #print(counter, end=" ")
 #                 #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
 #                 cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
 #                 conn.commit()
 
-#         if truncate_table:
-#             # if we don't have last update info, or we aren't doing incremental updates,
-#             # truncate the table before insertion
-#             cur.execute("TRUNCATE TABLE " + table_name + ";");
-#             print("Truncated data table.")
-
-#         # get only the rows since the last data load (if options permit)
-#         if not truncate_table and len(last_update_field) > 0 and len(last_update_value) > 0:
 
 # source_table    target_table    source_field    target_field    group_by    sum_of  count_of
 # construction_permits    construction_permit_aggregate   TO_CHAR(TO_DATE(issue_date, 'YYYY-MM-DD'),'YYYYMMDD')   date_number 1   0   0
