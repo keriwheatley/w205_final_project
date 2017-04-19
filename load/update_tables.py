@@ -10,7 +10,7 @@
 #import psycopg2
 import ConfigParser as cp
 import sys
-from load_data import *
+from extract_data import *
 from aggregate_data import *
 import aggregates as aggs
 
@@ -98,10 +98,10 @@ for i in range(2):
                 print("In " + s + "table_name, url, and type are required")
                 config_ok = False
                 
-            # everything is read in for this source, on verify pass, load the data
+            # everything is read in for this source, on verify pass, extract the data
             if i == 1:
                 if type_value == "SODA":
-                    ret = load_data_SODA( dict_db_connect, url_value, table_name_value, 
+                    ret = extract_data_SODA( dict_db_connect, url_value, table_name_value, 
                                           truncate_value, last_update_col_value, last_update_val_value)
                     
                     #check ret - it will be either a boolean or a string
@@ -116,7 +116,7 @@ for i in range(2):
                             config.write(configfile)                        
                     
                 elif type_value == "ZILLOW":
-                    ret = load_data_Zillow( dict_db_connect, url_value, table_name_value,
+                    ret = extract_data_Zillow( dict_db_connect, url_value, table_name_value,
                                             truncate_value, last_update_val_value)
                     
                     # check ret - it will be either a boolean or a string
