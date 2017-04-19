@@ -180,6 +180,6 @@ dict_db_connect = { "database" : "finalproject",
                     "host" : "localhost",
                     "port" : "5432"}
 source_table = "construction_permits"
-target_table = "construction_permit_aggregate"
+target_table = "construction_permits_aggregate"
 
 aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = False)
