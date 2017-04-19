@@ -157,7 +157,7 @@ if no_errors:
                     if TARGET_TABLE_KEY in config.options(s):
                         target_table = config.get(s, TARGET_TABLE_KEY)
                     else:
-                        taget_table = ""
+                        target_table = ""
                         
                     if LAST_UPDATE_COL_KEY in config.options(s):
                         last_update_col_value = config.get(s, LAST_UPDATE_COL_KEY)
@@ -181,9 +181,9 @@ if no_errors:
 
             # at a minimum, we need source table name, target table name, and type
             # if any are missing, error out so it can be fixed
-            if len(source_table) == 0 or len(taget_table) == 0 or len(type_value) == 0:
+            if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0:
                 print("Config file error:")            
-                print("In " + s + "source_table, taget_table, and type are required")
+                print("In " + s + "source_table, target_table, and type are required")
                 config_ok = False            
                 
             # everything is read in for this source, on verify pass, load the data
