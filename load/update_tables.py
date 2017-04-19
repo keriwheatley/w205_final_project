@@ -146,6 +146,55 @@ for i in range(2):
 
 print ""
 
+# Do not run custom if errors occurred previously
+if no_errors:
+    
+    # run custom
+    try:
+        # parse CUSTOM section of config file and call each function            
+        for i in range(2):
+            for s in config.sections():
+                if s.startswith(CUSTOM_SECTION):
+                                        
+                    if SOURCE_TABLE_KEY in config.options(s):
+                        source_table = config.get(s, SOURCE_TABLE_KEY)
+                    else:
+                        source_table = ""
+
+                    if TARGET_TABLE_KEY in config.options(s):
+                        target_table = config.get(s, TARGET_TABLE_KEY)
+                    else:
+                        target_table = ""
+                        
+                    if TYPE_KEY in config.options(s):
+                        type_value = config.get(s, TYPE_KEY)
+                    else:
+                        type_value = ""
+
+                    # at a minimum, we need source table name, target table name, and type
+                    # if any are missing, error out so it can be fixed
+                    if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0:
+                        print("Config file error:")            
+                        print("In " + s + "source_table, target_table, and type are required")
+                        config_ok = False            
+
+                    # everything is read in for this source, on verify pass, load the data
+                    if i == 1:
+                        if type_value == "SODA":
+                            ret = zip_code_map_SODA(dict_db_connect, source_table, target_table)
+
+                            #check ret - it will be either a boolean or a string
+                            # here is where we'd write back to the config file if we are not truncating
+                            # and storing the last_update_val
+                            if isinstance(ret, bool):
+                                if ret == False:
+                                    no_errors = False                     
+                         
+                        print ""
+
+    except Exception as e:
+            print(e)
+            
 # Do not run aggregations if error occurred during extract
 if no_errors:
     
@@ -197,75 +246,6 @@ if no_errors:
                     if i == 1:
                         if type_value == "SODA":
                             ret = aggregate_data_SODA(dict_db_connect, source_table, target_table, 
-                                                  truncate_value, last_update_col_value, last_update_val_value)
-
-                            #check ret - it will be either a boolean or a string
-                            # here is where we'd write back to the config file if we are not truncating
-                            # and storing the last_update_val
-                            if isinstance(ret, bool):
-                                if ret == False:
-                                    no_errors = False
-                            else:
-                                config.set(s, LAST_UPDATE_VAL_KEY, ret)
-                                with open(CONFIG_FILE_NAME, 'w') as configfile:
-                                    config.write(configfile)                        
-                         
-                        print ""
-
-    except Exception as e:
-            print(e)
-
-# Do not run custom if errors occurred previously
-if no_errors:
-    
-    # run custom
-    try:
-        # parse CUSTOM section of config file and call each function            
-        for i in range(2):
-            for s in config.sections():
-                if s.startswith(CUSTOM_SECTION):
-                                        
-                    if SOURCE_TABLE_KEY in config.options(s):
-                        source_table = config.get(s, SOURCE_TABLE_KEY)
-                    else:
-                        source_table = ""
-
-                    if TARGET_TABLE_KEY in config.options(s):
-                        target_table = config.get(s, TARGET_TABLE_KEY)
-                    else:
-                        target_table = ""
-                        
-                    if LAST_UPDATE_COL_KEY in config.options(s):
-                        last_update_col_value = config.get(s, LAST_UPDATE_COL_KEY)
-                    else:
-                        last_update_col_value = ""
-
-                    if LAST_UPDATE_VAL_KEY in config.options(s):
-                        last_update_val_value = config.get(s, LAST_UPDATE_VAL_KEY)
-                    else:
-                        last_update_val_value = ""
-
-                    if TYPE_KEY in config.options(s):
-                        type_value = config.get(s, TYPE_KEY)
-                    else:
-                        type_value = ""
-
-                    if TRUNCATE_KEY in config.options(s):
-                        truncate_value = True if config.get(s, TRUNCATE_KEY)[0].lower() == 't' else False
-                    else:
-                        truncate_value = False
-
-                    # at a minimum, we need source table name, target table name, and type
-                    # if any are missing, error out so it can be fixed
-                    if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0:
-                        print("Config file error:")            
-                        print("In " + s + "source_table, target_table, and type are required")
-                        config_ok = False            
-
-                    # everything is read in for this source, on verify pass, load the data
-                    if i == 1:
-                        if type_value == "SODA":
-                            ret = custom_function_SODA(dict_db_connect, source_table, target_table, 
                                                   truncate_value, last_update_col_value, last_update_val_value)
 
                             #check ret - it will be either a boolean or a string
