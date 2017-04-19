@@ -60,11 +60,11 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         group_by = ""
         for row in data:
             try:
-                insert_columns += str(row[4]) + ","
-                if row[5]==1: select_columns += str(row[3]) + " AS " + str(row[4]) + ","
-                if row[6]==1: select_columns += "SUM(" + str(row[3]) + ") AS " + str(row[4]) + ","
-                if row[7]==1: select_columns += "COUNT(" + str(row[3]) + ") AS " + str(row[4]) + ","
-                if row[5]==1: group_by += str(row[3]) + ","
+                insert_columns += str(row[3]) + ","
+                if row[4]==1: select_columns += str(row[2]) + " AS " + str(row[3]) + ","
+                if row[5]==1: select_columns += "SUM(" + str(row[2]) + ") AS " + str(row[3]) + ","
+                if row[6]==1: select_columns += "COUNT(" + str(row[2]) + ") AS " + str(row[3]) + ","
+                if row[4]==1: group_by += str(row[2]) + ","
             except Exception as e:
                 print "exception encountered:\n" +  str(e)
                 return False
