@@ -19,11 +19,11 @@ code_complaint_cases	code_complaint_cases_aggregate	*	total_num_cases	0	0	1	0	0
 residential_water_consumption	residential_water_consumption_aggregate	CAST(year_month AS INT)	year_month	1	0	0	0	0
 residential_water_consumption	residential_water_consumption_aggregate	CAST(postal_code AS INT)	zip_code	1	0	0	0	0
 residential_water_consumption	residential_water_consumption_aggregate	customer_class	custom_class	1	0	0	0	0
-residential_water_consumption	residential_water_consumption_aggregate	CAST(total_gallons AS INT)	total_gallons	1	0	0	0	0
+residential_water_consumption	residential_water_consumption_aggregate	CAST(total_gallons AS DECIMAL(16,2))	total_gallons	1	0	0	0	0
 commercial_water_consumption	commercial_water_consumption_aggregate	CAST(year_month AS INT)	year_month	1	0	0	0	0
 commercial_water_consumption	commercial_water_consumption_aggregate	CAST(postal_code AS INT)	zip_code	1	0	0	0	0
 commercial_water_consumption	commercial_water_consumption_aggregate	customer_class	custom_class	1	0	0	0	0
-commercial_water_consumption	commercial_water_consumption_aggregate	CAST(total_gallons AS INT)	total_gallons	1	0	0	0	0
+commercial_water_consumption	commercial_water_consumption_aggregate	CAST(total_gallons AS DECIMAL(16,2))	total_gallons	1	0	0	0	0
 pothole_repair	pothole_repair_aggregate	CAST(TO_CHAR(TO_DATE(sr_created_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	created_date_number	1	0	0	0	0
 pothole_repair	pothole_repair_aggregate	CAST(sr_location_zip_code AS INT)	zip_code	1	0	0	0	0
 pothole_repair	pothole_repair_aggregate	CAST(TO_CHAR(TO_DATE(sr_updated_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	status_change_date_number	1	0	0	0	0
