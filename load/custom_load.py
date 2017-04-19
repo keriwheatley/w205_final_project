@@ -35,13 +35,12 @@ requests.packages.urllib3.disable_warnings(SNIMissingWarning)
 # Data Aggregate Functions
 #############################################################################
 
-def custom_load_SODA( dict_db_connect, source_table, target_table, truncate_table = False, last_update_field = "", last_update_value =  ""):
-    """Loads all data since last_update_value (if provided) from source_table 
-    at url using the SODA API""" 
+def custom_zip_code_map_SODA( dict_db_connect, source_table, target_table):
+    """Map all data to zip code values""" 
     try:
         # Start runtime
         start_time = datetime.datetime.now()
-        print("Starting data aggregation for data source (" + source_table + ") at time (" + str(start_time) + ").")
+        print("Starting temp table (" + target_table + ") creation at time (" + str(start_time) + ").")
         
         # Connect to database
         conn = psycopg2.connect( database = dict_db_connect["database"], 
@@ -51,62 +50,22 @@ def custom_load_SODA( dict_db_connect, source_table, target_table, truncate_tabl
                                  port = dict_db_connect["port"])
         cur = conn.cursor()
 
-        if truncate_table:
-            cur.execute("TRUNCATE TABLE " + target_table + ";");
-            print("Truncated (" + target_table +") data table.")
-
-        cur.execute("SELECT * FROM transform_map WHERE target_table = '" + target_table + "';")
-        data = cur.fetchall()
-                
-        insert_columns = ""
-        select_columns = ""
-        group_by = ""
-        for row in data:
-            try:
-                insert_columns += str(row[3]) + ","
-                if row[4]==1: select_columns += str(row[2]) + " AS " + str(row[3]) + ","
-                if row[5]==1: select_columns += "SUM(" + str(row[2]) + ") AS " + str(row[3]) + ","
-                if row[6]==1: select_columns += "COUNT(" + str(row[2]) + ") AS " + str(row[3]) + ","
-                if row[7]==1: select_columns += "MIN(" + str(row[2]) + ") AS " + str(row[3]) + ","
-                if row[8]==1: select_columns += "MAX(" + str(row[2]) + ") AS " + str(row[3]) + ","
-                if row[4]==1: group_by += str(row[2]) + ","
-            except Exception as e:
-                print "exception encountered:\n" +  str(e)
-                return False
+        print("Dropping temp table if exists.")
+        cur.execute("DROP TABLE IF EXISTS " + target_table + ";")
         
-        select_columns = select_columns[:-1]
-        insert_columns = insert_columns[:-1]
-        group_by = group_by[:-1]
+        sql = "CREATE TABLE " + target_table + " AS"
+        sql += " (SELECT *, COALESCE(zip_code,99999) AS zip_code FROM " + source_table
+        sql += " WHERE location = " + source_location_col + ");"                
 
-        sql = "INSERT INTO " + target_table + " ("+ insert_columns + ") SELECT "
-        sql += select_columns + " FROM " + source_table
-
-        if not truncate_table and len(last_update_field) > 0 and len(last_update_value) > 0:
-            sql += " WHERE " + last_update_field + " > '" + last_update_value + "'"
-            print "last_update_field = " + last_update_field
-            print "last_update_value = " + str(last_update_value)
-        
-        sql += " GROUP BY " + group_by + ";"
-        
-        print "Inserting into (" + target_table +") table..."
+        print sql
         cur.execute(sql)
-        print "Insert completed with status message: " + cur.statusmessage
-        conn.commit()
-
-        if not truncate_table and len(last_update_field) > 0:
-            cur.execute("SELECT MAX("+last_update_field+") FROM " + source_table + ";")
-            last_update_value = cur.fetchone()
+        print "Created temp table with status message: " + cur.statusmessage
         
         conn.close()
             
-        print ("Ended data aggregation for data source (" + source_table + ") at time (" + 
+        print ("Ended temp table creation for table (" + source_table + ") at time (" + 
                 str(datetime.datetime.now()) + ").")
-    
-        # if doing incremental updates, return last value inserted to use next time
-        if not truncate_table and len(last_update_field) > 0:
-            return str(last_update_value[0])
-        else:
-            return True
+        return True
 
     except Exception as inst:
         print(inst.args)
