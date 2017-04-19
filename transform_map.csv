@@ -1,5 +1,5 @@
 source_table	target_table	source_field	target_field	group_by	sum_of	count_of	min_of	max_of
-construction_permits	construction_permits_aggregate	CAST(TO_CHAR(TO_DATE(issue_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
+construction_permits 	construction_permits_aggregate	CAST(TO_CHAR(TO_DATE(issue_date,'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
 construction_permits	construction_permits_aggregate	CAST(original_zip AS INT)	zip_code	1	0	0	0	0
 construction_permits	construction_permits_aggregate	permit_class_mapped	residential_or_commercial	1	0	0	0	0
 construction_permits	construction_permits_aggregate	permit_type_desc	permit_type	1	0	0	0	0
