@@ -182,5 +182,4 @@ dict_db_connect = { "database" : "finalproject",
 source_table = "construction_permits"
 target_table = "construction_permit_aggregate"
 
-aggregate_data_SODA( dict_db_connect, source_table, target_table, 
-                    truncate_table = False, last_update_field = "", last_update_value =  ""):
+aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = False)
