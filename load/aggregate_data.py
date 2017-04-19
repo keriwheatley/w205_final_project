@@ -69,6 +69,8 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
                 if row[4]==1: select_columns += str(row[2]) + " AS " + str(row[3]) + ","
                 if row[5]==1: select_columns += "SUM(" + str(row[2]) + ") AS " + str(row[3]) + ","
                 if row[6]==1: select_columns += "COUNT(" + str(row[2]) + ") AS " + str(row[3]) + ","
+                if row[7]==1: select_columns += "MIN(" + str(row[2]) + ") AS " + str(row[3]) + ","
+                if row[8]==1: select_columns += "MAX(" + str(row[2]) + ") AS " + str(row[3]) + ","
                 if row[4]==1: group_by += str(row[2]) + ","
             except Exception as e:
                 print "exception encountered:\n" +  str(e)
