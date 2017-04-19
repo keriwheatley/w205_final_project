@@ -92,7 +92,7 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         print "Insert completed with status message: " + cur.statusmessage
         conn.commit()
 
-        cur.execute("SELECT MAX("+last_update_field+") FROM " + target_table + ";")
+        cur.execute("SELECT MAX("+last_update_field+") FROM " + source_table + ";")
         last_update_value = cur.fetchone()
         print last_update_value
         
