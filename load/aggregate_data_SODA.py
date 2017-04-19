@@ -105,34 +105,3 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
         return str(last_update_value)
     else:
         return True
-            
-
-dict_db_connect = { "database" : "finalproject",
-                    "user" : "postgres",
-                    "password" : "pass",
-                    "host" : "localhost",
-                    "port" : "5432"}
-
-source_table = "construction_permits"
-target_table = "construction_permits_aggregate"
-aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = True)
-
-source_table = "restaurant_inspection_scores"
-target_table = "restaurant_inspection_scores_aggregate"
-aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = True)
-
-source_table = "code_complaint_cases"
-target_table = "code_complaint_cases_aggregate"
-aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = True)
-
-source_table = "residential_water_consumption"
-target_table = "residential_water_consumption_aggregate"
-aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = True)
-
-source_table = "commercial_water_consumption"
-target_table = "commercial_water_consumption_aggregate"
-aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = True)
-
-source_table = "pothole_repair"
-target_table = "pothole_repair_aggregate"
-aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_table = True)
