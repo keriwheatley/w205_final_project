@@ -143,10 +143,6 @@ if no_errors:
     
     # run aggregations
     try:
-        # make sure the config file contains aggregates
-        if not config.has_section(AGGREGATE_SECTION):
-            sys.exit("Error: No sections with type 'AGGREGATE' in config file")
-
         # parse AGGREGATES section of config file and call each function            
         for i in range(2):
             for s in config.sections():
