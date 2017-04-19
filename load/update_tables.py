@@ -141,8 +141,6 @@ for i in range(2):
     if not config_ok:
         sys.exit("Cannot proceed until errors are fixed\nexiting...")
 
-print no_errors
-
 # do we want to run aggregations even if there were errors?
 if no_errors:
     
@@ -153,10 +151,14 @@ if no_errors:
             for s in config.sections():
                 if s.startswith(AGGREGATE_SECTION):
 
+                    print SOURCE_TABLE_KEY
+                    
                     if SOURCE_TABLE_KEY in config.options(s):
                         source_table = config.get(s, SOURCE_TABLE_KEY)
                     else:
                         source_table = ""
+                    
+                    print source_table
 
 
                     if TARGET_TABLE_KEY in config.options(s):
