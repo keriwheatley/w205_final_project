@@ -105,6 +105,11 @@ psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations (ci
 off_from_date TEXT, off_time TEXT, race_origin_code TEXT, case_party_sex TEXT, reason_for_stop TEXT,
 race_known TEXT, vl_street_name TEXT, msearch_y_n TEXT, msearch_type TEXT, msearch_found TEXT);"
 
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_citations_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_citations_aggregate (date_number INT, 
+zip_code INT, race_origin_code TEXT, case_party_sex TEXT, reason_for_stop TEXT, race_known TEXT, msearch_y_n TEXT, 
+msearch_type TEXT, msearch_found TEXT, total_num_cases INT);"
+
 # 2014-2016 Racial Profiling Arrests
 # https://data.austintexas.gov/Public-Safety/2014-Racial-Profiling-Dataset-Arrests/rnv4-98ze
 # https://data.austintexas.gov/Public-Safety/Racial-Profiling-Dataset-2015-Arrests/vykk-upaj
@@ -114,3 +119,8 @@ psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_arrests (prim
 rep_time TEXT,sex TEXT,age_at_offense TEXT,apd_race_desc TEXT,location TEXT,person_searched_desc TEXT,
 reason_for_stop_desc TEXT,search_based_on_desc TEXT,search_disc_desc TEXT,race_known TEXT,x_coordinate TEXT,
 y_coordinate TEXT,sector TEXT,local_field1 TEXT);"
+
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS racial_profiling_arrests_aggregate;"
+psql -U postgres -d finalproject -c "CREATE TABLE racial_profiling_arrests_aggregate (date_number INT,
+zip_code INT,sex TEXT,age_at_offense TEXT,apd_race_desc TEXT,reason_for_stop_desc TEXT,
+search_based_on_desc TEXT,search_disc_desc TEXT,race_known TEXT, total_num_cases INT);"
