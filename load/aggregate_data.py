@@ -83,10 +83,11 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
 
         if not truncate_table and len(last_update_field) > 0 and len(last_update_value) > 0:
             sql += " WHERE " + last_update_field + " > '" + last_update_value + "'"
+            print "last_update_field = " + last_update_field
+            print "last_update_value = " + str(last_update_value)
         
         sql += " GROUP BY " + group_by + ";"
         
-        print sql
         print "Inserting into (" + target_table +") table..."
         cur.execute(sql)
         print "Insert completed with status message: " + cur.statusmessage
