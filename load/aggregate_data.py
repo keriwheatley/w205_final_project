@@ -53,7 +53,7 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
 
         cur.execute("SELECT * FROM transform_map WHERE target_table = '" + target_table + "';")
 
-        data = cursor.fetchall()
+        data = cur.fetchall()
 
         insert_columns = ""
         select_columns = ""
