@@ -87,6 +87,8 @@ def extract_data_SODA( dict_db_connect, url, table_name,
             # get latest values
             # NOTE: last_update_value must be wrapped in quotes or it is seen as an int
             request += "&$where=" + last_update_field + ">\'" + last_update_value + "'"
+            print "last_update_field = " + last_update_field
+            print "last_update_value = " + str(last_update_value)
         if truncate_table:
             # if we don't have last update info, or we aren't doing incremental updates,
             # truncate the table before insertion
