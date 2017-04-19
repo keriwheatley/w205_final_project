@@ -1,9 +1,9 @@
-source_table	target_table	source_field	target_field	group_by	sum_of	count_of
-construction_permits	construction_permits_aggregate	CAST(TO_CHAR(TO_DATE(issue_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0
-construction_permits	construction_permits_aggregate	CAST(original_zip AS INT)	zip_code	1	0	0
-construction_permits	construction_permits_aggregate	permit_class_mapped	residential_or_commercial	1	0	0
-construction_permits	construction_permits_aggregate	permit_type_desc	permit_type	1	0	0
-construction_permits	construction_permits_aggregate	work_class	work_class	1	0	0
+source_table	target_table	source_field	target_field	group_by	sum_of	count_of	min_of	max_of
+construction_permits	construction_permits_aggregate	CAST(TO_CHAR(TO_DATE(issue_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
+construction_permits	construction_permits_aggregate	CAST(original_zip AS INT)	zip_code	1	0	0	0	0
+construction_permits	construction_permits_aggregate	permit_class_mapped	residential_or_commercial	1	0	0	0	0
+construction_permits	construction_permits_aggregate	permit_type_desc	permit_type	1	0	0	0	0
+construction_permits	construction_permits_aggregate	work_class	work_class	1	0	0	0	0
 construction_permits	construction_permits_aggregate	COALESCE(CAST(total_valuation_remodel AS decimal(16,2))
         , COALESCE(CAST(total_job_valuation AS decimal(16,2))
         ,  (CAST(building_valuation AS decimal(16,2)) + 
@@ -16,5 +16,28 @@ construction_permits	construction_permits_aggregate	COALESCE(CAST(total_valuatio
             CAST(plumbing_valuation_remodel AS decimal(16,2)) +
             CAST(medgas_valuation AS decimal(16,2)) +
             CAST(medgas_valuation_remodel AS decimal(16,2)))
-        ))	sum_project_valuation	0	1	0
-construction_permits	construction_permits_aggregate	* 	total_num_permits	0	0	1
+        ))	sum_project_valuation	0	1	0	0	0
+construction_permits	construction_permits_aggregate	*	total_num_permits	0	0	1	0	0
+restaurant_inspection_scores	restaurant_inspection_scores_aggregate	CAST(TO_CHAR(TO_DATE(inspection_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
+restaurant_inspection_scores	restaurant_inspection_scores_aggregate	CAST(zip_code AS INT)	zip_code	1	0	0	0	0
+restaurant_inspection_scores	restaurant_inspection_scores_aggregate	CAST(score AS decimal(16,2))	sum_score	0	1	0	0	0
+restaurant_inspection_scores	restaurant_inspection_scores_aggregate	*	total_num_scores	0	0	1	0	0
+restaurant_inspection_scores	restaurant_inspection_scores_aggregate	CAST(score AS decimal(16,2))	min_score	0	0	0	1	0
+restaurant_inspection_scores	restaurant_inspection_scores_aggregate	CAST(score AS decimal(16,2))	max_score	0	0	0	0	1
+code_complaint_cases	code_complaint_cases_aggregate	CAST(TO_CHAR(TO_DATE(opened_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	date_number	1	0	0	0	0
+code_complaint_cases	code_complaint_cases_aggregate	zip_code	zip_code	1	0	0	0	0
+code_complaint_cases	code_complaint_cases_aggregate	case_type	complaint_type	1	0	0	0	0
+code_complaint_cases	code_complaint_cases_aggregate	*	total_num_cases	0	0	1	0	0
+residential_water_consumption	residential_water_consumption_aggregate	CAST(year_month AS INT)	year_month	1	0	0	0	0
+residential_water_consumption	residential_water_consumption_aggregate	postal_code	zip_code	1	0	0	0	0
+residential_water_consumption	residential_water_consumption_aggregate	customer_class	custom_class	1	0	0	0	0
+residential_water_consumption	residential_water_consumption_aggregate	total_gallons	total_gallons	1	0	0	0	0
+commercial_water_consumption	commercial_water_consumption_aggregate	CAST(year_month AS INT)	year_month	1	0	0	0	0
+commercial_water_consumption	commercial_water_consumption_aggregate	postal_code	zip_code	1	0	0	0	0
+commercial_water_consumption	commercial_water_consumption_aggregate	customer_class	custom_class	1	0	0	0	0
+commercial_water_consumption	commercial_water_consumption_aggregate	total_gallons	total_gallons	1	0	0	0	0
+pothole_repair	pothole_repair_aggregate	CAST(TO_CHAR(TO_DATE(sr_created_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	created_date_number	1	0	0	0	0
+pothole_repair	pothole_repair_aggregate	CAST(sr_location_zip_code AS INT)	zip_code	1	0	0	0	0
+pothole_repair	pothole_repair_aggregate	CAST(TO_CHAR(TO_DATE(sr_updated_date, 'YYYY-MM-DD'),'YYYYMMDD') AS INT)	status_change_date_number	1	0	0	0	0
+pothole_repair	pothole_repair_aggregate	sr_status_desc	status	1	0	0	0	0
+pothole_repair	pothole_repair_aggregate	*	total_num_cases	0	0	1	0	0
