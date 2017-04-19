@@ -66,7 +66,10 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table,
                 if row[6]==1: select_columns += "SUM(" + row[3] + ") AS " + row[4] + ","
                 if row[7]==1: select_columns += "COUNT(" + row[3] + ") AS " + row[4] + ","
                 if row[5]==1: group_by += row[3] + ","
-
+            except Exception as e:
+                print "exception encountered:\n" +  str(e)
+                return False
+        
         select_columns = select_columns[:-1]
         insert_columns = insert_columns[:-1]
         group_by = group_by[:-1]
@@ -78,6 +81,7 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table,
         sql += " GROUP BY " + group_by + ";"
 
         print sql
+
 #                 #counter += 1
 #                 #print(counter, end=" ")
 #                 #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
@@ -138,11 +142,6 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table,
 #                     #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
 #                     cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
 #                     conn.commit()
-#                 except Exception as e:
-#                     # placeholder - sometimes there are weird characters that the db won't take
-#                     # MUST SORT THIS OUT RATHER THAN SKIPPING THEM!
-#                     print "exception encountered:\n" +  str(e)
-#                     return False
             
 #             print "Added " + str(len(data)) + " records at time (" + str(start_time) + ")."
 
