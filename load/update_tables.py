@@ -111,6 +111,7 @@ for i in range(2):
                     # here is where we'd write back to the config file if we are not truncating
                     # and storing the last_update_val
                     if isinstance(ret, bool):
+                        print ret
                         if ret == False:
                             no_errors = False
                     else:
