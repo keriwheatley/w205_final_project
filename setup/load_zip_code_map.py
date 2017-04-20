@@ -5,6 +5,10 @@ import psycopg2
 from googlemaps import Client
 from eventlet.timeout import Timeout
 
+# CREATE TABLE zip_codes AS (
+# SELECT row_number() OVER () AS row_number, 00000 AS zip_code, location 
+# FROM (SELECT DISTINCT location AS location FROM racial_profiling_arrests UNION SELECT DISTINCT vl_street_name AS location FROM racial_profiling_citations) loc);
+
 # Will hide urrlib3 warnings for the purposes of this project.
 # Currently receiving this error message because an older version of Python is loaded to AMI.
 # InsecurePlatformWarning /usr/lib/python2.7/site-packages/requests-2.10.0-py2.7.egg/requests/
