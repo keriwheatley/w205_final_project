@@ -12,7 +12,7 @@ WITH CSV HEADER DELIMITER AS E'\t'"
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS data_dictionary;"
 psql -U postgres -d finalproject -c "CREATE TABLE data_dictionary (table_name TEXT, column_name TEXT, data_value TEXT, 
 data_value_desc TEXT);"
-psql -U postgres -d finalproject -c "\copy transform_map FROM '~/w205_final_project/setup/data_dictionary.csv' 
+psql -U postgres -d finalproject -c "\copy data_dictionary FROM '~/w205_final_project/setup/data_dictionary.csv' 
 WITH CSV HEADER DELIMITER AS E'\t'"
 
 # Issued Construction Permits
