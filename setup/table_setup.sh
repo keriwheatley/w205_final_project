@@ -1,11 +1,18 @@
 # Create database
 psql -U postgres -c "CREATE DATABASE finalproject;"
 
-# Create mapping table
+# Create transformation mapping table
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS transform_map;"
 psql -U postgres -d finalproject -c "CREATE TABLE transform_map (source_table TEXT, target_table TEXT, source_field TEXT, 
 target_field TEXT, group_by INT, sum_of INT, count_of INT, min_of INT, max_of INT);"
 psql -U postgres -d finalproject -c "\copy transform_map FROM '~/w205_final_project/setup/transform_map.csv' 
+WITH CSV HEADER DELIMITER AS E'\t'"
+
+# Create data dictionary table
+psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS data_dictionary;"
+psql -U postgres -d finalproject -c "CREATE TABLE data_dictionary (table TEXT, column TEXT, data TEXT, 
+desc TEXT);"
+psql -U postgres -d finalproject -c "\copy transform_map FROM '~/w205_final_project/setup/data_dictionary.csv' 
 WITH CSV HEADER DELIMITER AS E'\t'"
 
 # # Issued Construction Permits
