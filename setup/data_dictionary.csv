@@ -1,4 +1,4 @@
-table	column	data	desc
+table_name	column_name	data_value	data_value_desc
 racial_profiling_citations_aggregate	case_party_sex	F	Female
 racial_profiling_citations_aggregate	case_party_sex	M	Male
 racial_profiling_citations_aggregate	race_origin_code	A	Asian
