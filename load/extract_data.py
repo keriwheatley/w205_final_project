@@ -129,7 +129,7 @@ def extract_data_SODA( dict_db_connect, url, table_name,
                     #print(counter, end=" ")
                     #print("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
                     cur.execute("INSERT INTO " + table_name + " (" + columns + ") VALUES (" + values + ");");
-#                     conn.commit()
+                    conn.commit()
                 except Exception as e:
                     # placeholder - sometimes there are weird characters that the db won't take
                     # MUST SORT THIS OUT RATHER THAN SKIPPING THEM!
@@ -144,10 +144,7 @@ def extract_data_SODA( dict_db_connect, url, table_name,
             else:
                 offset += len(data)
                 all_data_loaded = True
-                
-            print "offset " + str(offset)
-            print "chunk_size " + str(chunk_size)
-        
+                        
         # Close connection
         conn.close()
         
@@ -157,12 +154,9 @@ def extract_data_SODA( dict_db_connect, url, table_name,
     
         # if doing incremental updates, save last value inserted, if there is one
         if len(data) > 0 and not truncate_table and len(last_update_field) > 0:
-            print "in here"
             last_update_value = row[last_update_field]
-            print " in here " + str(last_update_value)
-        
-        print last_update_value
-    
+            print "New last_update_value for (" + last_update_field + "): " + str(last_update_value)
+            
     except Exception as inst:
         print(inst.args)
         print(inst)
