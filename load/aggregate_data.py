@@ -104,8 +104,8 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
     
         # if doing incremental updates, return last value inserted to use next time
         if not truncate_table and len(last_update_field) > 0:
-            print "Starting last_update_field = " + last_update_field
-            print "Starting last_update_value = " + str(last_update_value[0])
+            print "Ending last_update_field = " + last_update_field
+            print "Ending last_update_value = " + str(last_update_value[0])
             return str(last_update_value[0])
         else:
             return True
