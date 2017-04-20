@@ -145,8 +145,7 @@ def extract_data_SODA( dict_db_connect, url, table_name,
                 offset += len(data)
                 all_data_loaded = True
         
-            all_data_loaded = True
-        # Commit changes to table and close connection
+        # Close connection
         conn.close()
         
         print ("Loaded " + str(offset) + " records to data source (" + table_name + ").")
@@ -156,7 +155,6 @@ def extract_data_SODA( dict_db_connect, url, table_name,
         # if doing incremental updates, save last value inserted, if there is one
         if len(data) > 0 and not truncate_table and len(last_update_field) > 0:
             last_update_value = row[last_update_field]
-            print last_update_value
     
     except Exception as inst:
         print(inst.args)
