@@ -1,5 +1,5 @@
 # Create database
-psql -U postgres -c "CREATE DATABASE finalproject;"
+psql -U postgres -c "CREATE DATABASE IF NOT EXISTS finalproject;"
 
 # Create mapping table
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS transform_map;"
