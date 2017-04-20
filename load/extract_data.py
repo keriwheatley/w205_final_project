@@ -145,6 +145,7 @@ def extract_data_SODA( dict_db_connect, url, table_name,
                 offset += len(data)
                 all_data_loaded = True
         
+            all_data_loaded = True
         # Commit changes to table and close connection
         conn.close()
         
