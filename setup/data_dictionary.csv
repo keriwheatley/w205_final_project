@@ -1,4 +1,4 @@
-table	column	data	desc
+table_name	column_name	data_value	data_value_desc
 racial_profiling_citations_aggregate	case_party_sex	F	Female
 racial_profiling_citations_aggregate	case_party_sex	M	Male
 racial_profiling_citations_aggregate	race_origin_code	A	Asian
@@ -34,4 +34,4 @@ racial_profiling_citations_aggregate	msearch_found	4	4 Other
 racial_profiling_citations_aggregate	msearch_found	5	5 Nothing
 racial_profiling_citations_aggregate	msearch_found	6	6 Drugs
 racial_profiling_arrests_aggregate	sex	F	Female
-racial_profiling_citations_aggregate	sex	M	Male
+racial_profiling_arrests_aggregate	sex	M	Male
