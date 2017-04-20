@@ -1,6 +1,9 @@
 # Create database
 psql -U postgres -c "CREATE DATABASE finalproject;"
 
+# Create zip code map table
+CREATE TABLE zip_code_map (row_number INT, zip_code INT, location TEXT); 
+
 # Create transformation mapping table
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS transform_map;"
 psql -U postgres -d finalproject -c "CREATE TABLE transform_map (source_table TEXT, target_table TEXT, source_field TEXT, 
