@@ -83,8 +83,8 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
 
         if not truncate_table and len(last_update_field) > 0 and len(last_update_value) > 0:
             sql += " WHERE " + last_update_field + " > '" + last_update_value + "'"
-            print "last_update_field = " + last_update_field
-            print "last_update_value = " + str(last_update_value)
+            print "Starting last_update_field = " + last_update_field
+            print "Starting last_update_value = " + str(last_update_value)
         
         sql += " GROUP BY " + group_by + ";"
         
@@ -104,6 +104,8 @@ def aggregate_data_SODA( dict_db_connect, source_table, target_table, truncate_t
     
         # if doing incremental updates, return last value inserted to use next time
         if not truncate_table and len(last_update_field) > 0:
+            print "Starting last_update_field = " + last_update_field
+            print "Starting last_update_value = " + str(last_update_value[0])
             return str(last_update_value[0])
         else:
             return True
