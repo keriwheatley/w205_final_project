@@ -55,7 +55,7 @@ def zip_code_map_SODA( dict_db_connect, source_table, target_table, custom_map_c
         
         sql = "CREATE TABLE " + target_table + " AS (SELECT " + source_table
         sql += ".*, COALESCE(zip_code_map.zip_code,99999) AS zip_code FROM " + source_table
-        sql += " LEFT JOIN zip_code_map ON zip_code_map.location = '" + source_table + "." + custom_map_col + "');"                
+        sql += " LEFT JOIN zip_code_map ON zip_code_map.location = " + source_table + "." + custom_map_col + ");"                
 
         print sql
         cur.execute(sql)
