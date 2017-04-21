@@ -89,10 +89,10 @@ def extract_data_SODA( dict_db_connect, url, table_name,
             request += "&$where=" + last_update_field + ">\'" + last_update_value + "'"
             print "Starting last_update_field = " + last_update_field
             print "Starting last_update_value = " + str(last_update_value)
+
         if truncate_table:
-            # if we don't have last update info, or we aren't doing incremental updates,
             # truncate the table before insertion
-            cur.execute("TRUNCATE TABLE " + table_name + ";");
+            cur.execute("TRUNCATE TABLE " + table_name + ";")
             print("Truncated data table.")
         
         # loop until all data is received
@@ -170,98 +170,94 @@ def extract_data_SODA( dict_db_connect, url, table_name,
         return True
             
 
-# You will need to implement truncate_table as well
-# Basically, if that value is true, you need to truncate the db table and reload all the data
-# it is mostly for testing, but needs to be implemented for consistency
-# 
-# Also, you need to modify slightly so that it doesn't just check the last column(date) because
-# on the first run it will need to load data for all dates thus far.
-# Another scenario is if somehow it doesn't run one month (who knows how), it should be able to 
-# see that there are 2 new date columns (or however many new columns there are) and load them both
-# shouldn't be too tough, do something like start at the last column and move towards the first.
-# Compare each date to "last_update_value" with isNewer, if it returns true, add that column to a 
-# list, and when isNewer returns false you have all the new dates. 
-# 
-def extract_data_Zillow( dict_db_connect, url, table_name, 
+def load_data_Zillow( dict_db_connect, url, table_name,
                       truncate_table = False, last_update_value =  ""):
     """return True if no errors and no new data to load
     return the newest date string that was loaded into the DB to be stored for next time
     return False if errors occurred"""
-    
+
     print "Loading Zillow data from (" + url + ")"
-    
+
     try:
         #Read the CSV from the url directly into a pandas dataframe
         df = pd.read_csv(url)
-        
-        # PUT THIS WHEREVER IT SHOULD LOGICALLY GO
-        #    - replace newDate with the actual date extracted from the csv file
-        #    - last_update_value will contain what this function returned last time it updated the DB
-        # check if there is newer data
-        newDate = list(df)[-1]  # (this is a placeholder for my own testing, do this part however is best)
-        if not isNewer( last_update_value, newDate):
-            return True
-        
-        print "loaded: " + str(df.shape[0]) + " rows, with " + str(df.shape[1]) + " columns."
-        
-        #Drop all rows that aren't for Austin
-        df = df.drop(df[df.City != "Austin"].index)
-        
-        #Drop all rows that aren't for Texas
-        df = df.drop(df[df.State != "TX"].index)
-        
-        #Get the Last Columns
-        last_col_index = len(df.columns)-1
-        
-        #List of columns to drop. 
-        #First 6 cols are regionid (ZIP), region name, city, metro area and county
-        drop_cols = list(range(6,last_col_index))
-        
-        #Drop all columns after the 6th until the last
-        df.drop(df.columns[drop_cols], axis = 1, inplace = True)
-        
-        #Get the date of the latest data
-        date = list(df.columns.values)[6]
-        
-        #Add new columns with date values
-        df['date'] = date
-        
-        # REMOVE? I DON'T SEE ANY NEED TO STORE FILES LOCALLY ONCE THEY ARE IN THE DB
-        #Save to .csv
-        #df.to_csv('updated_%s' % csv, header = False)
 
-        # Connect to database
-        conn = psycopg2.connect( database = dict_db_connect["database"], 
-                                 user = dict_db_connect["user"],
-                                 password = dict_db_connect["password"],
-                                 host = dict_db_connect["host"],
-                                 port = dict_db_connect["port"])
-        cur = conn.cursor()
+        # check if there is newer data
+        newDate = list(df.columns.values)[len(df.columns)-1]
+        if not isNewer( last_update_value, newDate):
+            print "No new data"
+            return True
+
+        print 'loaded: ' + str(new_columns) + (' new date.' if new_columns == 1 else ' new dates.')
+
+        #Drop all rows that aren't for Austin metro area (used instead of Austin city for robustness)
+        df = df.drop(df[df.Metro != "Austin"].index)
+
+        #Drop all rows that aren't for Texas (since there's Austins outside TX)
+        df = df.drop(df[df.State != "TX"].index)
+
+        #Get the Last Column's column number
+        last_col_index = len(df.columns)-1
+
+        #Create a new dataframe with the columns we need for reporting
+        df_transformed = pd.DataFrame({'zip_code':[],'city':[],'state':[],'metro':[],'value':[],'date':[]})
+        zip_code = list(df.columns.values)[1]
+        city = list(df.columns.values)[2]
+        state = list(df.columns.values)[3]
+        metro = list(df.columns.values)[4]
+        final_col_list = [zip_code, city, state, metro, 'value', 'date']
         
-        # this is where the data needs to be added to the DB
-        # assume that the table is created before the initial load in a bash script
-        count = 0
-        for index, row in df.iterrows():
-            # for testing
-            if count > 10:
-                break
-            
-            #
-            #insert values into DB
-            #
-            # for testing, let's print a couple of column headers and some row values
-            print list(df)[0], list(df)[6]
-            print str(row['RegionID']), str(row[date])
-            
-            count += 1
+        #Start at last column and interate to beginning. Index 7 is the first date col in original data
+        new_columns = 0
+        for i in range(last_col_index,7,-1):
+            #The date is the column header in the zillow data, storing it here
+            date = list(df.columns.values)[i]
+            #These are the columns that will go into the temp dataframe before being loaded into the new dataframe
+            temp_col_list = [zip_code,city,state,metro,list(df.columns.values)[i]]
+
+            #Check if the col date is newer than the last stored date
+            if isNewer(last_update_value,date) == True:
+                new_columns += 1
+                
+                #Create a temp dataframe made up of only the temp columns
+                df_temp = df.filter(temp_col_list, axis = 1)
+
+                #Add a column with the date in it
+                df_temp['date'] = list(df.columns.values)[i]
+
+                #Rename the columns to match the full data frame
+                df_temp.columns = ['zip_code','city','state','metro','value','date']
+
+                #Drop any N/A values (tends to only happen in early years)
+                df_temp.dropna()
+
+                #Append the temp table to the new table_name
+                df_transformed = df_transformed.append(df_temp)
+
+        # sql alchemy database connection string
+        # database://user:password@host:port/databaseName
+        dbConnect = 'postgresql://' + dict_db_connect["user"] + ':' + dict_db_connect["password"] + '@' + \
+                    dict_db_connect["host"] + ':' + dict_db_connect["port"] + '/' + dict_db_connect["database"]
+        engine = create_engine(dbConnect)
+
+        # if we are truncating the table, let SQL Alchemy do it
+        if truncate_table:
+            if_exists_string = 'drop'
+        else:
+            if_exists_string = 'append'
         
-        return date
-    
+        df_transformed.to_sql(table_name, engine, if_exists  = if_exists_string)
+
+        print "Successfully inserted into database."
+        
+        return newDate
+
     except Exception as e:
         print("There was an exception while updating the Zillow data:")
         print(e.args)
         print(e)
         return False
+
 
 
 
