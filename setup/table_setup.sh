@@ -4,7 +4,7 @@ psql -U postgres -c "CREATE DATABASE finalproject;"
 # Create zip code map table
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS zip_code_map;"
 psql -U postgres -d finalproject -c "CREATE TABLE zip_code_map (row_number INT, zip_code INT, location TEXT);"
-psql -U postgres -d finalproject -c "\copy transform_map FROM '~/w205_final_project/setup/zip_code_map.csv' 
+psql -U postgres -d finalproject -c "\copy zip_code_map FROM '~/w205_final_project/setup/zip_code_map.csv' 
 WITH CSV HEADER DELIMITER AS E'\t'"
 
 # Create transformation mapping table
