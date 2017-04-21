@@ -127,7 +127,7 @@ for i in range(2):
                     # check ret - it will be either a boolean or a string
                     # write back to the config file if we are not truncating
                     # and storing the last_update_val
-                    print(str(ret))
+                    #print(str(ret))
                     if isinstance(ret, bool):
                         if ret == False:
                             no_errors = False
@@ -246,7 +246,7 @@ if no_errors:
                     # if any are missing, error out so it can be fixed
                     if len(source_table) == 0 or len(target_table) == 0 or len(type_value) == 0:
                         print("Config file error:")            
-                        print("In " + s + "source_table, target_table, and type are required")
+                        print("In " + s + " source_table, target_table, and type are required")
                         config_ok = False            
 
                     # everything is read in for this source, on verify pass, load the data

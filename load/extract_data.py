@@ -9,6 +9,7 @@ import datetime
 import json
 import psycopg2
 import pandas as pd
+from sqlalchemy import create_engine
 
 # Will hide urrlib3 warnings for the purposes of this project.
 # Currently receiving this error message because an older version of Python is loaded to AMI.
@@ -170,35 +171,36 @@ def extract_data_SODA( dict_db_connect, url, table_name,
         return True
             
 
-def load_data_Zillow( dict_db_connect, url, table_name,
+def extract_data_Zillow( dict_db_connect, url, table_name,
                       truncate_table = False, last_update_value =  ""):
     """return True if no errors and no new data to load
     return the newest date string that was loaded into the DB to be stored for next time
     return False if errors occurred"""
 
     print "Loading Zillow data from (" + url + ")"
-
+    
+    if truncate_table:
+        last_update_value = ""
+    
     try:
-        #Read the CSV from the url directly into a pandas dataframe
+        # Read the CSV from the url directly into a pandas dataframe
         df = pd.read_csv(url)
-
+        
         # check if there is newer data
         newDate = list(df.columns.values)[len(df.columns)-1]
         if not isNewer( last_update_value, newDate):
             print "No new data"
             return True
-
-        print 'loaded: ' + str(new_columns) + (' new date.' if new_columns == 1 else ' new dates.')
-
-        #Drop all rows that aren't for Austin metro area (used instead of Austin city for robustness)
+        
+        # Drop all rows that aren't for Austin metro area (used instead of Austin city for robustness)
         df = df.drop(df[df.Metro != "Austin"].index)
-
+        
         #Drop all rows that aren't for Texas (since there's Austins outside TX)
         df = df.drop(df[df.State != "TX"].index)
-
+        
         #Get the Last Column's column number
         last_col_index = len(df.columns)-1
-
+        
         #Create a new dataframe with the columns we need for reporting
         df_transformed = pd.DataFrame({'zip_code':[],'city':[],'state':[],'metro':[],'value':[],'date':[]})
         zip_code = list(df.columns.values)[1]
@@ -234,6 +236,9 @@ def load_data_Zillow( dict_db_connect, url, table_name,
                 #Append the temp table to the new table_name
                 df_transformed = df_transformed.append(df_temp)
 
+        
+        print 'loaded: ' + str(new_columns) + (' new date.' if new_columns == 1 else ' new dates.')
+        
         # sql alchemy database connection string
         # database://user:password@host:port/databaseName
         dbConnect = 'postgresql://' + dict_db_connect["user"] + ':' + dict_db_connect["password"] + '@' + \
@@ -242,7 +247,8 @@ def load_data_Zillow( dict_db_connect, url, table_name,
 
         # if we are truncating the table, let SQL Alchemy do it
         if truncate_table:
-            if_exists_string = 'drop'
+            if_exists_string = 'replace'
+            print "Truncating table."
         else:
             if_exists_string = 'append'
         
