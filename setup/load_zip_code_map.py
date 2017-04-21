@@ -52,10 +52,10 @@ def data_extract():
             
             print "ROW: " + str(row)
             
-            clean_location = str(row[0].encode('ascii','ignore').replace("'","").replace("\\","")) + "',"
+            clean_location = str(row[0].encode('ascii','ignore').replace("'","").replace("\\",""))
             row_number = row[1]
 
-            sql = "UPDATE zip_code_map SET location = "+clean_location+" WHERE row_number = "+str(row_number)+";"
+            sql = "UPDATE zip_code_map SET location = '"+clean_location+"' WHERE row_number = "+str(row_number)+";"
             print sql
             cur.execute(sql)              
             conn.commit()
