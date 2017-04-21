@@ -73,12 +73,11 @@ def data_extract():
                 for i in xrange(len(geocode_result[0]['address_components'])):
                     if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
                         zip_code = geocode_result[0]['address_components'][i]['long_name']
-
-                        str(row[i].encode('ascii','ignore').replace("'","").replace("\\","")) + "',"
-            sql = "UPDATE zip_code_map SET zip_code = "+zip_code+" WHERE row_number = "+str(row_number)+";"
-            print sql
-            cur.execute(sql)              
-            conn.commit()
+            if len(zip_code) == 5:
+                sql = "UPDATE zip_code_map SET zip_code = "+zip_code+" WHERE row_number = "+str(row_number)+";"
+                print sql
+                cur.execute(sql)              
+                conn.commit()
     
         # Commit changes to table and close connection
         conn.close()
