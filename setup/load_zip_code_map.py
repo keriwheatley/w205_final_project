@@ -60,7 +60,7 @@ def data_extract():
             cur.execute(sql)              
             conn.commit()
 
-            location = row[0] + ",Austin,TX"
+            location = clean_location + ",Austin,TX"
             print location
             print row_number
 
