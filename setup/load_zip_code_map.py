@@ -79,8 +79,8 @@ def data_extract():
                     print sql
                     cur.execute(sql)              
                     conn.commit()
-            exception:
-                pass                      
+            except:
+                print "couldn't map"                      
     
         # Commit changes to table and close connection
         conn.close()
