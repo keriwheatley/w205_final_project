@@ -51,6 +51,13 @@ def data_extract():
         for row in data:
             
             print "ROW: " + str(row)
+            
+            clean_location = str(row[0].encode('ascii','ignore').replace("'","").replace("\\","")) + "',"
+
+            sql = "UPDATE zip_code_map SET location = "+clean_location+" WHERE row_number = "+str(row_number)+";"
+            print sql
+            cur.execute(sql)              
+            conn.commit()
 
             location = row[0] + ",Austin,TX"
             row_number = row[1]
@@ -66,7 +73,8 @@ def data_extract():
                 for i in xrange(len(geocode_result[0]['address_components'])):
                     if geocode_result[0]['address_components'][i]['types'][0] == 'postal_code':
                         zip_code = geocode_result[0]['address_components'][i]['long_name']
-            
+
+                        str(row[i].encode('ascii','ignore').replace("'","").replace("\\","")) + "',"
             sql = "UPDATE zip_code_map SET zip_code = "+zip_code+" WHERE row_number = "+str(row_number)+";"
             print sql
             cur.execute(sql)              
