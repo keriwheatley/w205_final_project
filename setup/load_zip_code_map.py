@@ -53,6 +53,7 @@ def data_extract():
             print "ROW: " + str(row)
             
             clean_location = str(row[0].encode('ascii','ignore').replace("'","").replace("\\","")) + "',"
+            row_number = row[1]
 
             sql = "UPDATE zip_code_map SET location = "+clean_location+" WHERE row_number = "+str(row_number)+";"
             print sql
@@ -60,7 +61,6 @@ def data_extract():
             conn.commit()
 
             location = row[0] + ",Austin,TX"
-            row_number = row[1]
             print location
             print row_number
             geocode_result = c.geocode(location)
