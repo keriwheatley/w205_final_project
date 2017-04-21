@@ -22,6 +22,7 @@ HOW TO SETUP ETL
 	pip install psycopg2
 	pip install googlemaps
 	pip install pandas
+	pip install sqlalchemy
 
 3. Start Postgres
 	mount -t ext4 <input EBS volume directoy> /data
