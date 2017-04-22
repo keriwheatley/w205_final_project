@@ -13,7 +13,7 @@ import sys
 from extract_data import *
 from aggregate_data import *
 from custom_map_data import *
-import aggregates as aggs
+#import aggregates as aggs
 
 #
 # still to do
@@ -44,8 +44,8 @@ config = cp.ConfigParser()
 config.optionxform = str
 
 try:
-    config.read(CONFIG_FILE_NAME)
-    
+    if len(config.read(CONFIG_FILE_NAME)) == 0:
+        sys.exit("Cannot read config file: " + CONFIG_FILE_NAME)
 except Exception as e:
     sys.exit("Cannot read config file:\n" + str(e))
 
