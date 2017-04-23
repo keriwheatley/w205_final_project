@@ -164,5 +164,5 @@ mkdir -p log
 # schedule task to run once a day at 1am and pass in the install directory (pwd)
 #    (to unschedule the task, run "crontab -e" and remove the entry for this program.)
 #    this file must be in the setup folder!
-((crontab -l && echo "0 1 * * * sh $(pwd)/runApp.sh $(pwd)/..") | sort | uniq) | crontab
+(echo "0 1 * * * sh $(pwd)/runApp.sh $(pwd)/..") | crontab
 
