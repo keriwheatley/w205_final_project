@@ -157,3 +157,12 @@ psql -U postgres -d finalproject -c "CREATE TABLE \"Zip_Zri_AllHomesPlusMultifam
 #http://files.zillowstatic.com/research/public/Zip/Zip_ZriPerSqft_AllHomes.csv
 psql -U postgres -d finalproject -c "DROP TABLE IF EXISTS \"Zip_ZriPerSqft_AllHomes\";"
 psql -U postgres -d finalproject -c "CREATE TABLE \"Zip_ZriPerSqft_AllHomes\" (index TEXT, city TEXT, date TEXT, metro TEXT, state TEXT, value INT, zip_code INT);"
+
+# make log folder
+mkdir -p log
+
+# schedule task to run once a day at 1am and pass in the install directory (pwd)
+#    (to unschedule the task, run "crontab -e" and remove the entry for this program.)
+#    this file must be in the setup folder!
+((crontab -l && echo "0 1 * * * sh $(pwd)/runApp.sh $(pwd)/..") | sort | uniq) | crontab
+
