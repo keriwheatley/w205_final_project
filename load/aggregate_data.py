@@ -1,6 +1,6 @@
 # 
-# aggregates.py
-# Provides functions to download data from various sources and insert into database
+# aggregate_data.py
+# Provides functions to aggregate previously stored data and store into database
 # 
 # 
 
