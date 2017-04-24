@@ -4,24 +4,11 @@
 # config file must be local and named 'config.ini'
 # 
 
-#import requests
-#import datetime
-#import json
-#import psycopg2
 import ConfigParser as cp
 import sys
 from extract_data import *
 from aggregate_data import *
 from custom_map_data import *
-#import aggregates as aggs
-
-#
-# still to do
-#
-# should "URL encode" GET parameters - look in SODA docs
-# 
-# get an "app token" to pass in with requests?
-# 
 
 # config file strings
 CONFIG_FILE_NAME = 'config.ini'
@@ -50,7 +37,7 @@ except Exception as e:
     sys.exit("Cannot read config file:\n" + str(e))
 
 # as of now, database info is hardcoded
-# we will read it here if we decide to put in config file
+# eventually, this should be externally configurable
 dict_db_connect = { "database" : "finalproject",
                     "user" : "postgres",
                     "password" : "pass",
