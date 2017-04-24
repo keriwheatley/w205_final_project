@@ -7,7 +7,9 @@ cd $1
 
 mkdir -p "log"
 
-python load/update_tables.py > "log/$(date +"%Y_%m_%d_%I_%M_%p").log"
+cd load
+
+python update_tables.py > "../log/$(date +"%Y_%m_%d_%I_%M_%p").log"
 
 cd $MY_CWD
 
