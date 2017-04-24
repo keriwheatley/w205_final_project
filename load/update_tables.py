@@ -32,8 +32,10 @@ config.optionxform = str
 
 try:
     if len(config.read(CONFIG_FILE_NAME)) == 0:
+        print "Cannot read config file"
         sys.exit("Cannot read config file: " + CONFIG_FILE_NAME)
 except Exception as e:
+    print "Cannot read config file"
     sys.exit("Cannot read config file:\n" + str(e))
 
 # as of now, database info is hardcoded
