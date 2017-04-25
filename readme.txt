@@ -56,7 +56,7 @@ HOW TO SETUP ETL
 	/analysis/data_dashboards.twbx
 
 12. Edit connections to point to your newly created public DNS (option not available 
-unless Tableau is being hosted on a server)
+    unless Tableau is being hosted on a server)
 
 13. To refresh data, go to Data > Refresh All Extracts...
 
