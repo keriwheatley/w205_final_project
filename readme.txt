@@ -57,10 +57,11 @@ HOW TO SETUP ETL
 
 12. If prompted, click `Yes` to accept the custom SQL stored in dashboard
 
-13. Edit connections to point to your newly created public DNS (option not available 
-    unless Tableau is being hosted on a server)
+13. Edit connections to point to your newly created public DNS (option not available unless Tableau is 
+    being hosted on a server)
 
 14. To refresh data, go to `Data > Refresh All Extracts...` and, if prompted, enter password `pass`
+
 
 
 Notes about the Cron task scheduler:
