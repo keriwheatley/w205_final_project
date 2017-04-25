@@ -10,7 +10,7 @@ HOW TO SETUP ETL
 	Source: Anywhere
 
 3. Connect to instance and run setup scripts
-	ls /
+	fdisk -l
 	mount -t ext4 <input EBS volume directoy> /data (not required if instance type has premounted volume)
 	chmod a+rwx /data
 	wget https://s3.amazonaws.com/ucbdatasciencew205/setup_ucb_complete_plus_postgres.sh
