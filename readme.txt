@@ -55,7 +55,7 @@ HOW TO SETUP ETL
 11. Go to your local machine with Tableau pre-installed and open dashboards located in:
 	/analysis/data_dashboards.twbx
 
-12. When prompted, accept the custom SQL stored in dashboard
+12. If prompted, click 'Yes' to accept the custom SQL stored in dashboard
 
 13. Edit connections to point to your newly created public DNS (option not available 
     unless Tableau is being hosted on a server)
