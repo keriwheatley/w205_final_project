@@ -1,3 +1,4 @@
+
 HOW TO SETUP ETL
 
 1. Create an EC2 instance using this AMI and attach 100GB EBS volume.
@@ -50,3 +51,18 @@ HOW TO SETUP ETL
 	
 	To test connection, type this into your local command line:
 	psql -U postgres -d finalproject -h <public DNS from AWS>
+
+Notes:
+
+Cron task scheduler
+This application makes use of the built in Linux task scheduler called cron. By default, the system is set to check for new data from all configured sources each day at 1am sytem time. To change this behavior, switch to the user that ran the installation (w205), and type: crontab -e
+This will bring up the user's cron file in a vim editor. Details on how to edit this file can be found online, or by typing: man crontab
+The default file will contain an entry that begins with "0 1 * * * $(pwd)/setup/runApp.sh $(pwd)"
+This indicates that the task (that should not be changed) will be run at 0 minutes past hour 1 of every day of every week of every month of the year.
+To see a list of all cron jobs that are scheduled for a user, type: crontab -l
+If no jobs have been scheduled, the command will display nothing.
+
+
+
+
+
