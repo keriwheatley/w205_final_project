@@ -52,7 +52,7 @@ HOW TO SETUP ETL
 	To test connection, type this into your local command line:
 	psql -U postgres -d finalproject -h <public DNS from AWS>
 
-11. Go to your local box with Tableau installed and open dashboards located in:
+11. Go to your local machine with Tableau pre-installed and open dashboards located in:
 	/analysis/data_dashboards.twbx
 
 12. Edit connections to point to your newly created public DNS (option not available 
