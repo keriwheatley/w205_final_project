@@ -57,8 +57,7 @@ HOW TO SETUP ETL
 
 12. If prompted, click `Yes` to accept the custom SQL stored in dashboard
 
-13. Edit connections to point to your newly created public DNS (option not available unless Tableau is 
-    being hosted on a server)
+13. Edit connections to point to your newly created public DNS (option not available unless Tableau is being hosted on a server)
 
 14. To refresh data, go to `Data > Refresh All Extracts...` and, if prompted, enter password `pass`
 
@@ -66,16 +65,12 @@ HOW TO SETUP ETL
 
 Notes about the Cron task scheduler:
 
-This application makes use of the built in Linux task scheduler called cron. By default, the system is set 
-to check for new data from all configured sources each day at 1am sytem time. 
+This application makes use of the built in Linux task scheduler called cron. By default, the system is set to check for new data from all configured sources each day at 1am sytem time. 
 
 To change this behavior, switch to the user that ran the installation (w205), and type: `crontab -e`.
-This will bring up the user's cron file in a vim editor. Details on how to edit this file can be found 
-online, or by typing: `man crontab`.
+This will bring up the user's cron file in a vim editor. Details on how to edit this file can be found online, or by typing: `man crontab`.
 
 The default file will contain an entry that begins with "0 1 * * * $(pwd)/setup/runApp.sh $(pwd)"
-This indicates that the task (that should not be changed) will be run at 0 minutes past hour 1 of every 
-day of every week of every month of the year.
+This indicates that the task (that should not be changed) will be run at 0 minutes past hour 1 of every day of every week of every month of the year.
 
-To see a list of all cron jobs that are scheduled for a user, type: `crontab -l`. If no jobs have been 
-scheduled, the command will display nothing.
+To see a list of all cron jobs that are scheduled for a user, type: `crontab -l`. If no jobs have been scheduled, the command will display nothing.
